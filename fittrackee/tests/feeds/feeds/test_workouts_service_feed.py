@@ -239,7 +239,7 @@ https://example.com"""
             )
         )
 
-    def test_it_returns_feed_with_media_attachments_when_visibility_is_public(
+    def test_it_returns_rss_feed_with_media_attachments_when_visibility_is_public(  # noqa
         self,
         app: Flask,
         user_1: "User",
@@ -262,6 +262,32 @@ https://example.com"""
             f'<enclosure length="{media.file_size}" '
             f'type="{media.file_content_type}" '
             f'url="{app.config["UI_URL"]}/media/{media.file_name}"/>'
+        ) in feed
+
+    def test_it_returns_atom_feed_with_media_attachments_when_visibility_is_public(  # noqa
+        self,
+        app: Flask,
+        user_1: "User",
+        sport_1_cycling: "Sport",
+        workout_cycling_user_1: "Workout",
+    ) -> None:
+        workout_cycling_user_1.title = WORKOUT_TITLE
+        workout_cycling_user_1.workout_visibility = VisibilityLevel.PUBLIC
+        workout_cycling_user_1.media_visibility = VisibilityLevel.PUBLIC
+        media = self.create_media(user_1, workout_id=workout_cycling_user_1.id)
+        service = UserWorkoutsFeedService(
+            user=user_1,
+            workouts=[workout_cycling_user_1],
+            with_description=True,
+            feed_format="atom",
+        )
+
+        feed = service.generate_user_workouts_feed()
+
+        assert (
+            f'<link href="{app.config["UI_URL"]}/media/{media.file_name}" '
+            f'length="{media.file_size}"'
+            f' rel="enclosure" type="{media.file_content_type}"/>'
         ) in feed
 
     @pytest.mark.parametrize(

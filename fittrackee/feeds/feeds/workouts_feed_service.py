@@ -156,25 +156,29 @@ class UserWorkoutsFeedService:
                 )
             )
 
-            # feedgenerator does not allow more than one enclosure.
+            # feedgenerator does not allow more than one enclosure in RSS Feed.
             # see W3C RSS validator:
             # https://validator.w3.org/feed/docs/warning/DuplicateEnclosure.html
-            enclosures = []
+            attachments = []
             if media_attachments:
-                attachment = media_attachments[0]
-                enclosures = [
-                    feedgenerator.Enclosure(
-                        f"{current_app.config['UI_URL']}/media/{attachment.file_name}",
-                        str(attachment.file_size),
-                        attachment.file_content_type,
-                    )
-                ]
+                attachments = (
+                    media_attachments
+                    if self.feed_format == "atom"
+                    else [media_attachments[0]]
+                )
 
             self.feed.add_item(
                 title=item_data["title.txt"],
                 link=f"{self.fittrackee_url}/workouts/{workout.short_id}",
                 pubdate=workout.workout_date,
                 description=item_data["body.html"] + workout_description,
-                enclosures=enclosures,
+                enclosures=[
+                    feedgenerator.Enclosure(
+                        f"{current_app.config['UI_URL']}/media/{attachment.file_name}",
+                        str(attachment.file_size),
+                        attachment.file_content_type,
+                    )
+                    for attachment in attachments
+                ],
             )
         return self.feed.writeString("UTF-8")

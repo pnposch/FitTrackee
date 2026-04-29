@@ -265,7 +265,7 @@ class TestGetUserPublicWorkoutsRssFeed(ApiTestCaseMixin, MediaMixin):
         assert "enclosure" not in response.data.decode()
 
 
-class TestGetUserPublicWorkoutsAtomFeed(ApiTestCaseMixin):
+class TestGetUserPublicWorkoutsAtomFeed(ApiTestCaseMixin, MediaMixin):
     route = "/users/{username}/workouts.atom"
 
     def test_it_returns_atom_feed(
@@ -289,3 +289,52 @@ class TestGetUserPublicWorkoutsAtomFeed(ApiTestCaseMixin):
                 workout_title=workout_cycling_user_1.title,
             )
         )
+
+    def test_it_returns_feed_with_all_attachments_when_media_visibility_is_public(  # noqa
+        self,
+        app: "Flask",
+        user_1: "User",
+        sport_1_cycling: "Sport",
+        workout_cycling_user_1: "Workout",
+    ) -> None:
+        workout_cycling_user_1.workout_visibility = VisibilityLevel.PUBLIC
+        workout_cycling_user_1.media_visibility = VisibilityLevel.PUBLIC
+        media_1 = self.create_media(
+            user_1, workout_id=workout_cycling_user_1.id
+        )
+        media_2 = self.create_media(
+            user_1, workout_id=workout_cycling_user_1.id
+        )
+        media_3 = self.create_media(
+            user_1, workout_id=workout_cycling_user_1.id
+        )
+        media_1_expected_path = (
+            f"{app.config['UI_URL']}/media/{media_1.file_name}"
+        )
+        media_2_expected_path = (
+            f"{app.config['UI_URL']}/media/{media_2.file_name}"
+        )
+        media_3_expected_path = (
+            f"{app.config['UI_URL']}/media/{media_3.file_name}"
+        )
+        client = app.test_client()
+
+        response = client.get(
+            f"{self.route.format(username=user_1.username)}?description=true"
+        )
+
+        assert (
+            f'<link href="{media_1_expected_path}" '
+            f'length="{media_1.file_size}"'
+            f' rel="enclosure" type="{media_1.file_content_type}"/>'
+        ) in response.data.decode()
+        assert (
+            f'<link href="{media_2_expected_path}" '
+            f'length="{media_2.file_size}"'
+            f' rel="enclosure" type="{media_2.file_content_type}"/>'
+        ) in response.data.decode()
+        assert (
+            f'<link href="{media_3_expected_path}" '
+            f'length="{media_3.file_size}"'
+            f' rel="enclosure" type="{media_3.file_content_type}"/>'
+        ) in response.data.decode()
