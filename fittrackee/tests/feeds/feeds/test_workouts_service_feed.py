@@ -14,6 +14,7 @@ from fittrackee.visibility_levels import VisibilityLevel
 
 from ...mixins import WorkoutMixin
 from ..template_results.workouts import (
+    expected_en_atom_feed_workout_cycling_user_1,
     expected_en_empty_feed,
     expected_en_feed_workout_cycling_user_1,
     expected_en_feed_workout_cycling_user_1_with_elevation,
@@ -48,6 +49,7 @@ class TestUserWorkoutsFeedServiceInstantiation:
         assert service.distance_unit == "km"
         assert service.elevation_multiplier == 1
         assert service.elevation_unit == "m"
+        assert service.feed_format == "rss"
         assert service.fittrackee_url == app.config["UI_URL"]
         assert service.lang == "en"
         assert service.user == user_1
@@ -67,6 +69,7 @@ class TestUserWorkoutsFeedServiceInstantiation:
             user=user_1,
             workouts=[workout_cycling_user_1],
             lang="fr",
+            feed_format="atom",
             use_imperial_units=True,
             with_description=True,
         )
@@ -77,10 +80,11 @@ class TestUserWorkoutsFeedServiceInstantiation:
         assert service.elevation_unit == "ft"
         assert service.fittrackee_url == app.config["UI_URL"]
         assert service.lang == "fr"
+        assert service.feed_format == "atom"
         assert service.user == user_1
         assert service.workouts == [workout_cycling_user_1]
         assert service.with_description is True
-        assert isinstance(service.feed, feedgenerator.Rss201rev2Feed)
+        assert isinstance(service.feed, feedgenerator.Atom1Feed)
         assert isinstance(service.feed_template, FeedItemTemplate)
 
 
@@ -315,4 +319,23 @@ https://example.com"""
 
         assert feed == expected_en_empty_feed.format(
             username=user_1.username, last_date=format_datetime(now)
+        )
+
+    def test_it_returns_atom_feed(
+        self,
+        app: Flask,
+        user_1: "User",
+        sport_1_cycling: "Sport",
+        workout_cycling_user_1: "Workout",
+    ) -> None:
+        workout_cycling_user_1.title = WORKOUT_TITLE
+        service = UserWorkoutsFeedService(
+            user=user_1, workouts=[workout_cycling_user_1], feed_format="atom"
+        )
+
+        feed = service.generate_user_workouts_feed()
+
+        assert feed == expected_en_atom_feed_workout_cycling_user_1.format(
+            workout_short_id=workout_cycling_user_1.short_id,
+            workout_title=WORKOUT_TITLE,
         )
