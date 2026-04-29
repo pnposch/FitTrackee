@@ -114,47 +114,51 @@
 <style scoped lang="scss">
   @use '~@/scss/vars.scss' as *;
 
-  .workout-media-gallery {
-    columns: auto 4;
-    column-gap: $default-padding;
-    margin: 0;
-    padding: 0;
+  ::v-deep(.card-content) {
+    padding: $default-padding;
 
-    .media-attachment {
-      break-inside: avoid;
-      display: inline-block;
-      cursor: pointer;
+    .workout-media-gallery {
+      columns: auto 4;
+      column-gap: $default-padding;
+      margin: 0;
+      padding: 0;
 
-      img {
-        display: block;
-        border-radius: 5px;
-        height: auto;
-        width: 100%;
-        margin-bottom: $default-padding * 0.5;
+      .media-attachment {
+        cursor: pointer;
+        break-inside: avoid;
+        margin-bottom: $default-padding;
+
+        img {
+          display: block;
+          border-radius: 5px;
+          height: auto;
+          width: 100%;
+        }
       }
     }
-  }
-  .media-visibility-level {
-    font-size: 0.9em;
-    font-style: italic;
-    .visibility-label {
-      color: var(--text-visibilty);
-      text-transform: lowercase;
+    @media screen and (max-width: $medium-limit) {
+      .workout-media-gallery {
+        columns: auto 3;
+      }
     }
-  }
-  @media screen and (max-width: $medium-limit) {
-    .workout-media-gallery {
-      columns: auto 3;
+    @media screen and (max-width: $small-limit) {
+      .workout-media-gallery {
+        columns: auto 2;
+      }
     }
-  }
-  @media screen and (max-width: $small-limit) {
-    .workout-media-gallery {
-      columns: auto 2;
+    @media screen and (max-width: $x-small-limit) {
+      .workout-media-gallery {
+        columns: auto 1;
+      }
     }
-  }
-  @media screen and (max-width: $x-small-limit) {
-    .workout-media-gallery {
-      columns: auto 1;
+
+    .media-visibility-level {
+      font-size: 0.9em;
+      font-style: italic;
+      .visibility-label {
+        color: var(--text-visibilty);
+        text-transform: lowercase;
+      }
     }
   }
 </style>
