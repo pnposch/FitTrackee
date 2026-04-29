@@ -19,7 +19,7 @@ babel-update:
 	$(PYBABEL) update -i messages.pot -d fittrackee/translations
 
 build-client: lint-client
-	cd fittrackee_client && $(NPM) run build
+	cd fittrackee_client && $(NPM) run build-only
 
 check-all: lint-all type-check-all test-all
 
@@ -134,18 +134,27 @@ docker-upgrade-db:
 downgrade-db:
 	$(FLASK) db downgrade --directory $(MIGRATIONS)
 
+HTML_CONTENT="<!DOCTYPE html>\
+<meta charset=\"utf-8\">\
+<title>Redirecting to FitTrackee Documentation</title>\
+<meta http-equiv=\"refresh\" content=\"0; URL=en/index.html\">\
+<link rel=\"canonical\" href=\"en/installation.html\">"
+docs-dir:
+	mkdir -p docs
+	echo $(HTML_CONTENT) > docs/index.html
+
 gettext:
 	$(SPHINXBUILD) -M gettext "$(SOURCEDIR)" "$(DOCSRC)"
 
 LANGUAGE := en
-html:
+html: docs-dir
 	rm -rf $(BUILDDIR)/$(LANGUAGE)
 	rm -rf docs/$(LANGUAGE)/*
 	$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(LANGUAGE)" -D language=$(LANGUAGE)
 	grep -rl "fosstodon.org" $(BUILDDIR)/$(LANGUAGE)/html/ | xargs sed -i "s/href=\"https:\/\/fosstodon.org\/\@FitTrackee\"/rel=\"me\" href=\"https:\/\/fosstodon.org\/\@FitTrackee\"/"
 	cp -a $(BUILDDIR)/$(LANGUAGE)/html/. docs/$(LANGUAGE)
 
-html-all:
+html-all: docs-dir
 	for language in en fr ; do \
 		echo -e "\r\nGenerating documentation for '$$language'...\r\n" ; \
 		$(MAKE) html LANGUAGE=$$language ; \
