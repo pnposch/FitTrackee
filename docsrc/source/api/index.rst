@@ -15,6 +15,7 @@ API documentation
    geocode
    health_check
    oauth2
+   media
    notifications
    queued_tasks
    records

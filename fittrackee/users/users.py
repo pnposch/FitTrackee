@@ -501,7 +501,7 @@ def update_user(auth_user: User, user_name: str) -> Union[Dict, HttpResponse]:
             "followers": 0,
             "following": 0,
             "follows": "false",
-            "is_active": True,
+            "is_active": true,
             "is_followed_by": "false",
             "last_name": null,
             "location": null,
@@ -556,7 +556,7 @@ def update_user(auth_user: User, user_name: str) -> Union[Dict, HttpResponse]:
               }
             ],
             "reported_count": 0,
-            "role": "user"
+            "role": "user",
             "sports_list": [
                 1,
                 4,
@@ -1524,6 +1524,8 @@ def get_user_latest_workouts(
     **Scope**: ``workouts:read``
 
     **Example request**:
+
+    .. sourcecode:: http
 
       GET /api/users/Sam/workouts HTTP/1.1
 

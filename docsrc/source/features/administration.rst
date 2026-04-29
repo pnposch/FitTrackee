@@ -18,6 +18,7 @@ Configuration
 .. versionchanged:: 0.7.4 maximum size of workout file and maximum number of files in the zip archive updated
 .. versionchanged:: 0.8.5 added maximum number of workouts for sport statistics
 .. versionchanged:: 0.10.0 added maximum number of files for synchronous processing and maximum number of workouts displayed on global map
+.. versionchanged:: 1.3.0 maximum size of images (workout photos and user picture)
 
 The following parameters can be set:
 
@@ -37,6 +38,7 @@ The following parameters can be set:
   | The maximum number of workouts for statistics or the global map must be defined according to the server capabilities.
   | In the case of the global map, this value also has an impact on the rendering performance on the client side (depending on the browser and the capabilities of the device displaying the map).
 
+- maximum size of images (default: 5Mb)
 - administrator email for contact
 
 .. warning::

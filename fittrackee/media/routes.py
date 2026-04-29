@@ -106,9 +106,9 @@ def post_media(auth_user: "User") -> Union[Tuple[Dict, int], "HttpResponse"]:
       Content-Type: application/json
 
       {
-        'description': None,
-        'id': '9376Mad4SnUoopkCszqHB6',
-        'url': 'https://example.com/media/c49dbe56b45a41509549bffd4c050438.png'
+        "description": null,
+        "id": "9376Mad4SnUoopkCszqHB6",
+        "url": "https://example.com/media/c49dbe56b45a41509549bffd4c050438.png"
       }
 
     :reqheader Authorization: OAuth 2.0 Bearer Token
@@ -176,9 +176,9 @@ def update_media_description(
       Content-Type: application/json
 
       {
-        'description': 'image description',
-        'id': '9376Mad4SnUoopkCszqHB6',
-        'url': 'https://example.com/media/c49dbe56b45a41509549bffd4c050438.png'
+        "description": "image description",
+        "id": "9376Mad4SnUoopkCszqHB6",
+        "url": "https://example.com/media/c49dbe56b45a41509549bffd4c050438.png"
       }
 
     :param string media_short_id: media attachment short id
@@ -226,7 +226,7 @@ def delete_media(
     auth_user: "User", media_short_id: str
 ) -> Union[Tuple[Dict, int], "HttpResponse"]:
     """
-    Delete media description.
+    Delete media.
 
     **Scope**: ``media:write``
 
