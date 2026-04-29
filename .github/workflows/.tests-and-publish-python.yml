@@ -10,7 +10,6 @@ on:
       'VERSION',
       '.github/workflows/.tests-and-publish-python.yml',
       '.github/workflows/.e2e-tests.yml',
-      '!fittrackee/dist/**'
     ]
   pull_request:
     paths: [
@@ -21,7 +20,6 @@ on:
       'VERSION',
       '.github/workflows/.tests-and-publish-python.yml',
       '.github/workflows/.e2e-tests.yml',
-      '!fittrackee/dist/**'
     ]
     types: [opened, synchronize, reopened]
 
@@ -89,15 +87,13 @@ jobs:
       with:
         node-version: 24.x
 
-    - name: Install yarn and dependencies
+    - name: Install dependencies
       working-directory: fittrackee_client
-      run: |
-        npm install --global yarn
-        yarn install --frozen-lockfile --ignore-scripts
+      run: npm ci --ignore-scripts
 
     - name: Build dist files
       working-directory: fittrackee_client
-      run: yarn build
+      run: npm run build
 
     - name: Set up Python 3.13
       uses: actions/setup-python@v6
