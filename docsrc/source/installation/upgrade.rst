@@ -59,6 +59,8 @@ From sources
 Prod environment
 ================
 
+.. versionchanged:: 1.3.0 NNode 20+ is now required
+
 - Stop the application
 
 - Change to the directory where FitTrackee directory is located
@@ -67,7 +69,7 @@ Prod environment
 
 .. code:: bash
 
-   $ wget https://github.com/SamR1/FitTrackee/archive/v1.2.2.tar.gz
+   $ wget https://github.com/SamR1/FitTrackee/archive/refs/tags/v1.2.2.tar.gz
    $ tar -xzf v1.2.2.tar.gz
    $ cp -R FitTrackee-1.2.2/* FitTrackee/
    $ cd FitTrackee
@@ -78,7 +80,13 @@ Prod environment
 
 .. code:: bash
 
-   $ make install-python
+   $ make install-python install-client-dev
+
+-  Build Javascript assets:
+
+.. code:: bash
+
+   $ make build-client
 
 - Upgrade database if needed (see changelog for migrations):
 

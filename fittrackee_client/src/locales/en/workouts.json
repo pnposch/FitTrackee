@@ -136,7 +136,7 @@
   "PREVIOUS_WORKOUT": "Previous workout",
   "PRIVATE_NOTES": "Private notes",
   "PRIVATE_NOTES_FIELD_HELP": "these notes are visible only to you.",
-  "PUBLIC_WORKOUTS_RSS_FEED": "Public workouts RSS Feed",
+  "PUBLIC_WORKOUTS_ATOM_FEED": "Public workouts Atom Feed",
   "RADIUS": "radius",
   "RECORD": "record | records",
   "RECORD_AP": "Ave. pace",

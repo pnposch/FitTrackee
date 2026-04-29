@@ -10,6 +10,7 @@ API documentation
    comments
    equipments
    equipment_types
+   feeds
    follow_requests
    geocode
    health_check
@@ -18,7 +19,6 @@ API documentation
    queued_tasks
    records
    reports
-   rss_feeds
    sports
    stats
    timeline

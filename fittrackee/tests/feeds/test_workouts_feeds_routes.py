@@ -9,6 +9,7 @@ from fittrackee.visibility_levels import VisibilityLevel
 
 from ..mixins import ApiTestCaseMixin, MediaMixin
 from .template_results.workouts import (
+    expected_en_atom_feed_workout_cycling_user_1,
     expected_en_empty_feed,
     expected_en_feed_user_1_workouts,
     expected_en_feed_workout_cycling_user_1,
@@ -24,7 +25,7 @@ if TYPE_CHECKING:
     from fittrackee.workouts.models import Sport, Workout
 
 
-class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
+class TestGetUserPublicWorkoutsRssFeed(ApiTestCaseMixin, MediaMixin):
     route = "/users/{username}/workouts.rss"
 
     def test_it_returns_error_when_user_does_not_exist(
@@ -51,7 +52,7 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
             response = client.get(self.route.format(username=user_1.username))
 
         assert response.status_code == 200
-        assert response.mimetype == "text/xml"
+        assert response.mimetype == "application/rss+xml"
         assert response.data.decode() == expected_en_empty_feed.format(
             username=user_1.username, last_date=format_datetime(now)
         )
@@ -73,7 +74,7 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
             )
 
         assert response.status_code == 200
-        assert response.mimetype == "text/xml"
+        assert response.mimetype == "application/rss+xml"
         assert response.data.decode() == expected_en_empty_feed.format(
             username=suspended_user.username, last_date=format_datetime(now)
         )
@@ -100,7 +101,7 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
             response = client.get(self.route.format(username=user_1.username))
 
         assert response.status_code == 200
-        assert response.mimetype == "text/xml"
+        assert response.mimetype == "application/rss+xml"
 
         assert (
             response.data.decode()
@@ -129,7 +130,7 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
             )
 
         assert response.status_code == 200
-        assert response.mimetype == "text/xml"
+        assert response.mimetype == "application/rss+xml"
         assert response.data.decode() == (
             expected_en_feed_workout_cycling_user_1_in_imperial_units.format(
                 workout_short_id=workout_cycling_user_1.short_id,
@@ -156,7 +157,7 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
             )
 
         assert response.status_code == 200
-        assert response.mimetype == "text/xml"
+        assert response.mimetype == "application/rss+xml"
         assert (
             response.data.decode()
             == expected_en_feed_workout_cycling_user_1.format(
@@ -182,7 +183,7 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
         )
 
         assert response.status_code == 200
-        assert response.mimetype == "text/xml"
+        assert response.mimetype == "application/rss+xml"
         assert response.data.decode() == (
             expected_en_feed_workout_cycling_user_1_with_text_description.format(
                 workout_short_id=workout_cycling_user_1.short_id,
@@ -211,7 +212,7 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
             )
 
         assert response.status_code == 200
-        assert response.mimetype == "text/xml"
+        assert response.mimetype == "application/rss+xml"
         assert (
             response.data.decode()
             == expected_fr_feed_workout_cycling_user_1_with_map.format(
@@ -262,3 +263,29 @@ class TestGetUserPublicWorkoutsFeed(ApiTestCaseMixin, MediaMixin):
         )
 
         assert "enclosure" not in response.data.decode()
+
+
+class TestGetUserPublicWorkoutsAtomFeed(ApiTestCaseMixin):
+    route = "/users/{username}/workouts.atom"
+
+    def test_it_returns_atom_feed(
+        self,
+        app: "Flask",
+        user_1: "User",
+        sport_1_cycling: "Sport",
+        workout_cycling_user_1: "Workout",
+    ) -> None:
+        workout_cycling_user_1.title = "some title"
+        workout_cycling_user_1.workout_visibility = VisibilityLevel.PUBLIC
+        client = app.test_client()
+
+        response = client.get(self.route.format(username=user_1.username))
+
+        assert response.status_code == 200
+        assert response.mimetype == "application/atom+xml"
+        assert response.data.decode() == (
+            expected_en_atom_feed_workout_cycling_user_1.format(
+                workout_short_id=workout_cycling_user_1.short_id,
+                workout_title=workout_cycling_user_1.title,
+            )
+        )

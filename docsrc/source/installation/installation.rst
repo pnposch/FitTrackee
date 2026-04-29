@@ -116,6 +116,8 @@ From sources
 Production environment
 ======================
 
+.. versionchanged:: 1.3.0 Node 20+ is now required
+
 .. warning::
     | Note that FitTrackee is under heavy development, some features may be unstable.
 
@@ -123,7 +125,7 @@ Production environment
 
 .. code:: bash
 
-   $ wget https://github.com/SamR1/FitTrackee/archive/1.2.2.tar.gz
+   $ wget https://github.com/SamR1/FitTrackee/archive/refs/tags/v1.2.2.tar.gz
    $ tar -xzf v1.2.2.tar.gz
    $ mv FitTrackee-1.2.2 FitTrackee
    $ cd FitTrackee
@@ -131,11 +133,17 @@ Production environment
 -  Create **.env** from example and update it
    (see `Environment variables <environments_variables.html>`__).
 
--  Install Python virtualenv and all related packages:
+-  Install Python and Javascript dependencies:
 
 .. code:: bash
 
-   $ make install-python
+   $ make install-python install-client-dev
+
+-  Build Javascript assets:
+
+.. code:: bash
+
+   $ make build-client
 
 -  Initialize the database (**after updating** ``db/create.sql`` **to change
    database credentials**):

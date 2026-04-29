@@ -21,6 +21,7 @@ classifiers = [
     "Programming Language :: JavaScript"
 ]
 exclude = ["fittrackee/tests"]
+include = ["fittrackee/dist/"]
 
 [tool.poetry.urls]
 Issues = "https://github.com/SamR1/FitTrackee/issues"
@@ -193,7 +194,9 @@ skip = [
     '.venv',
     '.mypy_cache',
     '.pytest_cache',
-    'node_modules']
+    'node_modules',
+    'package-lock.json'
+]
 check-hidden = true
 ignore-regex = '\b(Gard|Nome)\b'
 # Unfortunate choices for words which are not correct but too many by now
