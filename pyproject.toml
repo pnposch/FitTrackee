@@ -21,6 +21,7 @@ classifiers = [
     "Programming Language :: JavaScript"
 ]
 exclude = ["fittrackee/tests"]
+include = ["fittrackee/dist/"]
 
 [tool.poetry.urls]
 Issues = "https://github.com/SamR1/FitTrackee/issues"
