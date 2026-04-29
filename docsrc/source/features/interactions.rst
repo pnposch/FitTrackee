@@ -24,6 +24,7 @@ User profile
 .. versionchanged:: 0.9.0 display of the last 5 sessions visible in the user profile
 .. versionchanged:: 0.12.0 added RSS Feed
 .. versionchanged:: 0.12.1 description added to the RSS Feed
+.. versionchanged:: 1.3.0 add Atom feed format
 
 | The user profile displays the last 5 visible workouts.
 | The language and imperial units are taken into account according to the user's preferences if logged in.
@@ -33,12 +34,17 @@ User profile
 
    On the screenshot only 3 workouts are visible to the authenticated user.
 
-A RSS feed is available in the user profile with the 5 last public workouts (displayed by default in English and using the metric system).
+A feed is available in the user profile with the 5 last public workouts (displayed by default in English and using the metric system):
+
+- Atom: ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.atom``
+- RSS: ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.rss``
+
+Atom feed is the default format in the user profile.
 
 It's possible to specify language and/or imperial units display, for instance:
 
-- ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.rss?lang=fr``
-- ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.rss?imperial_units=true``
+- ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.atom?lang=fr``
+- ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.atom?imperial_units=true``
 
 .. note::
   The rendering of the description may differ from that on FitTrackee, as different libraries are used and additional styles are applied on the UI.
@@ -48,10 +54,10 @@ No workouts are displayed when the user is suspended.
 
 Workout description can be displayed by adding ``description`` parameter (not displayed by default):
 
-- ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.rss?description=true``
+- ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.atom?description=true``
 
 .. note::
-  The RSS feed is not autodiscoverable due to application architecture (client-side rendering).
+  The feeds are not autodiscoverable due to application architecture (client-side rendering).
 
 Follow requests
 ===============

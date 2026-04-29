@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List, Literal, Optional, Union
 
 import feedgenerator
 import mistune
@@ -24,6 +24,8 @@ class UserWorkoutsFeedService:
         self,
         user: "User",
         workouts: List["Workout"],
+        *,
+        feed_format: Literal["rss", "atom"] = "rss",
         lang: str = "en",
         use_imperial_units: bool = False,
         with_description: bool = False,
@@ -32,6 +34,7 @@ class UserWorkoutsFeedService:
         self.user = user
         self.workouts = workouts
         self.lang = lang if lang in current_app.config["LANGUAGES"] else "en"
+        self.feed_format = feed_format
         self.with_description = with_description
 
         # to display distance and speed
@@ -52,10 +55,17 @@ class UserWorkoutsFeedService:
             current_app.config["LANGUAGES"],
         )
 
-    def init_feed(self) -> "feedgenerator.Rss201rev2Feed":
+    def init_feed(
+        self,
+    ) -> Union["feedgenerator.Rss201rev2Feed", "feedgenerator.Atom1Feed"]:
         user_ui_url = f"{self.fittrackee_url}/users/{self.user.username}"
+        feed_format_class = (
+            feedgenerator.Atom1Feed
+            if self.feed_format == "atom"
+            else feedgenerator.Rss201rev2Feed
+        )
         with force_locale(self.lang):
-            feed = feedgenerator.Rss201rev2Feed(
+            feed = feed_format_class(
                 description=(
                     lazy_gettext(
                         "Latest public workouts on FitTrackee from %(username)s",  # noqa

@@ -133,7 +133,7 @@
   "PREVIOUS_WORKOUT": "Séance précédente",
   "PRIVATE_NOTES": "Notes personnelles",
   "PRIVATE_NOTES_FIELD_HELP": "ces notes ne sont visibles que par vous.",
-  "PUBLIC_WORKOUTS_RSS_FEED": "Flux RSS des séances publiques",
+  "PUBLIC_WORKOUTS_ATOM_FEED": "Flux Atom des séances publiques",
   "RADIUS": "rayon",
   "RECORD": "record | records",
   "RECORD_AP": "Allure moy.",
