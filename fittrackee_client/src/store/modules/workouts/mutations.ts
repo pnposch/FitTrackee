@@ -144,6 +144,7 @@ export const mutations: MutationTree<IWorkoutsState> & TWorkoutsMutations = {
       refreshLoading: false,
       elevationLoading: false,
       mediaAttachments: [],
+      isEditingMedia: false,
       mediaLoading: '',
       displayedMediaIndex: undefined,
     }
@@ -252,5 +253,11 @@ export const mutations: MutationTree<IWorkoutsState> & TWorkoutsMutations = {
     index: number | undefined
   ) {
     state.workoutData.displayedMediaIndex = index
+  },
+  [WORKOUTS_STORE.MUTATIONS.IS_EDITING_MEDIA](
+    state: IWorkoutsState,
+    isEditingMedia: boolean
+  ) {
+    state.workoutData.isEditingMedia = isEditingMedia
   },
 }

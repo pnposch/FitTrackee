@@ -842,6 +842,7 @@ export const actions: ActionTree<IWorkoutsState, IRootState> &
               res.data
             )
           }
+          context.commit(WORKOUTS_STORE.MUTATIONS.IS_EDITING_MEDIA, false)
         }
       })
       .catch((error) => {

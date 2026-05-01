@@ -287,6 +287,7 @@ export interface IWorkoutData {
   elevationLoading: boolean
   mediaAttachments: IMediaAttachment[]
   mediaLoading: string
+  isEditingMedia: boolean
   displayedMediaIndex: number | undefined
 }
 

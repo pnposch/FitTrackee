@@ -55,7 +55,7 @@
           {{ $t('workouts.DESCRIPTION') }}:
           <CustomTextArea
             :name="`media-description-${media.id}`"
-            :input="media.description || ''"
+            :input="mediaDescriptions[media.id] || ''"
             :disabled="loading"
             :charLimit="1500"
             :rows="2"
@@ -75,6 +75,17 @@
             :disabled="loading"
           >
             {{ $t('buttons.DELETE') }}
+          </button>
+          <button
+            class="confirm"
+            @click.prevent="cancelDescriptionEdition(media)"
+            :disabled="
+              loading ||
+              !(media.id in mediaDescriptions) ||
+              media.description === mediaDescriptions[media.id]
+            "
+          >
+            {{ $t('buttons.CANCEL') }}
           </button>
           <button
             class="confirm"
@@ -167,14 +178,45 @@
       id: mediaAttachmentId,
     })
   }
+  function cancelDescriptionEdition(media: IMediaAttachment) {
+    mediaDescriptions.value[media.id] = media.description
+  }
 
   watch(
     () => mediaLoading.value,
-    (newValue: string, oldValue: string) => {
-      if (newValue === '' && oldValue === 'new' && mediaAttachmentFile.value) {
+    (newLoading: string, oldLoading: string) => {
+      if (
+        newLoading === '' &&
+        oldLoading === 'new' &&
+        mediaAttachmentFile.value
+      ) {
         mediaAttachmentFile.value.value = ''
       }
     }
+  )
+  watch(
+    () => mediaAttachments.value,
+    (newMediaAttachments: IMediaAttachment[]) => {
+      newMediaAttachments.forEach(
+        (media) => (mediaDescriptions.value[media.id] = media.description)
+      )
+    },
+    { deep: true }
+  )
+  watch(
+    () => mediaDescriptions.value,
+    (newMediaDescriptions: Record<string, string>) => {
+      store.commit(
+        WORKOUTS_STORE.MUTATIONS.IS_EDITING_MEDIA,
+        Object.entries(newMediaDescriptions).some(([key, value]) => {
+          return (
+            mediaAttachments.value.find((media) => media.id === key)
+              ?.description !== value
+          )
+        })
+      )
+    },
+    { deep: true }
   )
 
   onBeforeMount(() => {
@@ -183,9 +225,10 @@
       workoutMediaAttachments.value
     )
   })
-  onUnmounted(() =>
+  onUnmounted(() => {
     store.commit(WORKOUTS_STORE.MUTATIONS.EMPTY_WORKOUT_MEDIA_ATTACHMENTS)
-  )
+    store.commit(WORKOUTS_STORE.MUTATIONS.IS_EDITING_MEDIA, false)
+  })
 </script>
 
 <style scoped lang="scss">

@@ -32,6 +32,7 @@ export const workoutsState: IWorkoutsState = {
     refreshLoading: false,
     elevationLoading: false,
     mediaAttachments: [],
+    isEditingMedia: false,
     mediaLoading: '',
     displayedMediaIndex: undefined,
   },

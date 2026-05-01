@@ -64,4 +64,7 @@ export const getters: GetterTree<IWorkoutsState, IRootState> &
   [WORKOUTS_STORE.GETTERS.DISPLAYED_MEDIA_INDEX]: (state: IWorkoutsState) => {
     return state.workoutData.displayedMediaIndex
   },
+  [WORKOUTS_STORE.GETTERS.IS_EDITING_MEDIA]: (state: IWorkoutsState) => {
+    return state.workoutData.isEditingMedia
+  },
 }

@@ -207,6 +207,7 @@ export interface IWorkoutsGetters {
   [WORKOUTS_STORE.GETTERS.DISPLAYED_MEDIA_INDEX](
     state: IWorkoutsState
   ): number | undefined
+  [WORKOUTS_STORE.GETTERS.IS_EDITING_MEDIA](state: IWorkoutsState): boolean
 }
 
 export type TWorkoutsMutations<S = IWorkoutsState> = {
@@ -335,6 +336,10 @@ export type TWorkoutsMutations<S = IWorkoutsState> = {
   [WORKOUTS_STORE.MUTATIONS.SET_DISPLAYED_MEDIA_INDEX](
     state: S,
     index: number | undefined
+  ): void
+  [WORKOUTS_STORE.MUTATIONS.IS_EDITING_MEDIA](
+    state: S,
+    isEditing: boolean
   ): void
 }
 

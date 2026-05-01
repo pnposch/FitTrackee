@@ -639,7 +639,8 @@
   const disabled: ComputedRef<boolean> = computed(
     () =>
       loading.value ||
-      store.getters[WORKOUTS_STORE.GETTERS.WORKOUT_MEDIA_LOADING] === 'new'
+      store.getters[WORKOUTS_STORE.GETTERS.WORKOUT_MEDIA_LOADING] === 'new' ||
+      store.getters[WORKOUTS_STORE.GETTERS.IS_EDITING_MEDIA]
   )
   const mediaAttachementIds: ComputedRef<string[]> = computed(() =>
     store.getters[WORKOUTS_STORE.GETTERS.WORKOUT_MEDIA_ATTACHMENTS].map(
