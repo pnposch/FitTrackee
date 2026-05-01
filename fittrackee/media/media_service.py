@@ -23,7 +23,7 @@ if TYPE_CHECKING:
 
     from fittrackee.users.models import User
 
-THUMBNAIL_MAX_SIZE = (350, 350)
+THUMBNAIL_MAX_SIZE = (1024, 1024)
 
 
 class MediaService:

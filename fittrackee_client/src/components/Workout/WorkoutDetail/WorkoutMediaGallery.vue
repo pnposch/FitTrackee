@@ -14,6 +14,15 @@
     <Card>
       <template #title>
         <span id="photos">{{ $t('common.PHOTOS') }}</span>
+        <button
+          id="edit-button"
+          class="transparent icon-button"
+          v-if="isWorkoutOwner"
+          @click="$router.push(`/workouts/${workoutId}/edit#media_visibility`)"
+          :title="$t(`workouts.EDIT_WORKOUT`)"
+        >
+          <i class="fa fa-edit" aria-hidden="true" />
+        </button>
       </template>
       <template #content>
         <div class="workout-media-gallery">
@@ -26,6 +35,7 @@
             role="button"
             tabindex="0"
             :title="media.description"
+            :style="`background-image: url(${media.meta.thumbnail_url})`"
           >
             <img :alt="media.description" :src="media.meta.thumbnail_url" />
           </div>
@@ -114,41 +124,59 @@
 <style scoped lang="scss">
   @use '~@/scss/vars.scss' as *;
 
+  #edit-button {
+    padding-left: $default-padding;
+  }
+
   ::v-deep(.card-content) {
-    padding: $default-padding;
+    padding: $default-padding $default-padding * 1.4;
 
     .workout-media-gallery {
-      columns: auto 4;
-      column-gap: $default-padding;
+      display: flex;
+      flex-wrap: wrap;
+      gap: $default-padding;
       margin: 0;
       padding: 0;
 
       .media-attachment {
         cursor: pointer;
-        break-inside: avoid;
-        margin-bottom: $default-padding;
-
+        background-size: cover;
+        background-position: center;
+        border-radius: 4px;
+        padding: 5px;
+        height: 200px;
+        width: 23.3%;
         img {
-          display: block;
-          border-radius: 5px;
-          height: auto;
-          width: 100%;
+          display: none;
         }
       }
     }
     @media screen and (max-width: $medium-limit) {
       .workout-media-gallery {
-        columns: auto 3;
+        .media-attachment {
+          width: 31%;
+        }
       }
     }
-    @media screen and (max-width: $small-limit) {
+    @media screen and (max-width: 763px) {
       .workout-media-gallery {
-        columns: auto 2;
+        .media-attachment {
+          width: 47.4%;
+        }
+      }
+    }
+    @media screen and (max-width: 626px) {
+      .workout-media-gallery {
+        .media-attachment {
+          width: 47%;
+        }
       }
     }
     @media screen and (max-width: $x-small-limit) {
       .workout-media-gallery {
-        columns: auto 1;
+        .media-attachment {
+          width: 100%;
+        }
       }
     }
 

@@ -159,7 +159,7 @@
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
-    }, 500)
+    }, 100)
   }
 
   watch(

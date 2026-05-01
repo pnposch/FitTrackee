@@ -13,8 +13,16 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, watch, onBeforeMount } from 'vue'
-  import type { ComputedRef } from 'vue'
+  import {
+    computed,
+    nextTick,
+    onBeforeMount,
+    onMounted,
+    onUnmounted,
+    ref,
+    watch,
+  } from 'vue'
+  import type { ComputedRef, Ref } from 'vue'
   import { useRoute } from 'vue-router'
 
   import WorkoutEdition from '@/components/Workout/WorkoutEdition.vue'
@@ -33,6 +41,16 @@
   const workoutData: ComputedRef<IWorkoutData> = computed(
     () => store.getters[WORKOUTS_STORE.GETTERS.WORKOUT_DATA]
   )
+  const timer: Ref<ReturnType<typeof setTimeout> | undefined> = ref()
+
+  function scrollTo(selector: string) {
+    timer.value = setTimeout(() => {
+      const element = document.getElementById(selector)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
+  }
 
   watch(
     () => route.params.workoutId,
@@ -47,5 +65,18 @@
     store.dispatch(WORKOUTS_STORE.ACTIONS.GET_WORKOUT_DATA, {
       workoutId: route.params.workoutId,
     })
+  })
+  onMounted(() => {
+    nextTick(() => {
+      if (route.hash) {
+        scrollTo(route.hash.replace('#', ''))
+      }
+    })
+  })
+  onUnmounted(() => {
+    if (timer.value) {
+      clearTimeout(timer.value)
+    }
+    store.commit(WORKOUTS_STORE.MUTATIONS.EMPTY_WORKOUT)
   })
 </script>
