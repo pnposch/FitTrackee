@@ -50,7 +50,7 @@
   import { computed, toRefs } from 'vue'
   import type { ComputedRef } from 'vue'
 
-  import GalleryModal from '@/components/Common/GalleryModal.vue'
+  import GalleryModal from '@/components/Workout/WorkoutDetail/GalleryModal.vue'
   import useApp from '@/composables/useApp.ts'
   import { WORKOUTS_STORE } from '@/store/constants.ts'
   import type { TVisibilityLevels } from '@/types/user.ts'
