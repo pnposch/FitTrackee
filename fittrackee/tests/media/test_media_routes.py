@@ -347,7 +347,7 @@ class TestMediaApiPatch(ApiTestCaseMixin, MediaMixin):
         db.session.refresh(media)
         assert media.description == ""
 
-    def test_test_it_updates_media_description_when_it_exceeds_max_limit(
+    def test_it_updates_media_description_when_it_exceeds_max_limit(
         self, app: "Flask", user_1: "User"
     ) -> None:
         media = self.create_media(user_1)
