@@ -187,13 +187,13 @@ def update_media_description(
 
     :statuscode 201: media created
     :statuscode 400: ``invalid payload``
-    :statuscode 404: ``media not found``
     :statuscode 401:
         - ``provide a valid auth token``
         - ``signature expired, please log in again``
         - ``invalid token, please log in again``
     :statuscode 403:
         - ``you do not have permissions, your account is suspended``
+    :statuscode 404: ``media not found``
     :statuscode 500: ``error, please try again or contact the administrator``
     """
     data = request.get_json()
@@ -248,13 +248,13 @@ def delete_media(
     :reqheader Authorization: OAuth 2.0 Bearer Token
 
     :statuscode 204: media deleted
-    :statuscode 404: ``media not found``
     :statuscode 401:
         - ``provide a valid auth token``
         - ``signature expired, please log in again``
         - ``invalid token, please log in again``
     :statuscode 403:
         - ``you do not have permissions, your account is suspended``
+    :statuscode 404: ``media not found``
     :statuscode 500: ``error, please try again or contact the administrator``
     """
     media = Media.query.filter_by(uuid=decode_short_id(media_short_id)).first()
