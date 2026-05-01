@@ -432,7 +432,7 @@ class TestWorkoutsFromFileCreationServiceCreateWorkout(
         assert new_workout.notes == workouts_data["notes"]
         assert new_workout.sport_id == sport_1_cycling.id
         assert new_workout.workout_visibility == VisibilityLevel.PUBLIC
-        assert new_workout.get_media_attachments(user_1) == [media]
+        assert new_workout.get_media_attachments(True) == [media]
 
     @pytest.mark.parametrize(
         "input_map_visibility,input_analysis_visibility,"
@@ -1618,9 +1618,9 @@ class TestWorkoutsFromFileCreationServiceProcessArchiveContent(
         workouts = Workout.query.all()
         assert len(workouts) == 2
         assert workouts[0].sport_id == sport_1_cycling.id
-        assert workouts[0].get_media_attachments(user_1) == []
+        assert workouts[0].get_media_attachments(True) == []
         assert workouts[1].sport_id == sport_1_cycling.id
-        assert workouts[1].get_media_attachments(user_1) == []
+        assert workouts[1].get_media_attachments(True) == []
         assert WorkoutSegment.query.count() == 2
         db.session.refresh(media)
         assert media.workout_id is None
@@ -2352,9 +2352,37 @@ class TestWorkoutsFromFileCreationServiceProcessForOneFile(
         new_workout = Workout.query.one()
         assert new_workout.sport_id == sport_1_cycling.id
         assert new_workout.map is not None
-        assert new_workout.get_media_attachments(user_1) == [media]
+        assert new_workout.get_media_attachments(True) == [media]
         assert WorkoutSegment.query.count() == 1
         assert media.workout_id == new_workout.id
+
+    def test_it_ignores_media_belonging_to_another_user(
+        self,
+        app: "Flask",
+        user_1: "User",
+        user_2: "User",
+        gpx_file: str,
+        sport_1_cycling: "Sport",
+    ) -> None:
+        media = self.create_media(user_2)
+        gpx_file_storage = FileStorage(
+            filename="file.gpx", stream=BytesIO(str.encode(gpx_file))
+        )
+        service = WorkoutsFromFileCreationService(
+            auth_user=user_1,
+            file=gpx_file_storage,
+            workouts_data={
+                "sport_id": sport_1_cycling.id,
+                "media_attachment_ids": [media.short_id],
+            },
+        )
+
+        service.process()
+        db.session.commit()
+
+        new_workout = Workout.query.one()
+        assert new_workout.get_media_attachments(True) == []
+        assert media.workout_id is None
 
     def test_it_deletes_workout_files_on_error(
         self,

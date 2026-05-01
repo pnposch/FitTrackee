@@ -44,6 +44,7 @@ class WorkoutMediaAttachmentsMixin:
         workout_id: int,
     ) -> None:
         if not media_attachment_ids:
+            Media.query.filter_by(workout_id=workout_id).delete()
             return
 
         update_data = []

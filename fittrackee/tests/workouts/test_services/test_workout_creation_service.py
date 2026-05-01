@@ -992,7 +992,7 @@ class TestWorkoutCreationServiceProcess(
         db.session.commit()
 
         workout = Workout.query.one()
-        assert workout.get_media_attachments(user_1) == [media_1, media_2]
+        assert workout.get_media_attachments(True) == [media_1, media_2]
 
     def test_it_ignores_not_found_media(
         self, app: "Flask", sport_1_cycling: "Sport", user_1: "User"
@@ -1011,7 +1011,7 @@ class TestWorkoutCreationServiceProcess(
         db.session.commit()
 
         workout = Workout.query.one()
-        assert workout.get_media_attachments(user_1) == [media]
+        assert workout.get_media_attachments(True) == [media]
 
     def test_it_ignores_media_belonging_to_another_user(
         self,
@@ -1040,7 +1040,7 @@ class TestWorkoutCreationServiceProcess(
         db.session.commit()
 
         workout = Workout.query.one()
-        assert workout.get_media_attachments(user_1) == [
+        assert workout.get_media_attachments(True) == [
             media_user_1_1,
             media_user_1_2,
         ]
