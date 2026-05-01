@@ -13,7 +13,7 @@
     />
     <Card>
       <template #title>
-        {{ $t('common.PHOTOS') }}
+        <span id="photos">{{ $t('common.PHOTOS') }}</span>
       </template>
       <template #content>
         <div class="workout-media-gallery">

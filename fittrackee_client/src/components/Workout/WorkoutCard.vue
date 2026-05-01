@@ -71,10 +71,7 @@
             :key="media.id"
             class="media-attachment"
             :title="media.description"
-            :to="{
-              name: 'Workout',
-              params: { workoutId: workout.id },
-            }"
+            :to="`workouts/${workout.id}#photos`"
             @click="$emit('workoutLinkClicked')"
           >
             <div

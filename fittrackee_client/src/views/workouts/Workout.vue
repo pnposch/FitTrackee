@@ -81,7 +81,16 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, toRefs, watch, onBeforeMount, onUnmounted } from 'vue'
+  import {
+    computed,
+    nextTick,
+    onBeforeMount,
+    onUnmounted,
+    onMounted,
+    ref,
+    toRefs,
+    watch,
+  } from 'vue'
   import type { ComputedRef, Ref } from 'vue'
   import { useRoute } from 'vue-router'
 
@@ -120,6 +129,7 @@
     latitude: null,
     longitude: null,
   })
+  const timer: Ref<ReturnType<typeof setTimeout> | undefined> = ref()
 
   const workoutData: ComputedRef<IWorkoutData> = computed(
     () => store.getters[WORKOUTS_STORE.GETTERS.WORKOUT_DATA]
@@ -142,6 +152,14 @@
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     }
+  }
+  function scrollTo(selector: string) {
+    timer.value = setTimeout(() => {
+      const element = document.getElementById(selector)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 500)
   }
 
   watch(
@@ -179,7 +197,17 @@
       store.dispatch(SPORTS_STORE.ACTIONS.GET_SPORTS)
     }
   })
+  onMounted(() => {
+    nextTick(() => {
+      if (route.hash) {
+        scrollTo(route.hash.replace('#', ''))
+      }
+    })
+  })
   onUnmounted(() => {
+    if (timer.value) {
+      clearTimeout(timer.value)
+    }
     store.commit(WORKOUTS_STORE.MUTATIONS.EMPTY_WORKOUT)
   })
 </script>
