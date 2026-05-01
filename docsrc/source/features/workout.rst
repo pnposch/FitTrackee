@@ -365,7 +365,7 @@ Visibility level can be set separately for workout data, analysis and map:
 - public: anyone can see data even unauthenticated users.
 
 | Workout visibility applies to title, description, records and workout data except elevation.
-| Media visibility applies to photos.
+| Media visibility applies to photos displayed in workout cards (timeline, user profile) and workout details.
 | Analysis visibility applies to chart data, elevation and segments, if workout is associated with a file.
 | Map visibility applies to the map and photos coordinates, if workout is associated with a file.
 
@@ -546,7 +546,7 @@ Map
 
 .. versionchanged:: 0.5.0 added full screen and reset control
 .. versionchanged:: 0.11.0 added heatmap for racket sports
-.. versionchanged:: 1.2.0 photos with coordinates are displayed on map
+.. versionchanged:: 1.3.0 photos with coordinates are displayed on map
 
 | A map is displayed for workout with a file with the tile server set by the administrators (OpenStreetMap's standard tile layer by default).
 | Controls allow full screen view and position reset.
