@@ -447,7 +447,11 @@
               <button class="confirm" type="submit" :disabled="disabled">
                 {{ $t('buttons.SUBMIT') }}
               </button>
-              <button class="cancel" @click.prevent="onCancel">
+              <button
+                class="cancel"
+                @click.prevent="onCancel"
+                :disabled="disabled"
+              >
                 {{ $t('buttons.CANCEL') }}
               </button>
             </div>
@@ -488,8 +492,7 @@
     SPORT_EQUIPMENT_TYPES,
   } from '@/utils/equipments'
   import { getReadableFileSizeAsText } from '@/utils/files'
-  import { translateSports } from '@/utils/sports'
-  import { sportsWithoutElevation } from '@/utils/sports'
+  import { translateSports, sportsWithoutElevation } from '@/utils/sports'
   import { convertDistance } from '@/utils/units'
   import {
     getAllVisibilityLevels,

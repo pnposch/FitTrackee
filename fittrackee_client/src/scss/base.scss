@@ -152,7 +152,8 @@ button {
   }
 
   &:disabled,
-  &.confirm:disabled {
+  &.confirm:disabled,
+  &.cancel:disabled {
     background: var(--disabled-background-color);
     color: var(--disabled-color);
     cursor: default;

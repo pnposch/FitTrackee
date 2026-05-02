@@ -181,9 +181,23 @@
     store.dispatch(WORKOUTS_STORE.ACTIONS.DELETE_WORKOUT_MEDIA_ATTACHMENT, {
       id: mediaAttachmentId,
     })
+    delete mediaDescriptions.value[mediaAttachmentId]
   }
   function cancelDescriptionEdition(media: IMediaAttachment) {
     mediaDescriptions.value[media.id] = media.description
+  }
+  function updateIsEditingMedia(
+    updatedMediaDescriptions: Record<string, string>
+  ) {
+    store.commit(
+      WORKOUTS_STORE.MUTATIONS.IS_EDITING_MEDIA,
+      Object.entries(updatedMediaDescriptions).some(([key, value]) => {
+        return (
+          mediaAttachments.value.find((media) => media.id === key)
+            ?.description !== value
+        )
+      })
+    )
   }
 
   watch(
@@ -204,21 +218,14 @@
       newMediaAttachments.forEach(
         (media) => (mediaDescriptions.value[media.id] = media.description)
       )
+      updateIsEditingMedia(mediaDescriptions.value)
     },
     { deep: true }
   )
   watch(
     () => mediaDescriptions.value,
     (newMediaDescriptions: Record<string, string>) => {
-      store.commit(
-        WORKOUTS_STORE.MUTATIONS.IS_EDITING_MEDIA,
-        Object.entries(newMediaDescriptions).some(([key, value]) => {
-          return (
-            mediaAttachments.value.find((media) => media.id === key)
-              ?.description !== value
-          )
-        })
-      )
+      updateIsEditingMedia(newMediaDescriptions)
     },
     { deep: true }
   )
