@@ -19,14 +19,14 @@
     onBeforeMount,
     onMounted,
     onUnmounted,
-    ref,
     watch,
   } from 'vue'
-  import type { ComputedRef, Ref } from 'vue'
+  import type { ComputedRef } from 'vue'
   import { useRoute } from 'vue-router'
 
   import WorkoutEdition from '@/components/Workout/WorkoutEdition.vue'
   import useAuthUser from '@/composables/useAuthUser'
+  import useScroll from '@/composables/useScroll.ts'
   import useSports from '@/composables/useSports'
   import { WORKOUTS_STORE } from '@/store/constants'
   import type { IWorkoutData } from '@/types/workouts'
@@ -37,20 +37,11 @@
 
   const { authUser } = useAuthUser()
   const { sports } = useSports()
+  const { resetTimeout, scrollTo } = useScroll()
 
   const workoutData: ComputedRef<IWorkoutData> = computed(
     () => store.getters[WORKOUTS_STORE.GETTERS.WORKOUT_DATA]
   )
-  const timer: Ref<ReturnType<typeof setTimeout> | undefined> = ref()
-
-  function scrollTo(selector: string) {
-    timer.value = setTimeout(() => {
-      const element = document.getElementById(selector)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
-  }
 
   watch(
     () => route.params.workoutId,
@@ -69,14 +60,12 @@
   onMounted(() => {
     nextTick(() => {
       if (route.hash) {
-        scrollTo(route.hash.replace('#', ''))
+        scrollTo(route.hash.replace('#', ''), 100)
       }
     })
   })
   onUnmounted(() => {
-    if (timer.value) {
-      clearTimeout(timer.value)
-    }
+    resetTimeout()
     store.commit(WORKOUTS_STORE.MUTATIONS.EMPTY_WORKOUT)
   })
 </script>

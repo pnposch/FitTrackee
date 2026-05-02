@@ -104,6 +104,7 @@
   import WorkoutUser from '@/components/Workout/WorkoutDetail/WorkoutUser.vue'
   import useApp from '@/composables/useApp.ts'
   import useAuthUser from '@/composables/useAuthUser'
+  import useScroll from '@/composables/useScroll.ts'
   import useSports from '@/composables/useSports'
   import { SPORTS_STORE, WORKOUTS_STORE } from '@/store/constants'
   import type { TCoordinates } from '@/types/map'
@@ -124,12 +125,12 @@
   const { authUser } = useAuthUser()
   const { displayOptions } = useApp()
   const { getWorkoutSport, sports } = useSports()
+  const { resetTimeout, scrollTo } = useScroll()
 
   const markerCoordinates: Ref<TCoordinates> = ref({
     latitude: null,
     longitude: null,
   })
-  const timer: Ref<ReturnType<typeof setTimeout> | undefined> = ref()
 
   const workoutData: ComputedRef<IWorkoutData> = computed(
     () => store.getters[WORKOUTS_STORE.GETTERS.WORKOUT_DATA]
@@ -152,14 +153,6 @@
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     }
-  }
-  function scrollTo(selector: string) {
-    timer.value = setTimeout(() => {
-      const element = document.getElementById(selector)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 300)
   }
 
   watch(
@@ -200,14 +193,12 @@
   onMounted(() => {
     nextTick(() => {
       if (route.hash) {
-        scrollTo(route.hash.replace('#', ''))
+        scrollTo(route.hash.replace('#', ''), 300)
       }
     })
   })
   onUnmounted(() => {
-    if (timer.value) {
-      clearTimeout(timer.value)
-    }
+    resetTimeout()
     store.commit(WORKOUTS_STORE.MUTATIONS.EMPTY_WORKOUT)
   })
 </script>
