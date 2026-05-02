@@ -48,6 +48,7 @@
           :alt="mediaAttachment.description || ''"
           :src="mediaAttachment.url"
           :title="mediaAttachment.description"
+          @touchstart.self.stop="handleSwipe"
         />
         <template v-if="mediaAttachment.description && !isEditing">
           <div class="modal-image-description" v-if="displayDescription">
@@ -180,6 +181,7 @@
   const displayDescription = ref(false)
   const mediaDescription = ref('')
   const timer: Ref<ReturnType<typeof setTimeout> | undefined> = ref()
+  const startPosition: Ref<number | undefined> = ref(undefined)
 
   const mediaAttachment: ComputedRef<IMediaAttachment | undefined> = computed(
     () => mediaAttachments.value[displayedMediaIndex.value]
@@ -304,6 +306,31 @@
     })
   }
 
+  function endSwipe(touchEvent: TouchEvent) {
+    if (touchEvent.changedTouches.length !== 1 || !startPosition.value) {
+      return
+    }
+    const endPosition = touchEvent.changedTouches[0].clientX
+    if (displayedMediaIndex.value !== 0 && startPosition.value < endPosition) {
+      navigate('displayPreviousMedia')
+    } else if (
+      displayedMediaIndex.value !== mediaAttachments.value.length - 1 &&
+      startPosition.value > endPosition
+    ) {
+      navigate('displayNextMedia')
+    }
+  }
+  function handleSwipe(touchEvent: TouchEvent) {
+    if (touchEvent.changedTouches.length !== 1) {
+      startPosition.value = undefined
+      return
+    }
+    startPosition.value = touchEvent.changedTouches[0].clientX
+    addEventListener('touchend', (touchEvent) => endSwipe(touchEvent), {
+      once: true,
+    })
+  }
+
   watch(
     () => mediaAttachment.value,
     () => {
@@ -331,6 +358,7 @@
       clearTimeout(timer.value)
     }
     document.removeEventListener('keydown', focusTrap)
+    document.removeEventListener('touchend', endSwipe)
     previousFocusedElement?.focus()
   })
 </script>
