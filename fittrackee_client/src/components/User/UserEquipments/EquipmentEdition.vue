@@ -72,8 +72,9 @@
             </label>
             <CustomTextArea
               name="equipment-description"
-              :charLimit="200"
+              :charLimit="2000"
               :input="equipmentForm.description"
+              :rows="5"
               @updateValue="updateDescription"
             />
           </div>
