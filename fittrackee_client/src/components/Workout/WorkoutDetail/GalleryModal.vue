@@ -426,6 +426,8 @@
         }
         .description-button {
           position: absolute;
+          background: var(--button-transparent-hover-color);
+          color: var(--button-hover-color);
           bottom: $default-padding;
           left: $default-padding;
           box-shadow: none;
