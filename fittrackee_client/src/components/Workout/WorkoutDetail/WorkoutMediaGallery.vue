@@ -183,6 +183,7 @@
     .media-visibility-level {
       font-size: 0.9em;
       font-style: italic;
+      margin-top: $default-margin * 0.5;
       .visibility-label {
         color: var(--text-visibilty);
         text-transform: lowercase;
