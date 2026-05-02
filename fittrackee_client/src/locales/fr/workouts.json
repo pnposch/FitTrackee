@@ -36,6 +36,7 @@
   "DESCENT": "dénivelé négatif",
   "DESCRIPTION": "description",
   "DESCRIPTION_FIELD_HELP": "si fournie, la description remplace celle du fichier.",
+  "DISPLAY_DESCRIPTION": "afficher la description",
   "DISPLAY_FILTERS": "afficher les filtres",
   "DISPLAY_MORE_FILTERS": "afficher plus de filtres",
   "DISPLAY_MULTIPLE_CHARTS": "afficher plusieurs graphiques",
@@ -62,6 +63,7 @@
   "FROM": "à partir de",
   "GLOBAL_MAP": "Carte globale",
   "HEART_RATE": "fréq. cardiaque",
+  "HIDE_DESCRIPTION": "masquer la description",
   "HIDE_FILTERS": "masquer les filtres",
   "HIDE_MAP": "masquer la carte",
   "HIDE_WORKOUTS": "masquer les séances",
@@ -94,6 +96,7 @@
     "selectedLabel": "Sélectionné"
   },
   "MY_WORKOUTS": "Mes séances",
+  "NEXT_PHOTO": "Photo suivante",
   "NEXT_SEGMENT": "Segment suivant",
   "NEXT_WORKOUT": "Séance suivante",
   "NOMINATIM_ADDRESS_TYPE": {
@@ -132,6 +135,7 @@
   "PHOTOS_COUNT_EXCEEDED": "Il n'est pas possible d'ajouter plus de 20 photos à une séance.",
   "PICTURE_DELETION_CONFIRMATION": "Êtes-vous sûr de vouloir supprimer cette photo ?",
   "POWER": "puissance",
+  "PREVIOUS_PHOTO": "Photo précédente",
   "PREVIOUS_SEGMENT": "Segment précédent",
   "PREVIOUS_WORKOUT": "Séance précédente",
   "PRIVATE_NOTES": "Notes personnelles",

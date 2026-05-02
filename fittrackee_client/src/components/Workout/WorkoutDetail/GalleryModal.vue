@@ -6,6 +6,7 @@
         id="prev-button"
         :disabled="displayedMediaIndex === 0"
         @click="navigate('displayPreviousMedia')"
+        :title="$t('workouts.PREVIOUS_PHOTO')"
       >
         <i class="fa fa-chevron-left" aria-hidden="true" />
       </button>
@@ -17,6 +18,7 @@
           class="transparent rounded-btn"
           id="edit-button"
           @click="enableEdition()"
+          :title="$t('buttons.EDIT')"
         >
           <i class="fa fa-edit" aria-hidden="true" />
         </button>
@@ -25,6 +27,7 @@
           class="transparent rounded-btn"
           id="delete-button"
           @click="enableDeletion()"
+          :title="$t('buttons.DELETE')"
         >
           <i class="fa fa-trash" aria-hidden="true" />
         </button>
@@ -32,26 +35,38 @@
           class="transparent rounded-btn"
           id="close-button"
           @click="emit('closeModal')"
+          :title="$t('buttons.CLOSE')"
         >
           <i class="fa fa-close" aria-hidden="true" />
         </button>
       </div>
-      <img
-        :class="{
-          'bottom-border':
-            !mediaAttachment.description && !isDeleting && !isEditing,
-        }"
-        :alt="mediaAttachment.description || ''"
-        :src="mediaAttachment.url"
-      />
-      <div
-        v-if="isEditing || isDeleting"
-        class="description-edition"
-        :class="{
-          'bottom-border':
-            mediaAttachment.description || isDeleting || isEditing,
-        }"
-      >
+      <div class="modal-image">
+        <img
+          :class="{
+            'with-edition': isDeleting || isEditing,
+          }"
+          :alt="mediaAttachment.description || ''"
+          :src="mediaAttachment.url"
+          :title="mediaAttachment.description"
+        />
+        <template v-if="mediaAttachment.description && !isEditing">
+          <div class="modal-image-description" v-if="displayDescription">
+            {{ mediaAttachment.description }}
+          </div>
+          <button
+            class="description-button"
+            @click="displayDescription = !displayDescription"
+            :title="
+              $t(
+                `workouts.${displayDescription ? 'HIDE' : 'DISPLAY'}_DESCRIPTION`
+              )
+            "
+          >
+            <i class="fa fa-info-circle" aria-hidden="true" />
+          </button>
+        </template>
+      </div>
+      <div v-if="isEditing || isDeleting" class="description-edition">
         <template v-if="isEditing">
           <CustomTextArea
             name="media-description-textarea"
@@ -97,20 +112,8 @@
               {{ $t('common.YES') }}
             </button>
           </div>
-        </template>
-      </div>
-      <div v-else class="description">
-        <div class="media-description-container bottom-border">
-          <div
-            id="media-description"
-            class="media-description"
-            v-if="mediaAttachment.description"
-            tabindex="0"
-          >
-            {{ mediaAttachment.description }}
-          </div>
           <ErrorMessage :message="errorMessages" v-if="errorMessages" />
-        </div>
+        </template>
       </div>
     </div>
     <div class="navigation-button navigation-button-next">
@@ -119,6 +122,7 @@
         id="next-button"
         :disabled="displayedMediaIndex === mediaAttachments.length - 1"
         @click="navigate('displayNextMedia')"
+        :title="$t('workouts.NEXT_PHOTO')"
       >
         <i class="fa fa-chevron-right" aria-hidden="true" />
       </button>
@@ -173,6 +177,7 @@
 
   const isEditing = ref(false)
   const isDeleting = ref(false)
+  const displayDescription = ref(false)
   const mediaDescription = ref('')
   const timer: Ref<ReturnType<typeof setTimeout> | undefined> = ref()
 
@@ -304,6 +309,7 @@
     () => {
       mediaDescription.value = ''
       isDeleting.value = false
+      displayDescription.value = false
     }
   )
   watch(
@@ -349,11 +355,6 @@
       padding: 0;
     }
 
-    .bottom-border {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
-
     .custom-gallery-modal {
       display: flex;
       flex-direction: column;
@@ -370,20 +371,45 @@
         justify-content: flex-end;
       }
 
-      img {
-        border-top-left-radius: $border-radius;
-        border-top-right-radius: $border-radius;
-        max-height: calc(100vh - 160px);
-        object-fit: contain;
-
-        &.bottom-border {
+      .modal-image {
+        position: relative;
+        display: flex;
+        img {
+          border-radius: $border-radius;
           max-height: calc(100vh - 50px);
+          object-fit: contain;
+          &.with-edition {
+            border-bottom-left-radius: initial;
+            border-bottom-right-radius: initial;
+            max-height: calc(100vh - 170px);
+          }
+        }
+        .modal-image-description {
+          position: absolute;
+          background-color: var(--app-background-color);
+          white-space: pre-wrap;
+          border-radius: $border-radius;
+          padding: $default-padding;
+          margin-right: $default-margin;
+          bottom: 50px;
+          left: $default-padding;
+          max-height: 80%;
+          overflow-y: auto;
+        }
+        .description-button {
+          position: absolute;
+          bottom: $default-padding;
+          left: $default-padding;
+          box-shadow: none;
+          border-radius: 20%;
         }
       }
 
       .description-edition {
         padding: $default-padding;
         background-color: var(--app-background-color);
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
 
         .buttons {
           display: flex;
@@ -394,28 +420,6 @@
 
       .deletion-confirmation {
         font-weight: bold;
-      }
-
-      .description {
-        display: flex;
-        align-items: center;
-
-        .media-description-container {
-          background-color: var(--app-background-color);
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-
-          .media-description {
-            font-style: italic;
-            text-align: center;
-            white-space: pre-wrap;
-            max-height: 90px;
-            overflow-y: scroll;
-            padding: $default-padding * 0.5 0;
-            width: 100%;
-          }
-        }
       }
     }
 
