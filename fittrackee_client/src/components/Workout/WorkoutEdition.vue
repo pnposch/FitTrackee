@@ -462,7 +462,7 @@
   import { computed, onMounted, reactive, ref, toRefs, watch } from 'vue'
   import type { ComputedRef, Ref } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
   import EquipmentMultiSelect from '@/components/User/UserEquipments/EquipmentMultiSelect.vue'
   import WorkoutMediaAttachementsUpload from '@/components/Workout/WorkoutMediaAttachementsUpload.vue'
@@ -511,6 +511,7 @@
   })
   const { authUser, workout, isCreation, loading } = toRefs(props)
 
+  const route = useRoute()
   const router = useRouter()
   const store = useStore()
   const { t } = useI18n()
@@ -923,13 +924,13 @@
     let element
     if (props.workout.id) {
       formatWorkoutForm(props.workout)
-      element = document.getElementById('sport')
+      element = document.getElementById(
+        route.hash ? route.hash.replace('#', '') : 'sport'
+      )
     } else {
       element = document.getElementById('withFile')
     }
-    if (element) {
-      element.focus()
-    }
+    element?.focus()
   })
 </script>
 

@@ -125,7 +125,7 @@
   @use '~@/scss/vars.scss' as *;
 
   #edit-button {
-    padding-left: $default-padding;
+    margin-left: $default-margin;
   }
 
   ::v-deep(.card-content) {
