@@ -2,7 +2,9 @@
   <div class="form-item">
     <label for="mediaAttachmentFile">
       {{ $t('common.PHOTOS') }} (<span>
-        {{ mediaAttachments.length }}/{{ maxAttachmentsCount }}</span
+        {{ isArchive ? 0 : mediaAttachments.length }}/{{
+          maxAttachmentsCount
+        }}</span
       >):
     </label>
     <input
@@ -12,7 +14,9 @@
       type="file"
       multiple
       accept=".jpeg, .jpg, .gif, .png, .webp"
-      :disabled="loading || mediaAttachments.length === maxAttachmentsCount"
+      :disabled="
+        loading || isArchive || mediaAttachments.length === maxAttachmentsCount
+      "
       @change="uploadMediaAttachment"
     />
   </div>
