@@ -34,6 +34,10 @@ body {
   }
 }
 
+body:has(div#modal) {
+  overflow: hidden;
+}
+
 #app {
   font-family: 'PT Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -148,7 +152,8 @@ button {
   }
 
   &:disabled,
-  &.confirm:disabled {
+  &.confirm:disabled,
+  &.cancel:disabled {
     background: var(--disabled-background-color);
     color: var(--disabled-color);
     cursor: default;

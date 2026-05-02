@@ -24,7 +24,7 @@ User profile
 .. versionchanged:: 0.9.0 display of the last 5 sessions visible in the user profile
 .. versionchanged:: 0.12.0 added RSS Feed
 .. versionchanged:: 0.12.1 description added to the RSS Feed
-.. versionchanged:: 1.3.0 add Atom feed format
+.. versionchanged:: 1.3.0 added Atom Feed format and photos
 
 | The user profile displays the last 5 visible workouts.
 | The language and imperial units are taken into account according to the user's preferences if logged in.
@@ -40,6 +40,10 @@ A feed is available in the user profile with the 5 last public workouts (display
 - RSS: ``https://<FITTRACKEE_DOMAIN>/users/<USERNAME>/workouts.rss``
 
 Atom feed is the default format in the user profile.
+
+.. note::
+
+    With RSS feed, only one photo per item is present.
 
 It's possible to specify language and/or imperial units display, for instance:
 

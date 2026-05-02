@@ -59,7 +59,7 @@ From sources
 Prod environment
 ================
 
-.. versionchanged:: 1.3.0 NNode 20+ is now required
+.. versionchanged:: 1.3.0 Node 20+ is now required
 
 - Stop the application
 
