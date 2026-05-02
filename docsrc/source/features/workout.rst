@@ -27,7 +27,7 @@ Supported files extensions are:
 
   - versions supported: 2.2.0 and 2.3.0
   - only files with ``Placemark``/``MultiTrack``/``Tracks`` are supported.
-  - files with folders or multiple ``Placemark`` are not supported for now.
+  - files with folders, multiple ``Placemark`` or photos in kmz archives are not supported for now.
 
 - .tcx
 - .zip archive containing files with one of the supported extensions
