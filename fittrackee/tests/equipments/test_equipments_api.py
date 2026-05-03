@@ -361,7 +361,7 @@ class TestPostEquipment(ApiTestCaseMixin, EquipmentMixin):
         assert len(data["data"]["equipments"]) == 1
         equipment = data["data"]["equipments"][0]
         assert "Test shoes" == equipment["label"]
-        assert equipment["description"] is None
+        assert equipment["description"] == ""
         assert equipment["is_active"] is True
         assert equipment_type_1_shoe.serialize() == equipment["equipment_type"]
 

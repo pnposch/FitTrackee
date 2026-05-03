@@ -18,7 +18,7 @@ from fittrackee.users.models import (
     User,
     UserSportPreferenceEquipment,
 )
-from fittrackee.utils import decode_short_id
+from fittrackee.utils import clean_input, decode_short_id
 from fittrackee.visibility_levels import VisibilityLevel
 from fittrackee.workouts.models import Sport, Workout
 
@@ -411,10 +411,14 @@ def post_equipment(auth_user: User) -> Union[Tuple[Dict, int], HttpResponse]:
     try:
         new_equipment = Equipment(
             user_id=auth_user.id,
-            label=label,
+            label=clean_input(label),
             equipment_type_id=equipment_type_id,
             is_active=True,
-            description=description,
+            description=(
+                clean_input(description, for_markdown_renderer=True)
+                if description
+                else ""
+            ),
         )
         db.session.add(new_equipment)
         db.session.flush()
