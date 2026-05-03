@@ -72,10 +72,15 @@
             </label>
             <CustomTextArea
               name="equipment-description"
-              :charLimit="200"
+              :charLimit="2000"
               :input="equipmentForm.description"
+              :rows="5"
               @updateValue="updateDescription"
             />
+            <div class="markdown-hints info-box">
+              <i class="fa fa-info-circle" aria-hidden="true" />
+              {{ $t('workouts.MARKDOWN_SYNTAX') }}
+            </div>
           </div>
           <div class="form-item">
             <label for="equipment-visibility">
