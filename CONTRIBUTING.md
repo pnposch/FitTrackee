@@ -17,24 +17,25 @@ Pull requests or feature requests must therefore take these points into account.
 
 ## Report issues, ask for features
 
-* If a bug is a **security vulnerability**, please refer to [security policy](https://github.com/SamR1/FitTrackee/blob/master/SECURITY.md).
+* If a bug is a **security vulnerability**, please refer to [security policy](https://codeberg.org/FitTrackee/FitTrackee/src/branch/main/SECURITY.md).
 
-* Ensure an issue was not **already opened** by searching on **GitHub** under [Issues](https://github.com/SamR1/FitTrackee/issues). 
+* Ensure an issue was not **already opened** by searching on **Codeberg** under [Issues](https://codeberg.org/FitTrackee/FitTrackee/issues). 
 
-* If not, [open a new one](https://github.com/SamR1/FitTrackee/issues/new) with a descriptive title and provide a description.
+* If not, [open a new one](https://codeberg.org/FitTrackee/FitTrackee/issues/new) with a descriptive title and provide a description.
 
 
 ## Contributing Code
 
 ### Project repository
 
-The **GitHub** repository contains:
+The **Codeberg** repository contains:
 - source code,
 - translations,
 - tests,
 - documentation (source and translations).
 
-Continuous integration workflows run on **Github Actions** platform (on **push** and **pull requests**).
+The repository is mirrored on **GitHub**.  
+Continuous integration workflows run on **Github Actions** platform (on **push**) for the moment (see [issue](https://codeberg.org/FitTrackee/FitTrackee/issues/1121)).
 
 For now, releases do not follow [semantic versioning](https://semver.org). Any version may contain backward-incompatible changes.
 
@@ -69,7 +70,7 @@ For new sports requests, as **FitTrackee** is built around files (.gpx or other 
 
 Please make your changes from the development branch (`dev`).
 
-* Fork the repository (see [GitHub instructions](https://docs.github.com/en/get-started/quickstart/contributing-to-projects))
+* Fork the repository (see [Codeberg instructions](https://docs.codeberg.org/collaborating/pull-requests-and-git-flow/))
 
 * Implement your feature.
 
@@ -126,9 +127,9 @@ Please make your changes from the development branch (`dev`).
 
 * Ensure the pull requests description clearly describes the problem and solution. Include the relevant issue number if applicable.
 
-* Check that all tests have been successfully passed.
+* Check that all tests have been successfully passed locally.
 
-* If needed, [update your branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/keeping-your-pull-request-in-sync-with-the-base-branch). 
+* If needed, [update your branch](https://docs.codeberg.org/collaborating/pull-requests-and-git-flow/#keep-it-up-to-date%3A-rebase-pull-requests-to-upstream). 
 
 
 Thanks.

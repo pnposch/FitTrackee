@@ -5,7 +5,7 @@ description = "Self-hosted outdoor workout/activity tracker"
 authors = ["SamR1"]
 license = "AGPL-3.0-only"
 readme = "README.md"
-homepage = "https://github.com/SamR1/FitTrackee"
+homepage = "https://codeberg.org/FitTrackee/FitTrackee"
 documentation = "https://docs.fittrackee.org"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -24,9 +24,9 @@ exclude = ["fittrackee/tests"]
 include = ["fittrackee/dist/"]
 
 [tool.poetry.urls]
-Issues = "https://github.com/SamR1/FitTrackee/issues"
+Issues = "https://codeberg.org/FitTrackee/FitTrackee/issues"
 Changelog = "https://docs.fittrackee.org/en/changelog.html"
-"Release Notes" = "https://github.com/SamR1/FitTrackee/releases"
+"Release Notes" = "https://codeberg.org/FitTrackee/FitTrackee/releases"
 
 [tool.poetry.dependencies]
 python = "^3.11"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FitTrackee 0.7.18\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-22 15:44+0200\n"
+"POT-Creation-Date: 2026-05-04 15:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -3616,7 +3616,7 @@ msgstr ""
 #: ../source/changelog.md:3390 ../source/changelog.md:3415
 #: ../source/changelog.md:3424 ../source/changelog.md:3435
 #: ../source/changelog.md:3454 ../source/changelog.md:3540
-#: ../source/contributing.md:41 ../source/features/translations.rst:2
+#: ../source/contributing.md:42 ../source/features/translations.rst:2
 msgid "Translations"
 msgstr ""
 
@@ -4832,7 +4832,7 @@ msgstr ""
 msgid "Reminder:"
 msgstr ""
 
-#: ../source/changelog.md:576 ../source/contributing.md:39
+#: ../source/changelog.md:576 ../source/contributing.md:40
 msgid ""
 "For now, releases do not follow semantic versioning. Any version may "
 "contain backward-incompatible changes."
@@ -6410,7 +6410,7 @@ msgid "@mbw83"
 msgstr ""
 
 #: ../source/changelog.md:1800 ../source/changelog.md:1886
-msgid "@OliverPifferi"
+msgid "@oliver-pifferi"
 msgstr ""
 
 #: ../source/changelog.md:1802
@@ -8372,7 +8372,7 @@ msgstr ""
 #: ../source/changelog.md:3513 ../source/changelog.md:3619
 #: ../source/changelog.md:3668 ../source/changelog.md:3696
 #: ../source/changelog.md:3726 ../source/changelog.md:3821
-#: ../source/contributing.md:65
+#: ../source/contributing.md:66
 msgid "Pull Requests"
 msgstr ""
 
@@ -9881,7 +9881,7 @@ msgstr ""
 
 #: ../source/contributing.md:22
 msgid ""
-"Ensure an issue was not already opened by searching on GitHub under "
+"Ensure an issue was not already opened by searching on Codeberg under "
 "Issues."
 msgstr ""
 
@@ -9898,7 +9898,7 @@ msgid "Project repository"
 msgstr ""
 
 #: ../source/contributing.md:31
-msgid "The GitHub repository contains:"
+msgid "The Codeberg repository contains:"
 msgstr ""
 
 #: ../source/contributing.md:32
@@ -9919,50 +9919,51 @@ msgstr ""
 
 #: ../source/contributing.md:37
 msgid ""
-"Continuous integration workflows run on Github Actions platform (on push "
-"and pull requests)."
-msgstr ""
-
-#: ../source/contributing.md:43
-msgid "Application translations files are located:"
+"The repository is mirrored on GitHub.<br />Continuous integration "
+"workflows run on Github Actions platform (on push) for the moment (see "
+"issue)."
 msgstr ""
 
 #: ../source/contributing.md:44
+msgid "Application translations files are located:"
+msgstr ""
+
+#: ../source/contributing.md:45
 msgid ""
 "on API side (emails and RSS Feeds): fittrackee/translations/ (implemented"
 " with Babel)"
 msgstr ""
 
-#: ../source/contributing.md:45
+#: ../source/contributing.md:46
 msgid "on client side: fittrackee_client/src/locales (implemented with Vue I18n)"
 msgstr ""
 
-#: ../source/contributing.md:47
+#: ../source/contributing.md:48
 msgid ""
 "Translations can be updated through Weblate.<br />For new language "
 "requests, please open an issue in order to initialize the translation "
 "files and make the language available on Weblate."
 msgstr ""
 
-#: ../source/contributing.md:50
+#: ../source/contributing.md:51
 msgid ""
 "Documentation translations are located in following directory: "
 "docsrc/locales. For now only English and French are available and "
 "translations files are not yet on Weblate."
 msgstr ""
 
-#: ../source/contributing.md:53
+#: ../source/contributing.md:54
 msgid "Generative AI Policy"
 msgstr ""
 
-#: ../source/contributing.md:55
+#: ../source/contributing.md:56
 msgid ""
 "The use of large language models (LLMs) or generative AI applications is "
 "strongly discouraged. One reason, among others, is that these tools can "
 "produce code that is more complex than necessary, or even incorrect."
 msgstr ""
 
-#: ../source/contributing.md:57
+#: ../source/contributing.md:58
 msgid ""
 "However, if you do use such tools as a aid in your development "
 "environment (IDE), make sure you fully understand the code produced and "
@@ -9970,22 +9971,22 @@ msgid ""
 "therefore be refactored if necessary."
 msgstr ""
 
-#: ../source/contributing.md:59
+#: ../source/contributing.md:60
 msgid ""
 "On the other hand, bug reports or PRs generated entirely by AI/LLM tools "
 "or with commits co-authored by AI/LLM tools in the case of PRs are not "
 "accepted and will be closed."
 msgstr ""
 
-#: ../source/contributing.md:61
+#: ../source/contributing.md:62
 msgid "How to install FitTrackee"
 msgstr ""
 
-#: ../source/contributing.md:63
+#: ../source/contributing.md:64
 msgid "see Installations instructions"
 msgstr ""
 
-#: ../source/contributing.md:67
+#: ../source/contributing.md:68
 msgid ""
 "Note: Before starting, please open an issue to discuss implementation if "
 "the feature requires major changes or involves the addition of a new "
@@ -9994,119 +9995,119 @@ msgid ""
 "only sports associated with a file can be added for now."
 msgstr ""
 
-#: ../source/contributing.md:70
+#: ../source/contributing.md:71
 msgid "Please make your changes from the development branch (dev)."
 msgstr ""
 
-#: ../source/contributing.md:72
-msgid "Fork the repository (see GitHub instructions)"
+#: ../source/contributing.md:73
+msgid "Fork the repository (see Codeberg instructions)"
 msgstr ""
 
-#: ../source/contributing.md:74
+#: ../source/contributing.md:75
 msgid "Implement your feature."
 msgstr ""
 
-#: ../source/contributing.md:76
+#: ../source/contributing.md:77
 msgid "If your changes need a database migration:"
 msgstr ""
 
-#: ../source/contributing.md:77
+#: ../source/contributing.md:78
 msgid "You can generate one after updating models with the following command:"
 msgstr ""
 
-#: ../source/contributing.md:81
+#: ../source/contributing.md:82
 msgid ""
 "For data migration, an empty migration can be created with this following"
 " command:"
 msgstr ""
 
-#: ../source/contributing.md:85
+#: ../source/contributing.md:86
 msgid "Rename the migration, prefixing with the next number."
 msgstr ""
 
-#: ../source/contributing.md:86
+#: ../source/contributing.md:87
 msgid "To apply database changes:"
 msgstr ""
 
-#: ../source/contributing.md:90
+#: ../source/contributing.md:91
 msgid "Check the downgrade migration."
 msgstr ""
 
-#: ../source/contributing.md:92
+#: ../source/contributing.md:93
 msgid "Run checks (lint, type check and unit tests)."
 msgstr ""
 
-#: ../source/contributing.md:96
+#: ../source/contributing.md:97
 msgid ""
 "There are some end-to-end tests, to run them (needs a running "
 "application):"
 msgstr ""
 
-#: ../source/contributing.md:101
+#: ../source/contributing.md:102
 msgid "If needed, update translations (at least add English strings)."
 msgstr ""
 
-#: ../source/contributing.md:102
+#: ../source/contributing.md:103
 msgid "On client side, update files in fittrackee_client/src/locales folder."
 msgstr ""
 
-#: ../source/contributing.md:103
+#: ../source/contributing.md:104
 msgid ""
 "On API side (emails and RSS Feeds), to extract new strings into "
 "messages.pot:"
 msgstr ""
 
-#: ../source/contributing.md:107
+#: ../source/contributing.md:108
 msgid ""
 "To add new strings in translations files "
 "(fittrackee/emails/translations/<LANG>/LC_MESSAGES/messages.po):"
 msgstr ""
 
-#: ../source/contributing.md:111
+#: ../source/contributing.md:112
 msgid "After updating strings in messages.po, compile the translations:"
 msgstr ""
 
-#: ../source/contributing.md:116
+#: ../source/contributing.md:117
 msgid "If needed, add or update tests."
 msgstr ""
 
-#: ../source/contributing.md:118
+#: ../source/contributing.md:119
 msgid ""
 "If needed, update documentation (no need to build documentation, it will "
 "be done when releasing)."
 msgstr ""
 
-#: ../source/contributing.md:120
+#: ../source/contributing.md:121
 msgid ""
 "If updated code contains client-side changes, you can generate javascript"
 " assets to check FitTrackee without starting client dev server:"
 msgstr ""
 
-#: ../source/contributing.md:124
+#: ../source/contributing.md:125
 msgid ""
 "No need to commit these files, dist files will be generated before "
 "merging or when releasing."
 msgstr ""
 
-#: ../source/contributing.md:126
+#: ../source/contributing.md:127
 msgid "Create your pull request to merge on dev branch."
 msgstr ""
 
-#: ../source/contributing.md:128
+#: ../source/contributing.md:129
 msgid ""
 "Ensure the pull requests description clearly describes the problem and "
 "solution. Include the relevant issue number if applicable."
 msgstr ""
 
-#: ../source/contributing.md:130
-msgid "Check that all tests have been successfully passed."
+#: ../source/contributing.md:131
+msgid "Check that all tests have been successfully passed locally."
 msgstr ""
 
-#: ../source/contributing.md:132
+#: ../source/contributing.md:133
 msgid "If needed, update your branch."
 msgstr ""
 
-#: ../source/contributing.md:135
+#: ../source/contributing.md:136
 msgid "Thanks."
 msgstr ""
 
@@ -13602,8 +13603,8 @@ msgstr ""
 
 #: ../source/index.rst:28
 msgid ""
-"(see `issues <https://github.com/SamR1/FitTrackee/issues>`__ for more "
-"information)"
+"(see `issues <https://codeberg.org/FitTrackee/FitTrackee/issues>`__ for "
+"more information)"
 msgstr ""
 
 #: ../source/index.rst:35
@@ -14617,7 +14618,7 @@ msgid ""
 msgstr ""
 
 #: ../source/installation/index.rst:90 ../source/installation/upgrade.rst:18
-#: ../source/installation/upgrade.rst:161
+#: ../source/installation/upgrade.rst:172
 msgid ""
 "Depending on the operating system and the version of Python installed, "
 "additional dependencies may be required, such as **gcc** or **libgdal-"
@@ -14761,23 +14762,23 @@ msgid ""
 msgstr ""
 
 #: ../source/installation/installation.rst:91
-#: ../source/installation/installation.rst:156
+#: ../source/installation/installation.rst:155
 msgid "Open http://localhost:5000 and register"
 msgstr ""
 
 #: ../source/installation/installation.rst:93
-#: ../source/installation/installation.rst:158
-#: ../source/installation/installation.rst:203
-#: ../source/installation/installation.rst:297
+#: ../source/installation/installation.rst:157
+#: ../source/installation/installation.rst:202
+#: ../source/installation/installation.rst:296
 msgid ""
 "To set owner role to the newly created account, use the following command"
 " line:"
 msgstr ""
 
 #: ../source/installation/installation.rst:100
-#: ../source/installation/installation.rst:165
-#: ../source/installation/installation.rst:210
-#: ../source/installation/installation.rst:304
+#: ../source/installation/installation.rst:164
+#: ../source/installation/installation.rst:209
+#: ../source/installation/installation.rst:303
 msgid "If the user account is inactive, it activates it."
 msgstr ""
 
@@ -14816,84 +14817,84 @@ msgstr ""
 msgid "Download the last release (for now, it is the release v1.2.2):"
 msgstr ""
 
-#: ../source/installation/installation.rst:131
-#: ../source/installation/installation.rst:178
+#: ../source/installation/installation.rst:130
+#: ../source/installation/installation.rst:177
 msgid ""
 "Create **.env** from example and update it (see `Environment variables "
 "<environments_variables.html>`__)."
 msgstr ""
 
-#: ../source/installation/installation.rst:134
+#: ../source/installation/installation.rst:133
 msgid "Install Python virtualenv and all related packages:"
 msgstr ""
 
-#: ../source/installation/installation.rst:140
+#: ../source/installation/installation.rst:139
 msgid ""
 "Initialize the database (**after updating** ``db/create.sql`` **to change"
 " database credentials**):"
 msgstr ""
 
-#: ../source/installation/installation.rst:147
+#: ../source/installation/installation.rst:146
 msgid "Start the server and **Dramatiq** workers:"
 msgstr ""
 
-#: ../source/installation/installation.rst:154
-#: ../source/installation/upgrade.rst:96
+#: ../source/installation/installation.rst:153
+#: ../source/installation/upgrade.rst:107
 msgid "If email sending is disabled: ``$ make run-server``"
 msgstr ""
 
-#: ../source/installation/installation.rst:169
-#: ../source/installation/upgrade.rst:100
+#: ../source/installation/installation.rst:168
+#: ../source/installation/upgrade.rst:111
 msgid "Dev environment"
 msgstr ""
 
-#: ../source/installation/installation.rst:171
+#: ../source/installation/installation.rst:170
 msgid "Clone this repo:"
 msgstr ""
 
-#: ../source/installation/installation.rst:181
+#: ../source/installation/installation.rst:180
 msgid ""
 "Install Python virtualenv, Vue and all related packages and initialize "
 "the database:"
 msgstr ""
 
-#: ../source/installation/installation.rst:189
+#: ../source/installation/installation.rst:188
 msgid "Start the server and the client:"
 msgstr ""
 
-#: ../source/installation/installation.rst:195
-#: ../source/installation/upgrade.rst:128
+#: ../source/installation/installation.rst:194
+#: ../source/installation/upgrade.rst:139
 msgid "Run **Dramatiq** workers:"
 msgstr ""
 
-#: ../source/installation/installation.rst:201
+#: ../source/installation/installation.rst:200
 msgid "Open http://localhost:3000 and register"
 msgstr ""
 
-#: ../source/installation/installation.rst:214
+#: ../source/installation/installation.rst:213
 msgid "Docker"
 msgstr ""
 
-#: ../source/installation/installation.rst:217
+#: ../source/installation/installation.rst:216
 msgid "add client application for development"
 msgstr ""
 
-#: ../source/installation/installation.rst:218
+#: ../source/installation/installation.rst:217
 msgid "add docker image for production"
 msgstr ""
 
-#: ../source/installation/installation.rst:222
+#: ../source/installation/installation.rst:221
 msgid "Production"
 msgstr ""
 
-#: ../source/installation/installation.rst:224
+#: ../source/installation/installation.rst:223
 msgid ""
 "Images are available on `DockerHub "
 "<https://hub.docker.com/r/fittrackee/fittrackee>`_ or `Github registry "
 "<https://github.com/SamR1/FitTrackee/packages>`_."
 msgstr ""
 
-#: ../source/installation/installation.rst:228
+#: ../source/installation/installation.rst:227
 msgid ""
 "Images are available for ``linux/amd64`` and ``linux/arm64`` platforms. "
 "Only ``linux/amd64`` image has been tested."
@@ -14909,87 +14910,87 @@ msgstr ""
 msgid "The workaround is to build PostGIS image locally."
 msgstr ""
 
-#: ../source/installation/installation.rst:235
+#: ../source/installation/installation.rst:234
 msgid ""
 "create a ``docker-compose.yml`` file as needed (see the `example "
 "<https://github.com/SamR1/FitTrackee/blob/main/docker-compose.yml>`__ in "
 "the repository):"
 msgstr ""
 
-#: ../source/installation/installation.rst:237
+#: ../source/installation/installation.rst:236
 msgid "the minimal set up requires at least the database and the web application"
 msgstr ""
 
-#: ../source/installation/installation.rst:238
+#: ../source/installation/installation.rst:237
 msgid "to activate the rate limit, redis is required"
 msgstr ""
 
-#: ../source/installation/installation.rst:239
+#: ../source/installation/installation.rst:238
 msgid ""
 "to send e-mails, redis and workers are required and a valid ``EMAIL_URL``"
 " variable must be set in ``.env``"
 msgstr ""
 
-#: ../source/installation/installation.rst:242
+#: ../source/installation/installation.rst:241
 msgid "The same image is used by the web application and workers."
 msgstr ""
 
-#: ../source/installation/installation.rst:245
+#: ../source/installation/installation.rst:244
 msgid ""
 "Following directory must be writable for ``fittrackee`` user (see "
 "`docker-compose.yml example "
 "<https://github.com/SamR1/FitTrackee/blob/main/docker-compose.yml>`__):"
 msgstr ""
 
-#: ../source/installation/installation.rst:247
+#: ../source/installation/installation.rst:246
 msgid "``/usr/src/app/uploads``"
 msgstr ""
 
-#: ../source/installation/installation.rst:248
+#: ../source/installation/installation.rst:247
 msgid "``/usr/src/app/logs``"
 msgstr ""
 
-#: ../source/installation/installation.rst:249
+#: ../source/installation/installation.rst:248
 msgid "``/usr/src/app/.staticmap_cache``"
 msgstr ""
 
-#: ../source/installation/installation.rst:251
+#: ../source/installation/installation.rst:250
 msgid ""
 "To disable logging to file, set ``GUNICORN_LOG`` to ``-`` and do not set "
 "``APP_LOG``. In this case, ``/usr/src/app/logs`` directory is not "
 "necessary, see comments in docker-compose.yml example."
 msgstr ""
 
-#: ../source/installation/installation.rst:253
+#: ../source/installation/installation.rst:252
 msgid ""
 "create ``.env`` from example (``.env.docker.example``) and update it (see"
 " `Environment variables <environments_variables.html>`__)."
 msgstr ""
 
-#: ../source/installation/installation.rst:255
+#: ../source/installation/installation.rst:254
 msgid "to start the application:"
 msgstr ""
 
-#: ../source/installation/installation.rst:263
+#: ../source/installation/installation.rst:262
 msgid ""
 "Migrations are executed at startup. Please backup data before updating "
 "FitTrackee image version."
 msgstr ""
 
-#: ../source/installation/installation.rst:265
+#: ../source/installation/installation.rst:264
 msgid "to run a CLI command, for instance to give admin rights:"
 msgstr ""
 
-#: ../source/installation/installation.rst:273
-#: ../source/installation/installation.rst:350
+#: ../source/installation/installation.rst:272
+#: ../source/installation/installation.rst:349
 msgid "Development"
 msgstr ""
 
-#: ../source/installation/installation.rst:275
+#: ../source/installation/installation.rst:274
 msgid "To install and run **FitTrackee**:"
 msgstr ""
 
-#: ../source/installation/installation.rst:283
+#: ../source/installation/installation.rst:282
 msgid "Open http://localhost:5000 and register."
 msgstr ""
 
@@ -15004,85 +15005,85 @@ msgstr ""
 msgid "For example:"
 msgstr ""
 
-#: ../source/installation/installation.rst:295
+#: ../source/installation/installation.rst:294
 msgid ""
 "Open http://localhost:8025 to access `MailHog interface "
 "<https://github.com/mailhog/MailHog>`_ (email testing tool)"
 msgstr ""
 
-#: ../source/installation/installation.rst:306
+#: ../source/installation/installation.rst:305
 msgid "To stop **Fittrackee**:"
 msgstr ""
 
-#: ../source/installation/installation.rst:312
+#: ../source/installation/installation.rst:311
 msgid "To run shell inside **Fittrackee** container:"
 msgstr ""
 
-#: ../source/installation/installation.rst:318
+#: ../source/installation/installation.rst:317
 msgid "an additional step is needed to install ``fittrackee_client``"
 msgstr ""
 
-#: ../source/installation/installation.rst:324
+#: ../source/installation/installation.rst:323
 msgid "to start **FitTrackee** with client dev tools:"
 msgstr ""
 
-#: ../source/installation/installation.rst:330
+#: ../source/installation/installation.rst:329
 msgid "Open http://localhost:3000"
 msgstr ""
 
-#: ../source/installation/installation.rst:333
+#: ../source/installation/installation.rst:332
 msgid "Some environment variables need to be updated like ``UI_URL``"
 msgstr ""
 
-#: ../source/installation/installation.rst:335
+#: ../source/installation/installation.rst:334
 msgid "to run lint or tests:"
 msgstr ""
 
-#: ../source/installation/installation.rst:345
+#: ../source/installation/installation.rst:344
 msgid "VSCode"
 msgstr ""
 
-#: ../source/installation/installation.rst:352
+#: ../source/installation/installation.rst:351
 msgid ""
 "You can use the **Dev Container** without the **debug configuration** and"
 " vice versa. Dev Container is strongly recommended on Windows because of "
 "path handling issues."
 msgstr ""
 
-#: ../source/installation/installation.rst:357
+#: ../source/installation/installation.rst:356
 msgid "Dev Container"
 msgstr ""
 
-#: ../source/installation/installation.rst:358
+#: ../source/installation/installation.rst:357
 msgid ""
 "Using a Dev Container gives you a ready-to-use environment (Python, "
 "Poetry, Node, etc.) without installing them on your host."
 msgstr ""
 
-#: ../source/installation/installation.rst:360
+#: ../source/installation/installation.rst:359
 msgid "**Prerequisites**"
 msgstr ""
 
-#: ../source/installation/installation.rst:362
+#: ../source/installation/installation.rst:361
 msgid "Docker Engine"
 msgstr ""
 
-#: ../source/installation/installation.rst:363
+#: ../source/installation/installation.rst:362
 msgid ""
 "VS Code with `Dev Containers extension "
 "<https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote"
 ".remote-containers>`__"
 msgstr ""
 
-#: ../source/installation/installation.rst:365
+#: ../source/installation/installation.rst:364
 msgid "**How to use**"
 msgstr ""
 
-#: ../source/installation/installation.rst:367
+#: ../source/installation/installation.rst:366
 msgid "Open the FitTrackee folder in VS Code."
 msgstr ""
 
-#: ../source/installation/installation.rst:368
+#: ../source/installation/installation.rst:367
 msgid ""
 "When prompted, choose **Reopen in Container** (or open the Command "
 "Palette and run ``Dev Containers: Reopen in Container``)."
@@ -15114,55 +15115,55 @@ msgid ""
 "performance>`__."
 msgstr ""
 
-#: ../source/installation/installation.rst:379
+#: ../source/installation/installation.rst:378
 msgid ""
 "Port 5000 (fittrackee-ui) is forwarded automatically, if you change "
 "APP_PORT you need to manually forward the new port using ``Forward a "
 "Port`` command in the Command Palette."
 msgstr ""
 
-#: ../source/installation/installation.rst:383
+#: ../source/installation/installation.rst:382
 msgid "Debug configuration & tasks"
 msgstr ""
 
-#: ../source/installation/installation.rst:384
+#: ../source/installation/installation.rst:383
 msgid "This repository includes a VS Code *launch* configuration that:"
 msgstr ""
 
-#: ../source/installation/installation.rst:386
+#: ../source/installation/installation.rst:385
 msgid "starts the full Docker Compose dev stack in the background,"
 msgstr ""
 
-#: ../source/installation/installation.rst:387
+#: ../source/installation/installation.rst:386
 msgid "waits until services are healthy,"
 msgstr ""
 
-#: ../source/installation/installation.rst:388
+#: ../source/installation/installation.rst:387
 msgid "attaches the debugger to the backend so breakpoints work immediately,"
 msgstr ""
 
-#: ../source/installation/installation.rst:389
+#: ../source/installation/installation.rst:388
 msgid "tears the stack down when you stop the debugger."
 msgstr ""
 
-#: ../source/installation/installation.rst:391
+#: ../source/installation/installation.rst:390
 msgid "**How to start debugging**"
 msgstr ""
 
-#: ../source/installation/installation.rst:393
+#: ../source/installation/installation.rst:392
 msgid ""
 "Open the Command Palette and run ``Debug: Start Debugging`` **or** press "
 "**F5**."
 msgstr ""
 
-#: ../source/installation/installation.rst:396
+#: ../source/installation/installation.rst:395
 msgid ""
 "If the debugger fails to attach, use ``Debug: Select Debug Session`` to "
 "end the session, check container logs, then run ``Tasks: Run Task`` and "
 "then **down: devcontainer-compose** before retrying."
 msgstr ""
 
-#: ../source/installation/installation.rst:401
+#: ../source/installation/installation.rst:400
 msgid ""
 "On Linux, ``host.docker.internal`` does not resolve automatically from "
 "inside containers. If the debugger fails to attach and logs show "
@@ -15351,17 +15352,17 @@ msgid ""
 "`Upgrading to 1.0.x <upgrade.html#upgrading-to-1-0-x>`__."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:8 ../source/installation/upgrade.rst:155
+#: ../source/installation/upgrade.rst:8 ../source/installation/upgrade.rst:166
 msgid "Before upgrading, make a backup of all data:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:10 ../source/installation/upgrade.rst:157
+#: ../source/installation/upgrade.rst:10 ../source/installation/upgrade.rst:168
 msgid ""
 "database (with `pg_dump <https://www.postgresql.org/docs/current/app-"
 "pgdump.html>`__ for instance)"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:11 ../source/installation/upgrade.rst:158
+#: ../source/installation/upgrade.rst:11 ../source/installation/upgrade.rst:169
 msgid ""
 "upload directory (see `Environment variables <environments_variables.html"
 "#envvar-UPLOAD_FOLDER>`__)"
@@ -15394,8 +15395,8 @@ msgid ""
 "file"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:42 ../source/installation/upgrade.rst:83
-#: ../source/installation/upgrade.rst:116
+#: ../source/installation/upgrade.rst:42 ../source/installation/upgrade.rst:94
+#: ../source/installation/upgrade.rst:127
 msgid "Upgrade database if needed (see changelog for migrations):"
 msgstr ""
 
@@ -15427,99 +15428,109 @@ msgid ""
 "overwrite existing files:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:75 ../source/installation/upgrade.rst:108
+#: ../source/installation/upgrade.rst
+msgid "After migration to Codeberg, the archive folder has changed."
+msgstr ""
+
+#: ../source/installation/upgrade.rst
+msgid ""
+"To update source, copy the new file to existing folder (or rename it and "
+"update application configuration):"
+msgstr ""
+
+#: ../source/installation/upgrade.rst:86 ../source/installation/upgrade.rst:119
 msgid ""
 "Update **.env** if needed (see `Environment variables "
 "<environments_variables.html>`__)."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:77 ../source/installation/upgrade.rst:110
+#: ../source/installation/upgrade.rst:88 ../source/installation/upgrade.rst:121
 msgid "Upgrade packages:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:89
+#: ../source/installation/upgrade.rst:100
 msgid "Restart the server and **Dramatiq** workers:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:102
+#: ../source/installation/upgrade.rst:113
 msgid "Stop the application and pull the repository:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:122
+#: ../source/installation/upgrade.rst:133
 msgid "Restart the server:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:135
+#: ../source/installation/upgrade.rst:146
 msgid "Upgrading to 1.0.x"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:138
+#: ../source/installation/upgrade.rst:149
 msgid ""
 "This paragraph describes the upgrade from a version prior to 1.0.0 to "
 "version 1.0.x."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:140
+#: ../source/installation/upgrade.rst:151
 msgid ""
 "The version 1.0.0 introduces major changes on workout file processing to "
 "improve performances and ease the implementation of the next features:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:142
+#: ../source/installation/upgrade.rst:153
 msgid "data displayed in the workout chart are stored in the database,"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:143
+#: ../source/installation/upgrade.rst:154
 msgid "and segments geometry is also stored."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:145
+#: ../source/installation/upgrade.rst:156
 msgid ""
 "This last change requires `PostGIS <https://postgis.net/>`__ extension, "
 "which adds geospatial capabilities to the `PostgreSQL "
 "<https://www.postgresql.org/>`__ database."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:149
+#: ../source/installation/upgrade.rst:160
 msgid "Instructions for upgrade"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:152
+#: ../source/installation/upgrade.rst:163
 msgid "These actions must be performed before upgrading to version 1.1.0."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:164
+#: ../source/installation/upgrade.rst:175
 msgid "From PyPI or sources"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:166
+#: ../source/installation/upgrade.rst:177
 msgid ""
 "**PostGIS** must be installed on your operating system. You can find "
 "instructions for your OS on `PostGIS documentation "
 "<https://postgis.net/documentation/getting_started/>`_."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:169
+#: ../source/installation/upgrade.rst:180
 msgid ""
 "Here are the instructions for installation on ArchLinux with `yay "
 "<https://github.com/Jguer/yay>`__ (to adapt depending on your operating "
 "system):"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:171
+#: ../source/installation/upgrade.rst:182
 msgid "stop the application and workers"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:172
+#: ../source/installation/upgrade.rst:183
 msgid "install **PostGIS** on the server running the database"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:178
-#: ../source/installation/upgrade.rst:221
+#: ../source/installation/upgrade.rst:189
+#: ../source/installation/upgrade.rst:232
 msgid "add **PostGIS** extension to the database"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:184
+#: ../source/installation/upgrade.rst:195
 msgid ""
 "if the server running the application is different from the server "
 "running the database, install `gdal "
@@ -15527,76 +15538,76 @@ msgid ""
 "server running the application (**GDAL** is installed with **PostGIS**)"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:190
+#: ../source/installation/upgrade.rst:201
 msgid "update **fittrackee** (see `instructions for upgrade <upgrade.html>`__)"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:191
+#: ../source/installation/upgrade.rst:202
 msgid "run database migrations"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:192
+#: ../source/installation/upgrade.rst:203
 msgid "start application and workers"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:195
+#: ../source/installation/upgrade.rst:206
 msgid "With Docker"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:197
+#: ../source/installation/upgrade.rst:208
 msgid "stop the application, workers and database"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:203
+#: ../source/installation/upgrade.rst:214
 msgid ""
 "change the database ``postgres`` image in ``docker-compose.yml`` to "
 "``postgis/postgis`` (keep the same **PostgreSQL** version), for instance:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:215
+#: ../source/installation/upgrade.rst:226
 msgid "start only the database"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:228
+#: ../source/installation/upgrade.rst:239
 msgid "update **fittrackee** version in ``docker-compose.yml``"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:229
+#: ../source/installation/upgrade.rst:240
 msgid "start the application, migrations should run without error"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:233
+#: ../source/installation/upgrade.rst:244
 msgid "Workouts data update"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:234
+#: ../source/installation/upgrade.rst:245
 msgid "handle workouts with missing files."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:236
+#: ../source/installation/upgrade.rst:247
 msgid ""
 "An new CLI option (``--add-missing-geometry``) allows to refresh workouts"
 " without geometry and chart data."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:238
+#: ../source/installation/upgrade.rst:249
 msgid ""
 "After upgrading **fittrackee**, run this command with other options "
 "depending on the number of workouts to update and the server capability, "
 "before enabling geospatial features on UI."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:240
+#: ../source/installation/upgrade.rst:251
 msgid "For instance to update the first 1,000 workouts created with a file:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:246
+#: ../source/installation/upgrade.rst:257
 msgid ""
 "This command can be re-executed until there are no more workouts to "
 "update."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:247
+#: ../source/installation/upgrade.rst:258
 msgid ""
 "Once all workouts have been updated, enable geospatial features on the "
 "interface by setting the environment variable `ENABLE_GEOSPATIAL_FEATURES"
@@ -15604,36 +15615,36 @@ msgid ""
 "``True`` in ``.env``."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:250
+#: ../source/installation/upgrade.rst:261
 msgid ""
 "The version 1.1.0 requires all workouts to be updated (``--add-missing-"
 "geometry`` option is removed in v1.1.0)."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:252
+#: ../source/installation/upgrade.rst:263
 msgid ""
 "If you encountered issues refreshing workouts due to missing files, you "
 "can run the refresh command with the option ``--on-file-error``:"
 msgstr ""
 
-#: ../source/installation/upgrade.rst:254
+#: ../source/installation/upgrade.rst:265
 msgid ""
 "``remove-references``: it empties columns related to files and delete "
 "segments. The workout is kept and can be displayed as a workout "
 "originally created without a file."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:257
+#: ../source/installation/upgrade.rst:268
 msgid ""
 "Other data extracted from the file (such as source, heart rate, etc.) are"
 " preserved."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:259
+#: ../source/installation/upgrade.rst:270
 msgid "``delete-workout``: it deletes workout."
 msgstr ""
 
-#: ../source/installation/upgrade.rst:262
+#: ../source/installation/upgrade.rst:273
 msgid "Warnings are displayed during deletion, due to files not found."
 msgstr ""
 
