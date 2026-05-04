@@ -21,7 +21,9 @@ classifiers = [
     "Programming Language :: JavaScript"
 ]
 exclude = ["fittrackee/tests"]
-include = ["fittrackee/dist/"]
+include = [
+    { path = "fittrackee/dist/", format = ["sdist", "wheel"] }
+]
 
 [tool.poetry.urls]
 Issues = "https://codeberg.org/FitTrackee/FitTrackee/issues"
