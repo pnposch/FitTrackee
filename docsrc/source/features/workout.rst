@@ -292,8 +292,8 @@ It is possible to configure sport in user preferences (see `Account & preference
 - Default equipment
 - Pace/Speed display
 
-Media
-=====
+Photos
+======
 
 .. versionadded:: 1.3.0
 
@@ -356,7 +356,7 @@ Visibility levels
 .. versionadded:: 0.9.0
 .. versionchanged:: 0.10.0 added visibility levels for heart rate
 .. versionchanged:: 1.1.0 added visibility levels for total calories
-.. versionchanged:: 1.3.0 added visibility levels for media (photos)
+.. versionchanged:: 1.3.0 added visibility levels for photos
 
 Visibility level can be set separately for workout data, analysis and map:
 

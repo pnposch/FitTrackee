@@ -16,7 +16,7 @@
       <p>
         <i class="fa fa-github fa-padding" aria-hidden="true"></i>
         <a
-          href="https://github.com/SamR1/FitTrackee"
+          href="https://codeberg.org/FitTrackee/FitTrackee"
           target="_blank"
           rel="noopener noreferrer"
         >
