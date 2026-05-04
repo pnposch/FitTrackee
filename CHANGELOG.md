@@ -56,11 +56,11 @@ Translation status for languages available on the interface:
 * [#1106](https://codeberg.org/FitTrackee/FitTrackee/issues/1106) - pandas installation fails on CI with python 3.14
 
 Thanks to the contributors:
-- @ArnyminerZ
-- @hyp1989
-- @iggydev
-- @PeterAuer
-- @xmgz
+- [@ArnyminerZ](https://github.com/ArnyminerZ)
+- [@hyp1989](https://github.com/hyp1989)
+- [@iggydev](https://github.com/iggydev)
+- [@PeterAuer](https://github.com/PeterAuer)
+- [@xmgz](https://github.com/xmgz)
 - Guilherme Wilson
 - Radek Smid
 
@@ -100,8 +100,8 @@ Translation status for languages available on the interface:
 - Turkish: 1%
 
 Thanks to the contributors:
-- @iggydev
-- @xmgz
+- [@iggydev](https://github.com/iggydev)
+- [@xmgz](https://github.com/xmgz)
 - ButterflyOfFire
 
 
@@ -169,11 +169,11 @@ Translation status for languages available on the interface:
 
 
 Thanks to the contributors:
-- @erral
-- @femoto
-- @ildave
-- @wetenschaap
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@femoto](https://github.com/femoto)
+- [@ildave](https://github.com/ildave)
+- [@wetenschaap](https://github.com/wetenschaap)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 
@@ -214,8 +214,8 @@ Translation status for languages available on the interface:
 - Turkish: 1%
 
 Thanks to the contributors:
-- @iggydev
-- @xmgz
+- [@iggydev](https://github.com/iggydev)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 1.1.1 (2026/02/01)
@@ -256,8 +256,8 @@ Translation status for languages available on the interface:
 - Turkish: 1%
 
 Thanks to the contributors:
-- @iggydev
-- @xmgz
+- [@iggydev](https://github.com/iggydev)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 1.0.7 (2026/02/01)
@@ -367,10 +367,10 @@ Translation status for languages available on the interface:
 * [6385ff4](https://codeberg.org/FitTrackee/FitTrackee/commit/6385ff41e2a945e9ab4ed105c39ccc51f0395545) - reorganize and complete the documentation
 
 Thanks to the contributors:
-- @kmorinCL
-- @slackline
-- @WBT112
-- @xmgz
+- [@kmorinCL](https://github.com/kmorinCL)
+- [@slackline](https://github.com/slackline)
+- [@WBT112](https://github.com/WBT112)
+- [@xmgz](https://github.com/xmgz)
 - ButterflyOfFire
 - Eduard
 
@@ -472,7 +472,7 @@ Starting with this version, [`ENABLE_GEOSPATIAL_FEATURES`](https://docs.fittrack
 * [#995](https://codeberg.org/FitTrackee/FitTrackee/issues/995) - Drop PostgreSQL13 support
 
 Thanks to the contributors:
-- @kmorinCL
+- [@kmorinCL](https://github.com/kmorinCL)
 
 
 ## Version 1.0.6 (2026/01/04)
@@ -513,7 +513,7 @@ Translation status for languages available on the interface:
 - Turkish: 1%
 
 Thanks to the contributors:
-- @easytigrrr
+- [@easytigrrr](https://github.com/easytigrrr)
 - ButterflyOfFire
 
 
@@ -560,7 +560,7 @@ Translation status for languages available on the interface:
 * [PR#1001](https://codeberg.org/FitTrackee/FitTrackee/pulls/1001) add codespell support (config, workflow to detect/not fix) and make it fix some typos
 
 Thanks to the contributors:
-- @yarikoptic
+- [@yarikoptic](https://github.com/yarikoptic)
 
 
 ## Version 1.0.4 (2025/12/14)
@@ -621,10 +621,10 @@ Translation status:
 * [73ffa44](https://codeberg.org/FitTrackee/FitTrackee/commit/73ffa44b18727f8afb00c7058da81ca8d08c4df7) - workflows refactoring on CI
 
 Thanks to the contributors:
-- @galshi
-- @hantangantan
-- @sikmir
-- @s0rau
+- [@galshi](https://github.com/galshi)
+- [@hantangantan](https://github.com/hantangantan)
+- [@sikmir](https://github.com/sikmir)
+- [@s0rau](https://github.com/s0rau)
 
 
 ## Version 1.0.3 (2025/11/05)
@@ -663,10 +663,10 @@ Translation status:
 - Turkish: 1%
 
 Thanks to the contributors:
-- @bhopmann
-- @erral
-- @iggydev
-- @xmgz
+- [@bhopmann](https://github.com/bhopmann)
+- [@erral](https://github.com/erral)
+- [@iggydev](https://github.com/iggydev)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 1.0.2 (2025/11/01)
@@ -713,8 +713,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @ildave
-- @xmgz
+- [@ildave](https://github.com/ildave)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 1.0.1 (2025/10/22)
@@ -761,10 +761,10 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
-- @Hawolex
-- @iggydev
-- @ildave
+- [@erral](https://github.com/erral)
+- [@Hawolex](https://github.com/Hawolex)
+- [@iggydev](https://github.com/iggydev)
+- [@ildave](https://github.com/ildave)
 - Poesty Li
 
 
@@ -835,10 +835,10 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
-- @Fuchs-David
-- @Stephan-P
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@Fuchs-David](https://github.com/Fuchs-David)
+- [@Stephan-P](https://github.com/Stephan-P)
+- [@xmgz](https://github.com/xmgz)
 - Leo
 - Rene Sato
 
@@ -947,8 +947,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.12.1 (2025/09/03)
@@ -983,8 +983,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @easytigrrr
-- @iggydev
+- [@easytigrrr](https://github.com/easytigrrr)
+- [@iggydev](https://github.com/iggydev)
 
 
 ## Version 0.12.0 (2025/08/31)
@@ -1036,8 +1036,8 @@ Translation status:
 - [0c5e44b](https://codeberg.org/FitTrackee/FitTrackee/commit/0c5e44bc785566e2d5ca92e2bfa18d32576ccb98) - update fitdecode to 0.11.0
 
 Thanks to the contributors:
-- @Stephan-P
-- @xmgz
+- [@Stephan-P](https://github.com/Stephan-P)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 
@@ -1082,7 +1082,7 @@ Translation status:
 
 
 Thanks to the contributors:
-- @xmgz
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.11.1 (2025/07/30)
@@ -1125,8 +1125,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @iggydev
-- @Stephan-P
+- [@iggydev](https://github.com/iggydev)
+- [@Stephan-P](https://github.com/Stephan-P)
 - Poesty Li
 
 
@@ -1204,13 +1204,13 @@ Translation status:
 
 
 Thanks to the contributors:
-- @BorATICI
-- @juanro49
-- @leafcompost
-- @Thovi98
-- @Unargent
-- @Vertux
-- @xmgz
+- [@BorATICI](https://github.com/BorATICI)
+- [@juanro49](https://github.com/juanro49)
+- [@leafcompost](https://github.com/leafcompost)
+- [@Thovi98](https://github.com/Thovi98)
+- [@Unargent](https://github.com/Unargent)
+- [@Vertux](https://github.com/Vertux)
+- [@xmgz](https://github.com/xmgz)
 - mrab
 - Nikita Epifanov
 
@@ -1256,11 +1256,11 @@ Translation status:
 - Turkish: 1%
 
 Thanks to the contributors:
-- @BorATICI
-- @iggydev
-- @jmlich
-- @sikmir
-- @xmgz
+- [@BorATICI](https://github.com/BorATICI)
+- [@iggydev](https://github.com/iggydev)
+- [@jmlich](https://github.com/jmlich)
+- [@sikmir](https://github.com/sikmir)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -1298,9 +1298,9 @@ Translation status:
 - Spanish: 59%
 
 Thanks to the contributors:
-- @iggydev
-- @jmlich
-- @xmgz
+- [@iggydev](https://github.com/iggydev)
+- [@jmlich](https://github.com/jmlich)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 
@@ -1335,7 +1335,7 @@ Translation status:
 - Spanish: 59%
 
 Thanks to the contributors:
-- @JeroenED
+- [@JeroenED](https://github.com/JeroenED)
 
 
 ## Version 0.10.0 (2025/05/29)
@@ -1392,8 +1392,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @ArnyminerZ
-- @Lemetist
+- [@ArnyminerZ](https://github.com/ArnyminerZ)
+- [@Lemetist](https://github.com/Lemetist)
 
 
 **Note:** If you upgrade from the v0.9.x, there are migrations to apply (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -1460,11 +1460,11 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
-- @iggydev
-- @JeroenED
-- @Lemetist
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@iggydev](https://github.com/iggydev)
+- [@JeroenED](https://github.com/JeroenED)
+- [@Lemetist](https://github.com/Lemetist)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.9.10 (2025/05/11)
@@ -1502,8 +1502,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @JcMinarro
-- @xmgz
+- [@JcMinarro](https://github.com/JcMinarro)
+- [@xmgz](https://github.com/xmgz)
 - Wiktor Jędrzejczak
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -1541,8 +1541,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @iggydev
-- @JeroenED
+- [@iggydev](https://github.com/iggydev)
+- [@JeroenED](https://github.com/JeroenED)
 
 
 ## Version 0.9.8 (2025/04/27)
@@ -1579,9 +1579,9 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
-- @iggydev
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@iggydev](https://github.com/iggydev)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 
@@ -1617,8 +1617,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @astridx
-- @JeroenED
+- [@astridx](https://github.com/astridx)
+- [@JeroenED](https://github.com/JeroenED)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -1653,8 +1653,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @astridx
-- @frankzimper
+- [@astridx](https://github.com/astridx)
+- [@frankzimper](https://github.com/frankzimper)
 
 
 ## Version 0.9.5 (2025/04/06)
@@ -1700,8 +1700,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @glggr
-- @xmgz
+- [@glggr](https://github.com/glggr)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 
@@ -1744,9 +1744,9 @@ Translation status:
 - Spanish: 63%
 
 Thanks to the contributors:
-- @erral
-- @Medformatik
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@Medformatik](https://github.com/Medformatik)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 
@@ -1794,13 +1794,13 @@ Translation status:
 * [PR#717](https://codeberg.org/FitTrackee/FitTrackee/pulls/717) - Adds YAML bug report template
 
 Thanks to the contributors:
-- @erral
-- @LordSexy
-- @mbw83
-- @OliverPifferi
-- @slackline
-- @Von-Birne
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@LordSexy](https://github.com/LordSexy)
+- [@mbw83](https://github.com/mbw83)
+- [@oliver-pifferi](https://github.com/oliver-pifferi)
+- [@slackline](https://github.com/slackline)
+- [@Von-Birne](https://github.com/Von-Birne)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -1835,7 +1835,7 @@ Translation status:
 * [2612cd9](https://codeberg.org/FitTrackee/FitTrackee/commit/2612cd9e4aa747036b79ed4a8492d0f7fea60c80) - fix Dockerfile used for development
 
 Thanks to the contributors:
-- @erral
+- [@erral](https://github.com/erral)
 - Poesty Li
 - Wiktor Jędrzejczak
 
@@ -1883,7 +1883,7 @@ Translation status:
 * [b224e17](https://codeberg.org/FitTrackee/FitTrackee/commit/b224e171c750dcfc3ca9c03068f91e21dd7eb189) - tools - update ruff config
 
 Thanks to the contributors:
-- @OliverPifferi
+- [@oliver-pifferi](https://github.com/oliver-pifferi)
 - Poesty Li
 - Wiktor Jędrzejczak
 
@@ -1950,8 +1950,8 @@ Translation status:
 * [PR#685](https://codeberg.org/FitTrackee/FitTrackee/pulls/685) - Update link to documentation
 
 Thanks to the contributors:
-- @erral
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@xmgz](https://github.com/xmgz)
 - Poesty Li
 
 **Note:** If you upgrade from the v0.8.x, there are migrations to apply (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -2027,8 +2027,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @DavidHenryThoreau
-- @xmgz
+- [@DavidHenryThoreau](https://github.com/DavidHenryThoreau)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.9.0b4 (2024/12/23)
@@ -2051,7 +2051,7 @@ If you find bugs, please report them.
 * [PR#667](https://codeberg.org/FitTrackee/FitTrackee/pulls/667) - Translations update (Galician)
 
 Thanks to the contributors:
-- @xmgz
+- [@xmgz](https://github.com/xmgz)
 
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -2152,8 +2152,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
-- @sikmir
+- [@erral](https://github.com/erral)
+- [@sikmir](https://github.com/sikmir)
 - Mariuz
 
 
@@ -2192,12 +2192,12 @@ Translation status:
 
 
 Thanks to the contributors:
-- @boosterl
-- @gallegonovato
-- @qwerty287
-- @Shura0
-- @sikmir
-- @xmgz
+- [@boosterl](https://github.com/boosterl)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@qwerty287](https://github.com/qwerty287)
+- [@Shura0](https://github.com/Shura0)
+- [@sikmir](https://github.com/sikmir)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.8.9 (2024/09/21)
@@ -2246,13 +2246,13 @@ Translation status:
 
 
 Thanks to the contributors:
-- @boosterl
-- @byakurau
-- @dotlambda
-- @erral
-- @gallegonovato
-- @qwerty287
-- @xmgz
+- [@boosterl](https://github.com/boosterl)
+- [@byakurau](https://github.com/byakurau)
+- [@dotlambda](https://github.com/dotlambda)
+- [@erral](https://github.com/erral)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@qwerty287](https://github.com/qwerty287)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -2290,11 +2290,11 @@ Translation status:
 
 
 Thanks to the contributors:
-- @gallegonovato
-- @jmlich
-- @mara21
-- @qwerty287
-- @xmgz
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@jmlich](https://github.com/jmlich)
+- [@mara21](https://github.com/mara21)
+- [@qwerty287](https://github.com/qwerty287)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.8.7 (2024/08/25)
@@ -2329,8 +2329,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
-- @xmgz
+- [@erral](https://github.com/erral)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -2365,11 +2365,11 @@ Translation status:
 
 
 Thanks to the contributors:
-- @ConfusedAlex
-- @lukasitaly
-- @simontb
-- @slothje
-- @xmgz
+- [@ConfusedAlex](https://github.com/ConfusedAlex)
+- [@lukasitaly](https://github.com/lukasitaly)
+- [@simontb](https://github.com/simontb)
+- [@slothje](https://github.com/slothje)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.8.5 (2024/06/29)
@@ -2411,11 +2411,11 @@ Translation status:
 
 
 Thanks to the contributors:
-- @byakurau
-- @gallegonovato
-- @jderuiter
-- @pluja
-- @xmgz
+- [@byakurau](https://github.com/byakurau)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@jderuiter](https://github.com/jderuiter)
+- [@pluja](https://github.com/pluja)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -2456,8 +2456,8 @@ Translation status:
 * [PR#557](https://codeberg.org/FitTrackee/FitTrackee/pulls/557) - API - prepare SQLAlchemy migration
 
 Thanks to the contributors:
-- @jmlich
-- @voodoopt
+- [@jmlich](https://github.com/jmlich)
+- [@voodoopt](https://github.com/voodoopt)
 
 
 ## Version 0.8.3 (2024/05/09)
@@ -2485,8 +2485,8 @@ Translation status:
 
 
 Thanks to the contributors:
-- @jmlich
-- @urtzai
+- [@jmlich](https://github.com/jmlich)
+- [@urtzai](https://github.com/urtzai)
 
 
 ## Version 0.8.2 (2024/05/08)
@@ -2516,9 +2516,9 @@ Translation status:
 
 
 Thanks to the contributors:
-- @jmlich
-- @OndrejZivny
-- @qwerty287
+- [@jmlich](https://github.com/jmlich)
+- [@OndrejZivny](https://github.com/OndrejZivny)
+- [@qwerty287](https://github.com/qwerty287)
 
 
 ## Version 0.8.1 (2024/05/01)
@@ -2561,11 +2561,11 @@ Translation status:
 
 
 Thanks to the contributors:
-- @comradekingu
-- @gallegonovato
-- @jderuiter
-- @jmlich
-- @xmgz
+- [@comradekingu](https://github.com/comradekingu)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@jderuiter](https://github.com/jderuiter)
+- [@jmlich](https://github.com/jmlich)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.8.0 (2024/04/21)
@@ -2610,9 +2610,9 @@ Translation status:
 
 
 Thanks to the contributors:
-- @jat255
-- @gallegonovato
-- @xmgz
+- [@jat255](https://github.com/jat255)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -2642,7 +2642,7 @@ Translation status:
 
 
 Thanks to the contributors:
-- @bjornclauw
+- [@bjornclauw](https://github.com/bjornclauw)
 - Mariuz
 
 
@@ -2676,7 +2676,7 @@ Translation status:
 
 
 Thanks to the contributors:
-- @erral
+- [@erral](https://github.com/erral)
 
 
 ## Version 0.7.30 (2024/02/04)
@@ -2714,9 +2714,9 @@ Translation status:
 
 
 Thanks to the contributors:
-- @gallegonovato
-- @qwerty287
-- @xmgz
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@qwerty287](https://github.com/qwerty287)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.7.29 (2024/01/06)
@@ -2752,7 +2752,7 @@ Translation status:
 
 
 Thanks to the contributors:
-- @traxys
+- [@traxys](https://github.com/traxys)
 - Mariuz
 - Koen
 
@@ -2784,9 +2784,9 @@ Translation status:
 - Spanish: 100%
 
 Thanks to the contributors:
-- @gallegonovato
-- @qwerty287
-- @xmgz
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@qwerty287](https://github.com/qwerty287)
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.7.27 (2023/12/20)
@@ -2823,9 +2823,9 @@ Translation status:
 - Spanish: 99%
 
 Thanks to the contributors:
-- @DavidHenryThoreau
-- @gallegonovato
-- @xmgz
+- [@DavidHenryThoreau](https://github.com/DavidHenryThoreau)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -2862,7 +2862,7 @@ Translation status:
 - Spanish: 100%
 
 Thanks to the contributors:
-- @comradekingu
+- [@comradekingu](https://github.com/comradekingu)
 
 
 ## Version 0.7.25 (2023/10/08)
@@ -2903,7 +2903,7 @@ Translation status:
 - Spanish: 100%
 
 Thanks to the contributors:
-- @xmgz
+- [@xmgz](https://github.com/xmgz)
 
 
 ## Version 0.7.23 (2023/09/14)
@@ -2911,7 +2911,7 @@ Thanks to the contributors:
 ### Bugs Fixed
 
 * [PR#421](https://codeberg.org/FitTrackee/FitTrackee/pulls/421) - remove darksky from available weather providers in .env
-* [PR#426](https://codeberg.org/FitTrackee/FitTrackee/pulls/426) - Update default tile server (thanks to @astridx)
+* [PR#426](https://codeberg.org/FitTrackee/FitTrackee/pulls/426) - Update default tile server (thanks to [@astridx](https://github.com/astridx))
 
 ### Misc
 
@@ -2945,8 +2945,8 @@ Translation status:
 - Spanish: 100%
 
 Thanks to the contributors:
-- @bjornclauw
-- @qwerty287
+- [@bjornclauw](https://github.com/bjornclauw)
+- [@qwerty287](https://github.com/qwerty287)
 - Mariusz
 
 
@@ -2994,8 +2994,8 @@ Translation status:
 - Spanish: 100%
 
 Thanks to the contributors:
-- @gallegonovato
-- @xmgz
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@xmgz](https://github.com/xmgz)
 - Mariusz
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -3046,9 +3046,9 @@ Translation status:
 - Spanish: 100%
 
 Thanks to the contributors:
-- @dkm
-- @gallegonovato
-- @xmgz
+- [@dkm](https://github.com/dkm)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -3063,10 +3063,10 @@ Documentation is now translated in French (**note**: documentation translations 
 ### Translations
 
 * [#351](https://codeberg.org/FitTrackee/FitTrackee/issues/351) - [Translation Request] Polish
-* [PR#370](https://codeberg.org/FitTrackee/FitTrackee/pulls/370) - Translations update (Dutch, thanks to @bjornclauw)
+* [PR#370](https://codeberg.org/FitTrackee/FitTrackee/pulls/370) - Translations update (Dutch, thanks to [@bjornclauw](https://github.com/bjornclauw))
 * [PR#371](https://codeberg.org/FitTrackee/FitTrackee/pulls/371) - Translations update (Polish, thanks to Mariusz on Weblate)
-* [PR#375](https://codeberg.org/FitTrackee/FitTrackee/pulls/375) - Translations update (French, thanks to @Thovi98)
-* [PR#376](https://codeberg.org/FitTrackee/FitTrackee/pulls/376) - Translations update (German, thanks to @qwerty287)
+* [PR#375](https://codeberg.org/FitTrackee/FitTrackee/pulls/375) - Translations update (French, thanks to [@Thovi98](Https://Github.Com/Thovi98))
+* [PR#376](https://codeberg.org/FitTrackee/FitTrackee/pulls/376) - Translations update (German, thanks to [@qwerty287](https://github.com/qwerty287))
 
 
 ### Documentation
@@ -3099,7 +3099,7 @@ Thanks to all contributors.
 
 ### Translations
 
-* [PR#366](https://codeberg.org/FitTrackee/FitTrackee/pulls/366), [PR#369](https://codeberg.org/FitTrackee/FitTrackee/pulls/369) - Translations update from Hosted Weblate (Galician, thanks to @xmgz)
+* [PR#366](https://codeberg.org/FitTrackee/FitTrackee/pulls/366), [PR#369](https://codeberg.org/FitTrackee/FitTrackee/pulls/369) - Translations update from Hosted Weblate (Galician, thanks to [@xmgz](https://github.com/xmgz))
 * [PR#367](https://codeberg.org/FitTrackee/FitTrackee/pulls/367) - Translations update (Spanish, French)
 
 Translation status:
@@ -3148,11 +3148,11 @@ Translation status:
 **Note:** Polish is not yet available in FitTrackee interface.
 
 Thanks to the contributors:
-- @bjornclauw
-- @gallegonovato
-- @gnu-ewm
-- @jat255
-- @xmgz
+- [@bjornclauw](https://github.com/bjornclauw)
+- [@gallegonovato](https://github.com/gallegonovato)
+- [@gnu-ewm](https://github.com/gnu-ewm)
+- [@jat255](https://github.com/jat255)
+- [@xmgz](https://github.com/xmgz)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -3202,12 +3202,12 @@ Translation status:
 
 
 Thanks to the contributors:
-- @bjornclauw
-- @comradekingu
-- @jat255
-- @gallegonovato 
-- @qwerty287
-- @xmgz
+- [@bjornclauw](https://github.com/bjornclauw)
+- [@comradekingu](https://github.com/comradekingu)
+- [@jat255](https://github.com/jat255)
+- [@gallegonovato ](https://github.com/gallegonovato )
+- [@qwerty287](https://github.com/qwerty287)
+- [@xmgz](https://github.com/xmgz)
 - J. Lavoie from Weblate
 - mondstern from Weblate
 
@@ -3223,7 +3223,7 @@ Thanks to the contributors:
 
 ### Translations
 
-* [PR#315](https://codeberg.org/FitTrackee/FitTrackee/pulls/315) - Translations update from Hosted Weblate (Dutch, thanks to @bjornclauw)
+* [PR#315](https://codeberg.org/FitTrackee/FitTrackee/pulls/315) - Translations update from Hosted Weblate (Dutch, thanks to [@bjornclauw](https://github.com/bjornclauw))
 
 
 ## Version 0.7.13 (2023/03/05)
@@ -3257,8 +3257,8 @@ Lastly, additional information that may be useful to users can be displayed in *
 * [PR#310](https://codeberg.org/FitTrackee/FitTrackee/pulls/310) - Translations update from Hosted Weblate (Dutch and German)
 
 Thanks to the contributors:
-- @bjornclauw
-- @qwerty287
+- [@bjornclauw](https://github.com/bjornclauw)
+- [@qwerty287](https://github.com/qwerty287)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
 
@@ -3267,7 +3267,7 @@ Thanks to the contributors:
 
 ### Translations
 
-* [PR#290](https://codeberg.org/FitTrackee/FitTrackee/pulls/290) - Translations update from Hosted Weblate (German, thanks to @qwerty287)
+* [PR#290](https://codeberg.org/FitTrackee/FitTrackee/pulls/290) - Translations update from Hosted Weblate (German, thanks to [@qwerty287](https://github.com/qwerty287))
 
 ### Misc
 
@@ -3289,14 +3289,14 @@ Thanks to the contributors:
 
 
 Thanks to the contributors:
-- @bjornclauw
-- @jat255 
-- @qwerty287
+- [@bjornclauw](https://github.com/bjornclauw)
+- [@jat255 ](https://github.com/jat255 )
+- [@qwerty287](https://github.com/qwerty287)
 
 
 ## Version 0.7.10 (2022/12/21)
 
-FitTrackee is now available in Italian (thanks to @dperruso).
+FitTrackee is now available in Italian (thanks to [@dperruso](https://github.com/dperruso)).
 
 ### Features and enhancements
 
@@ -3304,8 +3304,8 @@ FitTrackee is now available in Italian (thanks to @dperruso).
 
 ### Translations
 
-* [#279](https://codeberg.org/FitTrackee/FitTrackee/issues/279) - [Translation Request] - Italian (thanks to @dperruso)
-* [c88a515](https://codeberg.org/FitTrackee/FitTrackee/commit/c88a5158fea5f9e2fa8c41ecc2c100f6d9319371) - Translations update from Hosted Weblate (Dutch, thanks to @bjornclauw)
+* [#279](https://codeberg.org/FitTrackee/FitTrackee/issues/279) - [Translation Request] - Italian (thanks to [@dperruso](https://github.com/dperruso))
+* [c88a515](https://codeberg.org/FitTrackee/FitTrackee/commit/c88a5158fea5f9e2fa8c41ecc2c100f6d9319371) - Translations update from Hosted Weblate (Dutch, thanks to [@bjornclauw](https://github.com/bjornclauw))
 * [f96dcef](https://codeberg.org/FitTrackee/FitTrackee/commit/f96dcef0dc69d00f65a036fa2e33c22612004cb1) - Translations update (German)
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -3319,7 +3319,7 @@ FitTrackee is now available in Italian (thanks to @dperruso).
 
 ### Translations
 
-* [PR#278](https://codeberg.org/FitTrackee/FitTrackee/pulls/278) - Translations update from Hosted Weblate (German, thanks to @qwerty287)
+* [PR#278](https://codeberg.org/FitTrackee/FitTrackee/pulls/278) - Translations update from Hosted Weblate (German, thanks to [@qwerty287](https://github.com/qwerty287))
 * [PR#282](https://codeberg.org/FitTrackee/FitTrackee/pulls/282) - Init italian translation files
 
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -3327,7 +3327,7 @@ FitTrackee is now available in Italian (thanks to @dperruso).
 
 ## Version 0.7.8 (2022/11/30)
 
-FitTrackee is now available in Dutch (thanks to @bjornclauw).
+FitTrackee is now available in Dutch (thanks to [@bjornclauw](https://github.com/bjornclauw)).
 
 
 ### Translations
@@ -3339,7 +3339,7 @@ FitTrackee is now available in Dutch (thanks to @bjornclauw).
 
 ### Features and enhancements
 
-* [#258](https://codeberg.org/FitTrackee/FitTrackee/issues/258) - Request: parse links in notes area (thanks to @jat255)
+* [#258](https://codeberg.org/FitTrackee/FitTrackee/issues/258) - Request: parse links in notes area (thanks to [@jat255](https://github.com/jat255))
 
 ### Bugs Fixed
 
@@ -3375,7 +3375,7 @@ FitTrackee is now available in Dutch (thanks to @bjornclauw).
 
 ### Translations
 
-* [#266](https://codeberg.org/FitTrackee/FitTrackee/issues/266) - Translations update from Hosted Weblate (German, thanks to @qwerty287)
+* [#266](https://codeberg.org/FitTrackee/FitTrackee/issues/266) - Translations update from Hosted Weblate (German, thanks to [@qwerty287](https://github.com/qwerty287))
 
 
 ## Version 0.7.4 (2022/11/05)
@@ -3395,7 +3395,7 @@ Note: archive import still needs some improvements (see [#89](https://codeberg.o
 
 * [#257](https://codeberg.org/FitTrackee/FitTrackee/issues/257) - Add client_max_body_size note to example nginx config 
 
-Thanks to @jat255 
+Thanks to [@jat255](https://github.com/jat255) 
 
 
 ## Version 0.7.3 (2022/11/01)
@@ -3405,7 +3405,7 @@ Thanks to @jat255
 * [#112](https://codeberg.org/FitTrackee/FitTrackee/issues/112) - allow user to change date format
 * [#244](https://codeberg.org/FitTrackee/FitTrackee/issues/244) - New sport type: "Virtual Ride"
 
-Thanks to @jat255 
+Thanks to [@jat255](https://github.com/jat255) 
 
 ### Bugs Fixed
 
@@ -3423,7 +3423,7 @@ Thanks to @jat255
 
 ### Translations
 
-* [PR#242](https://codeberg.org/FitTrackee/FitTrackee/issues/242) - Translations update from Weblate (German, thanks to @qwerty287)
+* [PR#242](https://codeberg.org/FitTrackee/FitTrackee/issues/242) - Translations update from Weblate (German, thanks to [@qwerty287](https://github.com/qwerty287))
 
 
 ## Version 0.7.1 (2022/09/21)
@@ -3434,7 +3434,7 @@ Thanks to @jat255
 
 ### Translations
 
-* [PR#239](https://codeberg.org/FitTrackee/FitTrackee/issues/239) - Translations update from Weblate (German, thanks to @qwerty287)
+* [PR#239](https://codeberg.org/FitTrackee/FitTrackee/issues/239) - Translations update from Weblate (German, thanks to [@qwerty287](https://github.com/qwerty287))
 * [cb9d02f](https://codeberg.org/FitTrackee/FitTrackee/commit/cb9d02ff1d047e9abd80a87121796f94376b54d3) - Update OAuth 2.0 translations (English & French)
 
 
@@ -3472,7 +3472,7 @@ Thanks to @jat255
 
 * [#225](https://codeberg.org/FitTrackee/FitTrackee/pulls/225) - Fix grammar issue
 
-Thanks to @Skylan0916
+Thanks to [@Skylan0916](Https://Github.Com/Skylan0916)
 
 In this release 1 issue was closed.  
 **Note:** This release contains a fix on the last database migration that will be executed only on versions lower than v0.6.11 (no data differences with v0.6.11, the fix allows to execute the migration on Postgres<12)  
@@ -3495,7 +3495,7 @@ In this release 1 issue was closed.
 * [#167](https://codeberg.org/FitTrackee/FitTrackee/pulls/167) - Added ascent record to Dashboard 
 * [#162](https://codeberg.org/FitTrackee/FitTrackee/pulls/162) - Added total elevation to dashboard 
 
-Thanks to @Fmstrat
+Thanks to [@Fmstrat](https://github.com/Fmstrat)
 
 In this release 1 issue was closed.  
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -3516,14 +3516,14 @@ In this release 1 issue was closed.
 
 * [#209](https://codeberg.org/FitTrackee/FitTrackee/pulls/209) - Incorrect duration with track containing multiple segments
 
-Thanks to @gorgobacka
+Thanks to [@gorgobacka](https://github.com/gorgobacka)
 
 In this release 1 issue was closed.  
 
 
 ## Version 0.6.9 (2022/07/03)
 
-FitTrackee is now available in German (thanks to @gorgobacka).  
+FitTrackee is now available in German (thanks to [@gorgobacka](https://github.com/gorgobacka)).  
 And translations can be updated on Weblate.
 
 ### Issues Closed
@@ -3546,7 +3546,7 @@ And translations can be updated on Weblate.
 In this release 4 issues were closed.  
 
 Thanks to the contributors:
-- @gorgobacka
+- [@gorgobacka](https://github.com/gorgobacka)
 - J. Lavoie (from Weblate)
 
 
@@ -3672,7 +3672,7 @@ From now on, a user needs to confirm his account after registration (an email wi
 * [#161](https://codeberg.org/FitTrackee/FitTrackee/pulls/161) - Minor translation issue on 'Farthest'
 * [#160](https://codeberg.org/FitTrackee/FitTrackee/pulls/160) - Minor translation issue on APP_ERROR
 
-Thanks to @Fmstrat
+Thanks to [@Fmstrat](https://github.com/Fmstrat)
 
 In this release 3 issues were closed.  
 **Note:** This release contains database migration (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html))
@@ -3681,7 +3681,7 @@ In this release 3 issues were closed.
 ## Version 0.5.7 (2022/02/13)
 
 This release contains several fixes including security fixes.  
-Thanks to @DanielSiersleben for the report.
+Thanks to [@DanielSiersleben](https://github.com/DanielSiersleben) for the report.
 
 And from now on, admin account is not created on application initialization.  
 A new command is added to set administration rights on the account created after registration 
@@ -3829,8 +3829,8 @@ In this release 6 issues were closed.
 **Note:** This release contains database migrations.
 
 Thanks to the contributors:
-- @Fmstrat
-- @paf38
+- [@Fmstrat](https://github.com/Fmstrat)
+- [@paf38](https://github.com/paf38)
 
 
 ## Version 0.4.9 (2021/07/16)
