@@ -35,7 +35,7 @@ The **Codeberg** repository contains:
 - documentation (source, translations and build).
 
 The repository is mirrored on **GitHub**.  
-Continuous integration workflows run on **Github Actions** platform (on **push** and **pull requests**) for the moment (see [issue](https://codeberg.org/FitTrackee/FitTrackee/issues/1121)).
+Continuous integration workflows run on **Github Actions** platform (on **push**) for the moment (see [issue](https://codeberg.org/FitTrackee/FitTrackee/issues/1121)).
 
 For now, releases do not follow [semantic versioning](https://semver.org). Any version may contain backward-incompatible changes.
 
@@ -128,7 +128,7 @@ Please make your changes from the development branch (`dev`).
 
 * Ensure the pull requests description clearly describes the problem and solution. Include the relevant issue number if applicable.
 
-* Check that all tests have been successfully passed.
+* Check that all tests have been successfully passed locally.
 
 * If needed, [update your branch](https://docs.codeberg.org/collaborating/pull-requests-and-git-flow/#keep-it-up-to-date%3A-rebase-pull-requests-to-upstream). 
 
