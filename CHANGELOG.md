@@ -1,6 +1,19 @@
 # Change log
 
+## Version 1.3.0b2 (2026/05/05)
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+### Bugs Fixed
+
+* [PR#1129](https://codeberg.org/FitTrackee/FitTrackee/pulls/1129) - js assets are missing in wheel
+
+
 ## Version 1.3.0b1 (2026/05/04)
+
+**Warning**:
+- The Python package has been yanked due to an incomplete Wheel package. A new version will be released.
 
 **This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
 If you find bugs, please report them.
