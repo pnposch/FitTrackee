@@ -11,7 +11,7 @@ body:
       value: |
         For installation and configuration instructions please refer to the [documentation](https://docs.fittrackee.org/en/installation.html)
 
-        **NB**: Please copy and paste commands and output rather than including screenshots as sharing text facilitates recreating and investigating the error. You can use [GitHub Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#quoting-code).
+        **NB**: Please copy and paste commands and output rather than including screenshots as sharing text facilitates recreating and investigating the error. You can use [Markdown](https://docs.codeberg.org/markdown/).
 
   - type: checkboxes
     id: checks
@@ -76,12 +76,12 @@ body:
       description: |
         What version of Python are you running? If unsure type `python --version`.
       options:
-        - "3.9"
         - "3.10"
         - "3.11"
         - "3.12"
         - "3.13"
         - "3.14"
+        - "other"
       default: 3
     validations:
       required: true
