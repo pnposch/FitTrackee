@@ -67,10 +67,21 @@ Prod environment
 
 .. code:: bash
 
-   $ wget https://github.com/SamR1/FitTrackee/archive/v1.2.2.tar.gz
+   $ wget https://codeberg.org/FitTrackee/FitTrackee/archive/v1.2.2.tar.gz
    $ tar -xzf v1.2.2.tar.gz
-   $ cp -R FitTrackee-1.2.2/* FitTrackee/
-   $ cd FitTrackee
+   $ cd fittrackee
+
+.. warning::
+
+    | After migration to Codeberg, the archive folder has changed.
+    | To update source, copy the new file to existing folder (or rename it and update application configuration):
+
+    .. code:: bash
+
+       $ wget https://codeberg.org/FitTrackee/FitTrackee/archive/v1.2.2.tar.gz
+       $ tar -xzf v1.2.2.tar.gz
+       $ cp -R fittrackee/* FitTrackee/
+       $ cd FitTrackee
 
 - Update **.env** if needed (see `Environment variables <environments_variables.html>`__).
 

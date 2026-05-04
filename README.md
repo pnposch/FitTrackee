@@ -47,7 +47,7 @@ Map data from [OpenStreetMap](https://www.openstreetmap.org).
 - [Contributing](https://docs.fittrackee.org/en/contributing.html)
 
 **Under heavy development (some features may be unstable).**  
-(see [provisional roadmap](https://github.com/SamR1/FitTrackee/issues/1010), [issues](https://github.com/SamR1/FitTrackee/issues) and [documentation](https://docs.fittrackee.org) for more information)  
+(see [provisional roadmap](https://codeberg.org/FitTrackee/FitTrackee/issues/1010), [issues](https://codeberg.org/FitTrackee/FitTrackee/issues) and [documentation](https://docs.fittrackee.org) for more information)  
 
 ![FitTrackee Dashboard Screenshot](https://docs.fittrackee.org/en/_images/dashboard.png)
 
