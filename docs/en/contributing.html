@@ -321,23 +321,23 @@
 <section id="report-issues-ask-for-features">
 <h2>Report issues, ask for features<a class="headerlink" href="#report-issues-ask-for-features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>If a bug is a <strong>security vulnerability</strong>, please refer to <a class="reference external" href="https://github.com/SamR1/FitTrackee/blob/master/SECURITY.md">security policy</a>.</p></li>
-<li><p>Ensure an issue was not <strong>already opened</strong> by searching on <strong>GitHub</strong> under <a class="reference external" href="https://github.com/SamR1/FitTrackee/issues">Issues</a>.</p></li>
-<li><p>If not, <a class="reference external" href="https://github.com/SamR1/FitTrackee/issues/new">open a new one</a> with a descriptive title and provide a description.</p></li>
+<li><p>If a bug is a <strong>security vulnerability</strong>, please refer to <a class="reference external" href="https://codeberg.org/FitTrackee/FitTrackee/src/branch/main/SECURITY.md">security policy</a>.</p></li>
+<li><p>Ensure an issue was not <strong>already opened</strong> by searching on <strong>Codeberg</strong> under <a class="reference external" href="https://codeberg.org/FitTrackee/FitTrackee/issues">Issues</a>.</p></li>
+<li><p>If not, <a class="reference external" href="https://codeberg.org/FitTrackee/FitTrackee/issues/new">open a new one</a> with a descriptive title and provide a description.</p></li>
 </ul>
 </section>
 <section id="contributing-code">
 <h2>Contributing Code<a class="headerlink" href="#contributing-code" title="Link to this heading">¶</a></h2>
 <section id="project-repository">
 <h3>Project repository<a class="headerlink" href="#project-repository" title="Link to this heading">¶</a></h3>
-<p>The <strong>GitHub</strong> repository contains:</p>
+<p>The <strong>Codeberg</strong> repository contains:</p>
 <ul class="simple">
 <li><p>source code (note that the repository also includes client build),</p></li>
 <li><p>translations,</p></li>
 <li><p>tests,</p></li>
 <li><p>documentation (source, translations and build).</p></li>
 </ul>
-<p>Continuous integration workflows run on <strong>Github Actions</strong> platform (on <strong>push</strong> and <strong>pull requests</strong>).</p>
+<p>The repository is mirrored on <strong>GitHub</strong>.<br />Continuous integration workflows run on <strong>Github Actions</strong> platform (on <strong>push</strong>) for the moment (see <a class="reference external" href="https://codeberg.org/FitTrackee/FitTrackee/issues/1121">issue</a>).</p>
 <p>For now, releases do not follow <a class="reference external" href="https://semver.org">semantic versioning</a>. Any version may contain backward-incompatible changes.</p>
 </section>
 <section id="translations">
@@ -366,7 +366,7 @@ For now only English and French are available and translations files are not yet
 <p><strong>Note</strong>: Before starting, please open an issue to discuss implementation if the feature requires major changes or involves the addition of a new sport or language.<br />For new sports requests, as <strong>FitTrackee</strong> is built around files (.gpx or other supported formats) for outdoor activities, only sports associated with a file can be added for now.</p>
 <p>Please make your changes from the development branch (<code class="docutils literal notranslate"><span class="pre">dev</span></code>).</p>
 <ul>
-<li><p>Fork the repository (see <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/contributing-to-projects">GitHub instructions</a>)</p></li>
+<li><p>Fork the repository (see <a class="reference external" href="https://docs.codeberg.org/collaborating/pull-requests-and-git-flow/">Codeberg instructions</a>)</p></li>
 <li><p>Implement your feature.</p></li>
 <li><p>If your changes need a database migration:</p>
 <ul>
@@ -426,8 +426,8 @@ For now only English and French are available and translations files are not yet
 </li>
 <li><p>Create your pull request to merge on <code class="docutils literal notranslate"><span class="pre">dev</span></code> branch.</p></li>
 <li><p>Ensure the pull requests description clearly describes the problem and solution. Include the relevant issue number if applicable.</p></li>
-<li><p>Check that all tests have been successfully passed.</p></li>
-<li><p>If needed, <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/keeping-your-pull-request-in-sync-with-the-base-branch">update your branch</a>.</p></li>
+<li><p>Check that all tests have been successfully passed locally.</p></li>
+<li><p>If needed, <a class="reference external" href="https://docs.codeberg.org/collaborating/pull-requests-and-git-flow/#keep-it-up-to-date%3A-rebase-pull-requests-to-upstream">update your branch</a>.</p></li>
 </ul>
 <p>Thanks.</p>
 </section>
@@ -472,7 +472,10 @@ For now only English and French are available and translations files are not yet
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa fa-github fa-lg" href="https://github.com/SamR1/FitTrackee" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://codeberg.org/FitTrackee/FitTrackee" aria-label="Codeberg"><svg stroke="currentColor" fill="currentColor"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.955 0.49A12 12 0 0 0 0 12.49a12 12 0 0 0 1.832 6.373L11.838 5.928a0.187 0.14 0 0 1 0.324 0l10.006 12.935A12 12 0 0 0 24 12.49a12 12 0 0 0 -12 -12 12 12 0 0 0 -0.045 0zm0.375 6.467 4.416 16.553a12 12 0 0 0 5.137 -4.213z" stroke-width="0"></path>
+</svg>
+</a>
               <a class="muted-link fa fa-mastodon fa-lg" rel="me" href="https://fosstodon.org/@FitTrackee" aria-label="Mastodon"></a>
               
             </div>

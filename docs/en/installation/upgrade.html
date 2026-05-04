@@ -377,11 +377,23 @@ $<span class="w"> </span><span class="nb">source</span><span class="w"> </span>.
 <li><p>Change to the directory where FitTrackee directory is located</p></li>
 <li><p>Download the last release (for now, it is the release v1.2.2) and overwrite existing files:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://github.com/SamR1/FitTrackee/archive/v1.2.2.tar.gz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://codeberg.org/FitTrackee/FitTrackee/archive/v1.2.2.tar.gz
 $<span class="w"> </span>tar<span class="w"> </span>-xzf<span class="w"> </span>v1.2.2.tar.gz
-$<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>FitTrackee-1.2.2/*<span class="w"> </span>FitTrackee/
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>fittrackee
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">After migration to Codeberg, the archive folder has changed.</div>
+<div class="line">To update source, copy the new file to existing folder (or rename it and update application configuration):</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://codeberg.org/FitTrackee/FitTrackee/archive/v1.2.2.tar.gz
+$<span class="w"> </span>tar<span class="w"> </span>-xzf<span class="w"> </span>v1.2.2.tar.gz
+$<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>fittrackee/*<span class="w"> </span>FitTrackee/
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>FitTrackee
 </pre></div>
+</div>
 </div>
 <ul class="simple">
 <li><p>Update <strong>.env</strong> if needed (see <a class="reference external" href="environments_variables.html">Environment variables</a>).</p></li>
@@ -614,7 +626,10 @@ CREATE<span class="w"> </span>EXTENSION
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa fa-github fa-lg" href="https://github.com/SamR1/FitTrackee" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://codeberg.org/FitTrackee/FitTrackee" aria-label="Codeberg"><svg stroke="currentColor" fill="currentColor"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.955 0.49A12 12 0 0 0 0 12.49a12 12 0 0 0 1.832 6.373L11.838 5.928a0.187 0.14 0 0 1 0.324 0l10.006 12.935A12 12 0 0 0 24 12.49a12 12 0 0 0 -12 -12 12 12 0 0 0 -0.045 0zm0.375 6.467 4.416 16.553a12 12 0 0 0 5.137 -4.213z" stroke-width="0"></path>
+</svg>
+</a>
               <a class="muted-link fa fa-mastodon fa-lg" rel="me" href="https://fosstodon.org/@FitTrackee" aria-label="Mastodon"></a>
               
             </div>

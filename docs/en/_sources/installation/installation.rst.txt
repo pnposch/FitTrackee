@@ -123,10 +123,9 @@ Production environment
 
 .. code:: bash
 
-   $ wget https://github.com/SamR1/FitTrackee/archive/1.2.2.tar.gz
+   $ wget https://codeberg.org/FitTrackee/FitTrackee/archive/v1.2.2.tar.gz
    $ tar -xzf v1.2.2.tar.gz
-   $ mv FitTrackee-1.2.2 FitTrackee
-   $ cd FitTrackee
+   $ cd fittrackee
 
 -  Create **.env** from example and update it
    (see `Environment variables <environments_variables.html>`__).

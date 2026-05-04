@@ -322,7 +322,7 @@
 <h2>Signaler des problèmes, demander des fonctionnalités<a class="headerlink" href="#report-issues-ask-for-features" title="Lien vers cette rubrique">¶</a></h2>
 <ul class="simple">
 <li><p>Si le bug concerne une <strong>faille de sécurité</strong>, veuillez vous référer à la <a class="reference external" href="https://github.com/SamR1/FitTrackee/blob/master/SECURITY.md">politique de sécurité</a>.</p></li>
-<li><p>Assurez-vous qu'un ticket n'a pas <strong>déjà été ouvert</strong> en effectuant une recherche dans le <a class="reference external" href="https://github.com/SamR1/FitTrackee/issues">tickets</a> dans <strong>GitHub</strong>.</p></li>
+<li><p>Assurez-vous qu'un ticket n'a pas <strong>déjà été ouvert</strong> en effectuant une recherche dans les <a class="reference external" href="https://codeberg.org/FitTrackee/FitTrackee/issues">tickets</a> sur <strong>Codeberg</strong>.</p></li>
 <li><p>Si ce n'est pas le cas, ouvrez un <a class="reference external" href="https://github.com/SamR1/FitTrackee/issues/new">nouveau ticket</a> avec un titre descriptif et une description.</p></li>
 </ul>
 </section>
@@ -330,14 +330,14 @@
 <h2>Contribuer au code<a class="headerlink" href="#contributing-code" title="Lien vers cette rubrique">¶</a></h2>
 <section id="project-repository">
 <h3>Dépôt du projet<a class="headerlink" href="#project-repository" title="Lien vers cette rubrique">¶</a></h3>
-<p>Le dépôt <strong>GitHub</strong> contient :</p>
+<p>Le dépôt <strong>Codeberg</strong> contient :</p>
 <ul class="simple">
 <li><p>le code source (à noter que le dépôt contient également les fichiers compilés client),</p></li>
 <li><p>traductions,</p></li>
 <li><p>tests,</p></li>
 <li><p>documentation (source, traductions et fichiers compilés).</p></li>
 </ul>
-<p>Les workflows d'intégration continue s'exécutent sur la plateforme <strong>Github Actions</strong> (lors de <strong>push</strong> et <strong>pull requests</strong>).</p>
+<p>Le dépôt est répliqué sur <strong>GitHub</strong>.<br />Les workflows d'intégration continue s'exécutent sur la plateforme <strong>Github Actions</strong> (lors de <strong>push</strong>).</p>
 <p>Pour le moment, les versions publiées ne suivent pas la <a class="reference external" href="https://semver.org/lang/fr/">gestion sémantique de version</a>. Toute version peut contenir des changements non rétro-compatibles.</p>
 </section>
 <section id="translations">
@@ -365,7 +365,7 @@
 <p>Remarque : Avant de commencer, veuillez ouvrir un ticket pour discuter de la mise en œuvre si la fonctionnalité nécessite des modifications majeures ou implique l'ajout d'un nouveau sport ou d'une nouvelle langue. Pour les demandes de nouveaux sports, <strong>FitTrackee</strong> étant basée sur des fichiers (.gpx ou autre format supporté) pour des activités de plein air, seuls les sports associés à un fichier peuvent être ajoutés pour le moment.</p>
 <p>Veuillez effectuer vos modifications à partir de la branche de développement (<code class="docutils literal notranslate"><span class="pre">dev</span></code>)</p>
 <ul>
-<li><p>Dupliquer le dépôt (voir les <a class="reference external" href="https://docs.github.com/fr/get-started/exploring-projects-on-github/contributing-to-a-project">instructions sur GitHub</a>)</p></li>
+<li><p>Dupliquer le dépôt (voir les <a class="reference external" href="https://docs.codeberg.org/collaborating/pull-requests-and-git-flow/">instructions sur Codeberg</a>)</p></li>
 <li><p>Implémentez votre fonctionnalité</p></li>
 <li><p>Si vos modifications nécessitent une migration de base de données :</p>
 <ul>
@@ -425,7 +425,7 @@
 </li>
 <li><p>Créez votre <em>pull request</em> avec comme branche cible la branche <code class="docutils literal notranslate"><span class="pre">dev</span></code>.</p></li>
 <li><p>Assurez-vous que la description de la <em>pull request</em> décrit clairement le problème et sa solution. Indiquez le numéro du ticket concerné, le cas échéant.</p></li>
-<li><p>Vérifiez que tous les tests se sont exécutés avec succès.</p></li>
+<li><p>Vérifiez que tous les tests se sont exécutés avec succès localement.</p></li>
 <li><p>Si nécessaire, mettez à jour votre branche.</p></li>
 </ul>
 <p>Merci.</p>
@@ -471,7 +471,10 @@
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa fa-github fa-lg" href="https://github.com/SamR1/FitTrackee" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://codeberg.org/FitTrackee/FitTrackee" aria-label="Codeberg"><svg stroke="currentColor" fill="currentColor"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.955 0.49A12 12 0 0 0 0 12.49a12 12 0 0 0 1.832 6.373L11.838 5.928a0.187 0.14 0 0 1 0.324 0l10.006 12.935A12 12 0 0 0 24 12.49a12 12 0 0 0 -12 -12 12 12 0 0 0 -0.045 0zm0.375 6.467 4.416 16.553a12 12 0 0 0 5.137 -4.213z" stroke-width="0"></path>
+</svg>
+</a>
               <a class="muted-link fa fa-mastodon fa-lg" rel="me" href="https://fosstodon.org/@FitTrackee" aria-label="Mastodon"></a>
               
             </div>
