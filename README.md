@@ -36,6 +36,11 @@ It is also possible to add a workout without a file.
 
 Map data from [OpenStreetMap](https://www.openstreetmap.org).  
 
+## Repositories
+
+The main repository is hosted on [Codeberg.org](https://codeberg.org/FitTrackee/FitTrackee).  
+The [Github repository](https://github.com/SamR1/FitTrackee) is a mirror (except for issues and PRs). For now, it is used to run tests, as well as to build and publish Python packages and Docker images using GitHub Actions (see [issue](https://codeberg.org/FitTrackee/FitTrackee/issues/1121)).
+
 ## Documentation
 
 - [Features](https://docs.fittrackee.org/en/features/index.html)
