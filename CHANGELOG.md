@@ -1,5 +1,40 @@
 # Change log
 
+## Version 1.3.0b1 (2026/05/04)
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+FitTrackee now allow to add photos to workouts 🖼️ and longer descriptions to equipment.
+An Atom feed is also available in addition to the RSS feed on User profile.
+
+**Warning**:
+- **Python 3.10** is no longer supported.
+- **libmagic** is now required.
+- Installation from source code on production now require Node (see instructions in [documentation](https://next.docs.fittrackee.org/en/installation/installation.html#from-sources)).
+- This release contains database migrations (see upgrade instructions in [documentation](https://next.docs.fittrackee.org/en/installation/upgrade.html)). 
+
+### Features and enhancements
+
+* [#60](https://codeberg.org/FitTrackee/FitTrackee/issues/60) - Display photos related to workouts
+* [#1117](https://codeberg.org/FitTrackee/FitTrackee/issues/1117) - allow for longer equipment description
+* [#1120](https://codeberg.org/FitTrackee/FitTrackee/issues/1120) - Add Atom feed to user profile
+
+### Translations
+
+* [PR#1115](https://codeberg.org/FitTrackee/FitTrackee/pulls/1115) - Translations update from Hosted Weblate (German)
+
+### Misc
+
+* [#1107](https://codeberg.org/FitTrackee/FitTrackee/issues/1107) - Drop support for Python 3.10
+* [PR#1119](https://codeberg.org/FitTrackee/FitTrackee/pulls/1119) - Remove dist directory from repository
+* [PR#1122](https://codeberg.org/FitTrackee/FitTrackee/pulls/1122) - Remove documentation directory
+* [PR#1127](https://codeberg.org/FitTrackee/FitTrackee/pulls/1127) - update repository URLs and documentation
+
+Thanks to the contributors:
+- [@PeterAuer](https://github.com/PeterAuer)
+
+
 ## Version 1.2.2 (2026/04/19)
 
 Adding MIME type checking requires the libmagic C library. If not present, a warning will appear in the application logs and files will be uploaded without mime type verification.  
