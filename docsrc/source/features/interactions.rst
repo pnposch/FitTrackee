@@ -24,7 +24,7 @@ User profile
 .. versionchanged:: 0.9.0 display of the last 5 sessions visible in the user profile
 .. versionchanged:: 0.12.0 added RSS Feed
 .. versionchanged:: 0.12.1 description added to the RSS Feed
-.. versionchanged:: 1.3.0 added Atom Feed format and photos
+.. versionchanged:: 1.3.0 added Atom Feed format and photos, increase the character limit for bio to 500 and add Markdown syntax
 
 | The user profile displays the last 5 visible workouts.
 | The language and imperial units are taken into account according to the user's preferences if logged in.

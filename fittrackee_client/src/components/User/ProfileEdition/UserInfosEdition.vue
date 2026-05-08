@@ -37,15 +37,20 @@
             :disabled="authUserLoading"
           />
         </label>
-        <label class="form-items">
+        <label class="form-items" for="bio">
           {{ $t('user.PROFILE.BIO') }}
           <CustomTextArea
             name="bio"
-            :charLimit="200"
+            charLimit="500"
+            rows="3"
             :input="userForm.bio"
             :disabled="authUserLoading"
             @updateValue="updateBio"
           />
+          <span class="markdown-hints info-box">
+            <i class="fa fa-info-circle" aria-hidden="true" />
+            {{ $t('workouts.MARKDOWN_SYNTAX') }}
+          </span>
         </label>
         <div class="form-buttons">
           <button class="confirm" type="submit">
@@ -143,7 +148,9 @@
         }
       }
     }
-
+    .markdown-hints {
+      font-weight: normal;
+    }
     .form-buttons {
       flex-direction: row;
       @media screen and (max-width: $x-small-limit) {

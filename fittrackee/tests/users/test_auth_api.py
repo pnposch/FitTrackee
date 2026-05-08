@@ -13,6 +13,8 @@ from fittrackee.constants import ElevationDataSource, PaceSpeedDisplay
 from fittrackee.equipments.models import Equipment
 from fittrackee.reports.models import ReportActionAppeal
 from fittrackee.users.models import (
+    MAX_BIO_LIMIT,
+    MAX_USER_INPUT,
     BlacklistedToken,
     Notification,
     User,
@@ -900,6 +902,42 @@ class TestUserProfileUpdate(ApiTestCaseMixin):
         assert data["message"] == "user profile updated"
         assert data["data"] == jsonify_dict(
             suspended_user.serialize(current_user=suspended_user, light=False)
+        )
+
+    @pytest.mark.parametrize(
+        "input_data,max_limit",
+        [
+            ("first_name", MAX_USER_INPUT),
+            ("last_name", MAX_USER_INPUT),
+            ("location", MAX_USER_INPUT),
+            ("bio", MAX_BIO_LIMIT),
+        ],
+    )
+    def test_it_returns_error_when_user_input_exceeds_max_limit(
+        self, app: Flask, user_1: User, input_data: str, max_limit: int
+    ) -> None:
+        client, auth_token = self.get_test_client_and_auth_token(
+            app, user_1.email
+        )
+        data = {
+            "first_name": self.random_string(),
+            "last_name": self.random_string(),
+            "location": self.random_string(),
+            "bio": self.random_string(),
+            "birth_date": "1980-01-01",
+            input_data: self.random_string(max_limit + 1),
+        }
+
+        response = client.post(
+            "/api/auth/profile/edit",
+            content_type="application/json",
+            json=data,
+            headers=dict(Authorization=f"Bearer {auth_token}"),
+        )
+
+        self.assert_400(
+            response,
+            error_message=f"{input_data} exceeds {max_limit} characters",
         )
 
     def test_expected_scope_is_profile_write(
