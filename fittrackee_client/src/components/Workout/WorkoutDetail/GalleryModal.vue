@@ -55,6 +55,7 @@
             {{ mediaAttachment.description }}
           </div>
           <button
+            id="description-button"
             class="description-button"
             @click="displayDescription = !displayDescription"
             :title="
@@ -236,7 +237,7 @@
       focusableElements.push('next-button')
     }
     if (mediaAttachment.value?.description && !isEditing.value) {
-      focusableElements.push('media-description')
+      focusableElements.push('description-button')
     }
     if (isEditing.value) {
       focusableElements.push(
