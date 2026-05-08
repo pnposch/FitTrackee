@@ -253,12 +253,14 @@ button {
   color: var(--workout-trophy-color);
 }
 
+.codeberg-logo,
 .mountains,
 .cadence,
 .chronometer {
   height: 16px;
   filter: var(--icon-svg-filter);
 }
+.codeberg-logo,
 .mountains,
 .cadence {
   margin-bottom: -3px;
