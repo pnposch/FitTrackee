@@ -47,9 +47,7 @@ from fittrackee.responses import (
     handle_error_and_return_response,
 )
 from fittrackee.users.users_service import UserManagerService
-from fittrackee.utils import (
-    decode_short_id,
-)
+from fittrackee.utils import clean_input, decode_short_id
 from fittrackee.visibility_levels import (
     VisibilityLevel,
     get_calculated_visibility,
@@ -60,6 +58,8 @@ from ..constants import IMAGE_MIMETYPES, PaceSpeedDisplay
 from ..workouts.constants import PACE_SPORTS
 from .exceptions import UserControlsException, UserCreationException
 from .models import (
+    MAX_BIO_LIMIT,
+    MAX_USER_INPUT,
     BlacklistedToken,
     BlockedUser,
     Notification,
@@ -594,7 +594,12 @@ def edit_user(auth_user: User) -> Union[Dict, HttpResponse]:
     :reqheader Authorization: OAuth 2.0 Bearer Token
 
     :statuscode 200: ``user profile updated``
-    :statuscode 400: ``invalid payload``
+    :statuscode 400:
+        - ``invalid payload``
+        - ``first_name exceeds 80 characters``
+        - ``last_name exceeds 80 characters``
+        - ``bio exceeds 500 characters``
+        - ``location exceeds 80 characters``
     :statuscode 401:
         - ``provide a valid auth token``
         - ``signature expired, please log in again``
@@ -614,16 +619,32 @@ def edit_user(auth_user: User) -> Union[Dict, HttpResponse]:
         return InvalidPayloadErrorResponse()
 
     first_name = post_data.get("first_name")
+    if first_name and len(first_name) > MAX_USER_INPUT:
+        return InvalidPayloadErrorResponse(
+            f"first_name exceeds {MAX_USER_INPUT} characters"
+        )
     last_name = post_data.get("last_name")
+    if last_name and len(last_name) > MAX_USER_INPUT:
+        return InvalidPayloadErrorResponse(
+            f"last_name exceeds {MAX_USER_INPUT} characters"
+        )
     bio = post_data.get("bio")
+    if bio and len(bio) > MAX_BIO_LIMIT:
+        return InvalidPayloadErrorResponse(
+            f"bio exceeds {MAX_BIO_LIMIT} characters"
+        )
     birth_date = post_data.get("birth_date")
     location = post_data.get("location")
+    if location and len(location) > MAX_USER_INPUT:
+        return InvalidPayloadErrorResponse(
+            f"location exceeds {MAX_USER_INPUT} characters"
+        )
 
     try:
-        auth_user.first_name = first_name
-        auth_user.last_name = last_name
-        auth_user.bio = bio
-        auth_user.location = location
+        auth_user.first_name = clean_input(first_name) if first_name else None
+        auth_user.last_name = clean_input(last_name) if last_name else None
+        auth_user.bio = clean_input(bio) if bio else None
+        auth_user.location = clean_input(location) if bio else None
         auth_user.birth_date = (
             get_datetime_in_utc(birth_date) if birth_date else None
         )
