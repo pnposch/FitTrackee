@@ -1,5 +1,27 @@
 # Change log
 
+## Version 1.3.0b3 (2026/05/08)
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+**Warning**:
+- This release contains database migrations (see upgrade instructions in [documentation](https://next.docs.fittrackee.org/en/installation/upgrade.html)). 
+
+### Features and enhancements
+
+* [#1132](https://codeberg.org/FitTrackee/FitTrackee/issues/1132) - Add Markdown syntax to Bio
+
+### Bugs Fixed
+
+* [#1133](https://codeberg.org/FitTrackee/FitTrackee/issues/1133) - image description is not displayed when updating a workout
+* [PR#1138](https://codeberg.org/FitTrackee/FitTrackee/pulls/1138) - fix keyboard navigation in gallery modal when photo has description
+
+### Misc
+
+* [PR#1135](https://codeberg.org/FitTrackee/FitTrackee/pulls/1135) - Update repository logo in About page
+
+
 ## Version 1.3.0b2 (2026/05/05)
 
 **This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
@@ -7,7 +29,7 @@ If you find bugs, please report them.
 
 ### Bugs Fixed
 
-* [PR#1129](https://codeberg.org/FitTrackee/FitTrackee/pulls/1129) - js assets are missing in wheel
+* [#1129](https://codeberg.org/FitTrackee/FitTrackee/issues/1129) - js assets are missing in wheel
 
 
 ## Version 1.3.0b1 (2026/05/04)
