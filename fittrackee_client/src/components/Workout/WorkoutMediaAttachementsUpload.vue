@@ -59,7 +59,7 @@
           {{ $t('workouts.DESCRIPTION') }}:
           <CustomTextArea
             :name="`media-description-${media.id}`"
-            :input="mediaDescriptions[media.id] || ''"
+            :input="mediaDescriptions[media.id] || media.description"
             :disabled="loading"
             :charLimit="1500"
             :rows="2"
@@ -211,16 +211,6 @@
         mediaAttachmentFile.value.value = ''
       }
     }
-  )
-  watch(
-    () => mediaAttachments.value,
-    (newMediaAttachments: IMediaAttachment[]) => {
-      newMediaAttachments.forEach(
-        (media) => (mediaDescriptions.value[media.id] = media.description)
-      )
-      updateIsEditingMedia(mediaDescriptions.value)
-    },
-    { deep: true }
   )
   watch(
     () => mediaDescriptions.value,
