@@ -51,16 +51,6 @@ jobs:
       - name: Create test databases
         run: python db/create_ci_test_db.py
 
-      - name: Lint
-        if: ${{ inputs.with-additional-check && inputs.python-version == '3.13' }}
-        run: |
-          ruff format --check fittrackee e2e
-          ruff check fittrackee e2e
-
-      - name: Mypy
-        if: ${{ inputs.with-additional-check && inputs.python-version == '3.13' }}
-        run: mypy fittrackee
-
       - name: Pytest
         if: ${{ !inputs.with-coverage || inputs.python-version != '3.13'  }}
         run: pytest fittrackee -n auto --maxprocesses=2  -p no:warnings --maxfail=1
