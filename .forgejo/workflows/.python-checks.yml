@@ -2,6 +2,10 @@ name: Python - lint and type hints check
 
 on:
   push:
+    branches:
+      - main
+      - dev
+      - v*
     paths: [
       'fittrackee/**',
       'e2e/**',
