@@ -81,7 +81,7 @@
       </i18n-t>
       <dl>
         <dt>{{ $t('admin.APP_MODERATION.APPEAL.REASON_IS') }}</dt>
-        <dd>{{ appeal.reason }}</dd>
+        <dd class="reason">{{ appeal.reason }}</dd>
       </dl>
     </div>
   </div>
@@ -145,6 +145,7 @@
     }
     .appeal-text {
       font-style: normal;
+      white-space: pre-wrap;
     }
 
     .appeal-actions {
@@ -164,6 +165,10 @@
       dl {
         margin-bottom: -$default-margin;
       }
+    }
+
+    .reason {
+      white-space: pre-wrap;
     }
   }
 </style>

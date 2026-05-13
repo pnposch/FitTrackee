@@ -277,8 +277,10 @@
                     </button>
                   </div>
                   <div v-if="item.reason" class="report-action-note">
-                    <span>{{ $t('admin.APP_MODERATION.REASON') }}:</span>
-                    {{ item.reason }}
+                    <span class="label">
+                      {{ $t('admin.APP_MODERATION.REASON') }}:
+                    </span>
+                    <span class="reason">{{ item.reason }}</span>
                   </div>
                   <ReportActionAppeal
                     v-if="
@@ -835,8 +837,11 @@
         .report-action-note {
           margin: 0 0 0 $default-margin;
           font-size: 0.95em;
-          span {
+          .label {
             font-weight: bold;
+          }
+          .reason {
+            white-space: pre-wrap;
           }
         }
 
