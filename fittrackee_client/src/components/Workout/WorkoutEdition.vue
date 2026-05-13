@@ -402,6 +402,8 @@
                 <label for="notes"> {{ $t('workouts.PRIVATE_NOTES') }}: </label>
                 <CustomTextArea
                   name="notes"
+                  :charLimit="500"
+                  :rows="2"
                   :input="workoutForm.notes"
                   :disabled="disabled"
                   @updateValue="updateNotes"

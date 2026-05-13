@@ -309,6 +309,8 @@
                   <CustomTextArea
                     class="report-comment-textarea"
                     name="report-comment"
+                    :charLimit="500"
+                    :rows="2"
                     :required="isNoteMandatory"
                     :placeholder="getTextAreaPlaceholder()"
                     :disabled="reportUpdateLoading"

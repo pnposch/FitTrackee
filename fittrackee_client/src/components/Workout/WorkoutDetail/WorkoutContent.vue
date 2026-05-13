@@ -31,12 +31,9 @@
               :disabled="loading"
               :charLimit="contentType === 'NOTES' ? 500 : 10000"
               :rows="contentType === 'NOTES' ? 2 : 5"
+              with-markdown
               @updateValue="updateContent"
             />
-            <div class="markdown-hints info-box">
-              <i class="fa fa-info-circle" aria-hidden="true" />
-              {{ $t('workouts.MARKDOWN_SYNTAX') }}
-            </div>
             <div class="form-buttons">
               <button
                 class="confirm"

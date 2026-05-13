@@ -43,6 +43,8 @@
           <label for="appeal">{{ $t('user.APPEAL') }}:</label>
           <CustomTextArea
             name="appeal"
+            :charLimit="500"
+            :rows="2"
             :required="true"
             @updateValue="updateText"
           />

@@ -19,6 +19,7 @@
   "FOLLOW": "Follow",
   "HIDE": "Hide",
   "LOGIN": "Log in",
+  "PREVIEW": "Preview",
   "READ_MORE": "Read more",
   "REFRESH": "Refresh",
   "REFRESH_TOTALS": "Refresh totals",
@@ -31,5 +32,6 @@
   "SEE_DETAIL": "See detail",
   "SUBMIT": "Submit",
   "UNBLOCK": "Unblock",
-  "UNFOLLOW": "Unfollow"
+  "UNFOLLOW": "Unfollow",
+  "WRITE": "Write"
 }

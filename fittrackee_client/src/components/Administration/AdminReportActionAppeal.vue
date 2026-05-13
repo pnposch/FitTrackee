@@ -29,6 +29,8 @@
           :placeholder="
             $t('admin.APP_MODERATION.TEXTAREA_PLACEHOLDER.UPDATE_APPEAL')
           "
+          :rows="2"
+          :charLimit="500"
           @updateValue="updateReason"
         />
         <ErrorMessage
