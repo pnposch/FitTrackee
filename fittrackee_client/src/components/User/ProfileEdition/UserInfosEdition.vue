@@ -45,12 +45,9 @@
             rows="3"
             :input="userForm.bio"
             :disabled="authUserLoading"
+            with-markdown
             @updateValue="updateBio"
           />
-          <span class="markdown-hints info-box">
-            <i class="fa fa-info-circle" aria-hidden="true" />
-            {{ $t('workouts.MARKDOWN_SYNTAX') }}
-          </span>
         </label>
         <div class="form-buttons">
           <button class="confirm" type="submit">
@@ -147,9 +144,6 @@
           padding-left: 0;
         }
       }
-    }
-    .markdown-hints {
-      font-weight: normal;
     }
     .form-buttons {
       flex-direction: row;

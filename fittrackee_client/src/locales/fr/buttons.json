@@ -19,6 +19,7 @@
   "FOLLOW": "s'abonner",
   "HIDE": "Masquer",
   "LOGIN": "Se connecter",
+  "PREVIEW": "Prévisualiser",
   "READ_MORE": "Lire la suite",
   "REFRESH": "Rafraîchir la page",
   "REFRESH_TOTALS": "Recalculer les totaux",
@@ -31,5 +32,6 @@
   "SEE_DETAIL": "Voir le détail",
   "SUBMIT": "Valider",
   "UNBLOCK": "débloquer",
-  "UNFOLLOW": "se désabonner"
+  "UNFOLLOW": "se désabonner",
+  "WRITE": "Écrire"
 }

@@ -31,12 +31,9 @@
               :disabled="loading"
               :charLimit="contentType === 'NOTES' ? 500 : 10000"
               :rows="contentType === 'NOTES' ? 2 : 5"
+              with-markdown
               @updateValue="updateContent"
             />
-            <div class="markdown-hints info-box">
-              <i class="fa fa-info-circle" aria-hidden="true" />
-              {{ $t('workouts.MARKDOWN_SYNTAX') }}
-            </div>
             <div class="form-buttons">
               <button
                 class="confirm"
@@ -58,7 +55,7 @@
         </template>
         <template v-else>
           <span
-            class="workout-content"
+            class="workout-content white-space-pre-wrap"
             :class="{ notes: contentType === 'NOTES' || !content }"
             v-html="
               displayedContent && displayedContent !== ''
@@ -189,9 +186,6 @@
       }
     }
     ::v-deep(.card-content) {
-      .workout-content {
-        white-space: pre-wrap;
-      }
       .read-more {
         font-size: 0.85em;
         font-weight: bold;

@@ -152,12 +152,16 @@
           <span class="textarea-description">
             {{ $t('admin.ABOUT.DESCRIPTION') }}
           </span>
-          <textarea
+          <CustomTextArea
             v-if="edition"
             id="about"
             name="about"
+            :input="appData.about"
             rows="10"
-            v-model="appData.about"
+            with-markdown
+            :with-markdown-info="false"
+            use-convert
+            @updateValue="updateAbout"
           />
           <div
             v-else
@@ -174,12 +178,15 @@
           <span class="textarea-description">
             {{ $t('admin.PRIVACY_POLICY_DESCRIPTION') }}
           </span>
-          <textarea
+          <CustomTextArea
             v-if="edition"
             id="privacy_policy"
             name="privacy_policy"
+            :input="appData.privacy_policy"
             rows="20"
-            v-model="appData.privacy_policy"
+            with-markdown
+            use-convert
+            @updateValue="updatePrivacyPolicy"
           />
           <div
             v-else
@@ -224,6 +231,7 @@
   import useApp from '@/composables/useApp'
   import { ROOT_STORE } from '@/store/constants'
   import type { TAppConfig, TAppConfigForm } from '@/types/application'
+  import type { ICustomTextareaData } from '@/types/forms.ts'
   import { useStore } from '@/use/useStore'
   import { getFileSizeInMB } from '@/utils/files'
   import { convertToMarkdown } from '@/utils/inputs'
@@ -277,6 +285,12 @@
         appData[key] = appConfig[key]
       }
     })
+  }
+  function updateAbout(textareaData: ICustomTextareaData) {
+    appData.about = textareaData.value
+  }
+  function updatePrivacyPolicy(textareaData: ICustomTextareaData) {
+    appData.privacy_policy = textareaData.value
   }
   function onCancel() {
     updateForm(appConfig.value)
