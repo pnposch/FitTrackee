@@ -56,7 +56,7 @@
         <template v-else>
           <span
             class="workout-content white-space-pre-wrap"
-            :class="{ notes: contentType === 'NOTES' || !content }"
+            :class="{ 'no-content': !content }"
             v-html="
               displayedContent && displayedContent !== ''
                 ? linkifyAndClean(displayedContent)
@@ -194,6 +194,9 @@
       .edition-loading {
         display: flex;
         align-items: center;
+      }
+      .no-content {
+        font-style: italic;
       }
       .form-buttons {
         display: flex;

@@ -79,6 +79,8 @@ Follow requests
 Comments
 ********
 
+.. versionchanged:: 1.3.0  added a preview button for markdown
+
 | Depending on visibility, an authenticated user can comment on a workout.
 | A limited Markdown syntax can be used.
 
