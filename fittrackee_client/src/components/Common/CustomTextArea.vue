@@ -22,7 +22,10 @@
     />
     <div class="char-count-btn">
       <div class="remaining-chars" v-if="charLimit">
-        {{ $t('workouts.REMAINING_CHARS') }}: {{ text.length }}/{{ charLimit }}
+        {{ $t('workouts.REMAINING_CHARS') }}: {{ text.length }}/{{ charLimit }}.
+        <span v-if="withMarkdown && withMarkdownInfo === 'text'">
+          {{ $t('common.MARKDOWN_SYNTAX_CAN_BE_USED') }}
+        </span>
       </div>
       <button
         v-if="withMarkdown"
@@ -34,7 +37,10 @@
       </button>
     </div>
   </div>
-  <span class="markdown-hints info-box" v-if="withMarkdown && withMarkdownInfo">
+  <span
+    class="markdown-hints info-box"
+    v-if="withMarkdown && withMarkdownInfo === 'info-box'"
+  >
     <i class="fa fa-info-circle" aria-hidden="true" />
     {{ $t('workouts.MARKDOWN_SYNTAX') }}
   </span>
@@ -54,7 +60,7 @@
     required?: boolean
     placeholder?: string
     withMarkdown?: boolean
-    withMarkdownInfo?: boolean
+    withMarkdownInfo?: 'none' | 'info-box' | 'text'
     useConvert?: boolean
   }
   const props = withDefaults(defineProps<Props>(), {
@@ -63,7 +69,7 @@
     required: false,
     placeholder: '',
     withMarkdown: false,
-    withMarkdownInfo: true,
+    withMarkdownInfo: 'info-box',
     useConvert: false,
   })
 

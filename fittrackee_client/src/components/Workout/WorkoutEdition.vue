@@ -389,6 +389,8 @@
                   :disabled="disabled"
                   :charLimit="10000"
                   :rows="5"
+                  with-markdown
+                  :with-markdown-info="'text'"
                   @updateValue="updateDescription"
                 />
                 <div class="field-help" v-if="withFile && isCreation">
@@ -406,6 +408,8 @@
                   :rows="2"
                   :input="workoutForm.notes"
                   :disabled="disabled"
+                  with-markdown
+                  :with-markdown-info="'text'"
                   @updateValue="updateNotes"
                 />
                 <div class="field-help" v-if="isCreation">

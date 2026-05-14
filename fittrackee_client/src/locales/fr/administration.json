@@ -1,6 +1,6 @@
 {
   "ABOUT": {
-    "DESCRIPTION": "Toute information supplémentaire qui peut être utile à vos utilisateurs. La syntaxe Markdown peut être utilisée.",
+    "DESCRIPTION": "Toute information supplémentaire qui peut être utile à vos utilisateurs.",
     "TEXT": "Information détaillée de l'instance"
   },
   "ACTION": "Action | Actions",
@@ -119,7 +119,7 @@
   "NEW_EMAIL": "Nouvelle adresse email",
   "NO_TEXT_ENTERED": "pas de texte saisi",
   "PASSWORD_RESET_SUCCESSFUL": "Le mot de passe a été réinitialisé.",
-  "PRIVACY_POLICY_DESCRIPTION": "Ajouter votre propre politique de confidentialité ou laisser vider pour utiliser la politique par défaut. La syntaxe Markdown peut être utilisée.",
+  "PRIVACY_POLICY_DESCRIPTION": "Ajouter votre propre politique de confidentialité ou laisser vider pour utiliser la politique par défaut.",
   "REGISTRATION_DISABLED": "Les inscriptions sont actuellement désactivées.",
   "REGISTRATION_ENABLED": "Les inscriptions sont actuellement activées.",
   "RESET_USER_PASSWORD": "Réinit. le mot de passe",
