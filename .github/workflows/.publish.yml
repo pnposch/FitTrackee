@@ -1,80 +1,20 @@
-name: Python CI
+name: Publish package on PyPI and Docker images
 
 on:
   push:
-    paths: [
-      'fittrackee/**',
-      'e2e/**',
-      'pyproject.toml',
-      'poetry.lock',
-      'VERSION',
-      '.github/workflows/.tests-and-publish-python.yml',
-      '.github/workflows/.e2e-tests.yml',
-    ]
-  pull_request:
-    paths: [
-      'fittrackee/**',
-      'e2e/**',
-      'pyproject.toml',
-      'poetry.lock',
-      'VERSION',
-      '.github/workflows/.tests-and-publish-python.yml',
-      '.github/workflows/.e2e-tests.yml',
-    ]
-    types: [opened, synchronize, reopened]
+    tags:
+      - 'v*'
 
 env:
   GITHUB_REGISTRY: ghcr.io
   GITHUB_IMAGE_NAME: ${{ github.repository }}
 
+permissions:
+  contents: read
+
 jobs:
-  python:
-    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.fork }}
-    name: python ${{ matrix.python-version }} (postgis 17-3.5)
-    uses: ./.github/workflows/.workflow-python.yml
-    strategy:
-      matrix:
-        python-version:  [ "3.11", "3.12", "3.13", "3.14" ]
-    with:
-      ubuntu-version: "ubuntu-latest"
-      python-version: ${{ matrix.python-version }}
-      postgis-version: "17-3.5"
-      with-additional-check: true
-      with-coverage: true
-
-  postgis:
-    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.fork }}
-    name: postgis ${{ matrix.postgis-version }} (python 3.13)
-    uses: ./.github/workflows/.workflow-python.yml
-    strategy:
-      matrix:
-        postgis-version:  [ "14-3.5", "15-3.5", "16-3.5", "17-3.4", "17-3.6", "18-3.6" ]
-    with:
-      ubuntu-version: "ubuntu-latest"
-      python-version: "3.13"
-      postgis-version: ${{ matrix.postgis-version }}
-      with-additional-check: false
-      with-coverage: false
-
-  arm:
-    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.fork }}
-    name: postgis 17-3.5 on arm platform (python 3.13)
-    uses: ./.github/workflows/.workflow-python.yml
-    with:
-      ubuntu-version: "ubuntu-24.04-arm"
-      python-version: "3.13"
-      postgis-version: "17-3.5"
-      with-additional-check: false
-      with-coverage: false
-
-  end2end_with_sources:
-    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.fork }}
-    name: e2e tests with sources (Node 20)
-    needs: ["python"]
-    uses: ./.github/workflows/.workflow-e2e-with-sources.yml
-
   build_package:
-    needs: ["python"]
+    if: github.repository == 'SamR1/FitTrackee' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
 
@@ -118,23 +58,15 @@ jobs:
         retention-days: 5
 
   end2end_package:
-    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.fork }}
+    if: github.repository == 'SamR1/FitTrackee' && startsWith(github.ref, 'refs/tags/v')
     name: e2e tests with package
     needs: ["build_package"]
     uses: ./.github/workflows/.workflow-e2e.yml
 
-  end2end_package_update:
-    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.fork }}
-    name: e2e tests after FitTrackee update
-    needs: ["build_package"]
-    uses: ./.github/workflows/.workflow-e2e.yml
-    with:
-      previous-version: true
-
   publish-to-pypi:
     if: github.repository == 'SamR1/FitTrackee' && startsWith(github.ref, 'refs/tags/v')
     name: Publish Python distribution to PyPI
-    needs: ["postgis", "arm", "end2end_with_sources", "end2end_package", "end2end_package_update"]
+    needs: ["end2end_package"]
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -197,7 +129,7 @@ jobs:
   push_to_registries:
     if: github.repository == 'SamR1/FitTrackee' && startsWith(github.ref, 'refs/tags/v')
     name: Push Docker image to multiple registries
-    needs: ["postgis", "arm", "end2end_with_sources", "end2end_package", "end2end_package_update"]
+    needs: ["publish-to-pypi"]
     runs-on: ubuntu-latest
     permissions:
       contents: read
