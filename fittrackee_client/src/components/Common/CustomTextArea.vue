@@ -92,7 +92,7 @@
       (text.value.match(/\n/g) || []).length,
       rows.value
     )
-    return rowHeight + lineBreaksCount * 17
+    return rowHeight + lineBreaksCount * rowHeight
   }
 
   watch(
