@@ -151,6 +151,7 @@
           </label>
           <span class="textarea-description">
             {{ $t('admin.ABOUT.DESCRIPTION') }}
+            {{ $t('common.MARKDOWN_SYNTAX_CAN_BE_USED') }}
           </span>
           <CustomTextArea
             v-if="edition"
@@ -159,7 +160,7 @@
             :input="appData.about"
             rows="10"
             with-markdown
-            :with-markdown-info="false"
+            :with-markdown-info="'none'"
             use-convert
             @updateValue="updateAbout"
           />
@@ -177,6 +178,7 @@
           </label>
           <span class="textarea-description">
             {{ $t('admin.PRIVACY_POLICY_DESCRIPTION') }}
+            {{ $t('common.MARKDOWN_SYNTAX_CAN_BE_USED') }}
           </span>
           <CustomTextArea
             v-if="edition"

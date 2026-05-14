@@ -195,9 +195,6 @@
         display: flex;
         align-items: center;
       }
-      .notes {
-        font-style: italic;
-      }
       .form-buttons {
         display: flex;
         margin-top: $default-margin * 0.5;
