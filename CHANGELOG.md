@@ -1,5 +1,25 @@
 # Change log
 
+## Version 1.3.0b4 (2026/05/14)
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+### Features and enhancements
+
+* [#1139](https://codeberg.org/FitTrackee/FitTrackee/issues/1139) - add preview when Markdown syntax is enabled
+* [PR#1140](https://codeberg.org/FitTrackee/FitTrackee/pulls/1140) - add Open Graph tags to improve link sharing
+
+### Bugs Fixed
+
+* [PR#1141](https://codeberg.org/FitTrackee/FitTrackee/pulls/1141) - fix photos link in workout card when it is displayed in the User Profile
+
+### Misc
+
+* [PR#1142](https://codeberg.org/FitTrackee/FitTrackee/pulls/1142) - CI - move lightweight workflows to Forgejo Actions
+* [PR#1145](https://codeberg.org/FitTrackee/FitTrackee/pulls/1145) - CI - move publishing of packages and images into a dedicated workflow
+
+
 ## Version 1.3.0b3 (2026/05/08)
 
 **This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  

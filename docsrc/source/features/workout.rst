@@ -17,7 +17,7 @@ File upload
 
 .. versionchanged:: 0.10.0  support for .fit, .kml/.kmz and .tcx files, asynchronous uploads for larger files
 .. versionchanged:: 0.10.3  pause events triggering segment creation (.fit files only)
-.. versionchanged:: 1.3.0  added possibility to add photos
+.. versionchanged:: 1.3.0  added possibility to add photos and a preview button for markdown
 
 Supported files extensions are:
 
@@ -73,7 +73,7 @@ Data entry
 
 .. versionchanged:: 0.7.10 add ascent and descent
 .. versionchanged:: 1.1.2 added total calories to workout without file, elevation related inputs disabled for workout for sports without elevation
-.. versionchanged:: 1.3.0  added possibility to add photos
+.. versionchanged:: 1.3.0  added possibility to add photos and a preview button for markdown
 
 Users can create a workout without file by entering date, time, duration, distance, ascent, descent and calories.
 
