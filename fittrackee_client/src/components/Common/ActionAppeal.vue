@@ -2,7 +2,7 @@
   <div v-if="reportAction.id" class="appeal description-list">
     <dl v-if="reportAction.reason">
       <dt>{{ $t(`user.${actionTitle}_REASON`) }}:</dt>
-      <dd>{{ reportAction.reason }}</dd>
+      <dd class="white-space-pre-wrap">{{ reportAction.reason }}</dd>
     </dl>
     <div v-if="success || reportAction.appeal" class="appeal-submitted">
       <div

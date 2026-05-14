@@ -4,7 +4,7 @@
       v-show="preview"
       :style="{ 'min-height': `${rows * rowHeight}px` }"
       class="preview"
-      :class="{ wrap: !useConvert }"
+      :class="{ 'white-space-pre-wrap': !useConvert }"
       v-html="useConvert ? convertToMarkdown(text) : linkifyAndClean(text)"
     />
     <textarea
@@ -112,9 +112,6 @@
       font-weight: normal;
       font-style: normal;
       padding: $default-padding 0;
-      &.wrap {
-        white-space: pre-wrap;
-      }
     }
     .char-count-btn {
       display: flex;

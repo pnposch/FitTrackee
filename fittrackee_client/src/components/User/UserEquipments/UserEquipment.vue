@@ -35,7 +35,7 @@
       <dt>{{ $t('common.DESCRIPTION') }}</dt>
       <dd>
         <span
-          class="equipment-description"
+          class="white-space-pre-wrap"
           v-if="equipment.description"
           v-html="linkifyAndClean(equipment.description)"
         />
@@ -224,9 +224,6 @@
     }
     .no-description {
       font-style: italic;
-    }
-    .equipment-description {
-      white-space: pre-wrap;
     }
     .equipment-type {
       display: flex;

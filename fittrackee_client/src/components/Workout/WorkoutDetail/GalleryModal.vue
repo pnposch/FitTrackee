@@ -51,7 +51,10 @@
           @touchstart.self.stop="handleSwipe"
         />
         <template v-if="mediaAttachment.description && !isEditing">
-          <div class="modal-image-description" v-if="displayDescription">
+          <div
+            class="modal-image-description white-space-pre-wrap"
+            v-if="displayDescription"
+          >
             {{ mediaAttachment.description }}
           </div>
           <button
@@ -416,7 +419,6 @@
         .modal-image-description {
           position: absolute;
           background-color: var(--app-background-color);
-          white-space: pre-wrap;
           border-radius: $border-radius;
           padding: $default-padding;
           margin-right: $default-margin;

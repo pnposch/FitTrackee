@@ -66,7 +66,7 @@
         <dd
           :class="{
             'no-description': !client.client_description,
-            description: client.client_description,
+            'white-space-pre-wrap': client.client_description,
           }"
         >
           {{
@@ -249,9 +249,6 @@
     }
     .no-description {
       font-style: italic;
-    }
-    .description {
-      white-space: pre-wrap;
     }
     .no-app {
       font-style: italic;

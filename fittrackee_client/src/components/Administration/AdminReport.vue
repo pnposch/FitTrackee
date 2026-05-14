@@ -133,7 +133,7 @@
                   </span>
                 </template>
                 <template #content>
-                  {{ report.note }}
+                  <span class="white-space-pre-wrap">{{ report.note }}</span>
                 </template>
               </Card>
             </div>
@@ -225,7 +225,9 @@
                       }}
                     </div>
                   </div>
-                  <div class="report-comment-comment">{{ item.comment }}</div>
+                  <div class="report-comment-comment white-space-pre-wrap">
+                    {{ item.comment }}
+                  </div>
                 </div>
                 <div class="report-action" v-if="'action_type' in item">
                   <div>
@@ -280,7 +282,7 @@
                     <span class="label">
                       {{ $t('admin.APP_MODERATION.REASON') }}:
                     </span>
-                    <span class="reason">{{ item.reason }}</span>
+                    <span class="white-space-pre-wrap">{{ item.reason }}</span>
                   </div>
                   <ReportActionAppeal
                     v-if="
@@ -839,9 +841,6 @@
           font-size: 0.95em;
           .label {
             font-weight: bold;
-          }
-          .reason {
-            white-space: pre-wrap;
           }
         }
 

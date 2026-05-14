@@ -80,7 +80,7 @@
           <dt v-if="user.location">{{ $t('user.PROFILE.LOCATION') }}:</dt>
           <dd v-if="user.location">{{ user.location }}</dd>
           <dt v-if="user.bio">{{ $t('user.PROFILE.BIO') }}:</dt>
-          <dd v-if="user.bio" class="user-bio">
+          <dd v-if="user.bio" class="white-space-pre-wrap">
             <span v-html="linkifyAndClean(user.bio)" />
           </dd>
         </template>
@@ -319,10 +319,6 @@
 
   #user-infos {
     padding: 0 0 $default-padding;
-    .user-bio {
-      white-space: pre-wrap;
-    }
-
     .alert-message {
       margin: 0;
     }

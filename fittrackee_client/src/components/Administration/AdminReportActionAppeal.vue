@@ -1,6 +1,6 @@
 <template>
   <div class="appeal box" :id="`appeal-${appeal.id}`">
-    <div class="appeal-text">{{ appeal.text }}</div>
+    <div class="appeal-text white-space-pre-wrap">{{ appeal.text }}</div>
     <span
       class="appeal-date"
       :title="
@@ -81,7 +81,7 @@
       </i18n-t>
       <dl>
         <dt>{{ $t('admin.APP_MODERATION.APPEAL.REASON_IS') }}</dt>
-        <dd class="reason">{{ appeal.reason }}</dd>
+        <dd class="white-space-pre-wrap">{{ appeal.reason }}</dd>
       </dl>
     </div>
   </div>
@@ -145,7 +145,6 @@
     }
     .appeal-text {
       font-style: normal;
-      white-space: pre-wrap;
     }
 
     .appeal-actions {
@@ -165,10 +164,6 @@
       dl {
         margin-bottom: -$default-margin;
       }
-    }
-
-    .reason {
-      white-space: pre-wrap;
     }
   }
 </style>
