@@ -60,7 +60,7 @@ Prerequisites
 
   - installation from sources or package:
 
-    - `Python <https://www.python.org/>`__ 3.10+
+    - `Python <https://www.python.org/>`__ 3.11+
     - `PostgreSQL <https://www.postgresql.org/>`__ 14+
     - `PostGIS <https://postgis.net/>`__ 3.4+
     - `GDAL <https://gdal.org/en/stable/>`__ on the server running the application, if different from the server running the database (GDAL is installed with PostGIS)
@@ -80,8 +80,8 @@ Prerequisites
   - SMTP provider (if `email <emails.html>`__ sending is enabled)
   - API key from a `weather data provider <weather.html>`__
   - `elevation data provider <elevation.html>`__
-  - `Poetry <https://python-poetry.org>`__ 1.2+ (for installation from sources only)
-  - `Node <https://nodejs.org>`__ 20+ and `Yarn <https://yarnpkg.com>`__ (for development only)
+  - `Poetry <https://python-poetry.org>`__ 1.2+ (for installation from sources and development)
+  - `Node <https://nodejs.org>`__ 20+ (for installation from sources and development)
 
 .. note::
     | If registration is enabled, it is recommended to set Redis and a SMTP provider for email sending and data export requests.

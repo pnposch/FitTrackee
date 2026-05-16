@@ -59,16 +59,18 @@ From sources
 Prod environment
 ================
 
+.. versionchanged:: 1.3.0 Node 20+ is now required on production
+
 - Stop the application
 
 - Change to the directory where FitTrackee directory is located
 
-- Download the last release (for now, it is the release v1.2.2) and overwrite existing files:
+- Download the last release (for now, it is the release v1.3.0b4) and overwrite existing files:
 
 .. code:: bash
 
-   $ wget https://codeberg.org/FitTrackee/FitTrackee/archive/v1.2.2.tar.gz
-   $ tar -xzf v1.2.2.tar.gz
+   $ wget https://codeberg.org/FitTrackee/FitTrackee/archive/v1.3.0b4.tar.gz
+   $ tar -xzf v1.3.0b4.tar.gz
    $ cd fittrackee
 
 .. warning::
@@ -78,8 +80,8 @@ Prod environment
 
     .. code:: bash
 
-       $ wget https://codeberg.org/FitTrackee/FitTrackee/archive/v1.2.2.tar.gz
-       $ tar -xzf v1.2.2.tar.gz
+       $ wget https://codeberg.org/FitTrackee/FitTrackee/archive/v1.3.0b4.tar.gz
+       $ tar -xzf v1.3.0b4.tar.gz
        $ cp -R fittrackee/* FitTrackee/
        $ cd FitTrackee
 
@@ -89,7 +91,13 @@ Prod environment
 
 .. code:: bash
 
-   $ make install-python
+   $ make install-python install-client-dev
+
+-  Build Javascript assets:
+
+.. code:: bash
+
+   $ make build-client
 
 - Upgrade database if needed (see changelog for migrations):
 
