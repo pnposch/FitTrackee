@@ -1,5 +1,162 @@
 # Change log
 
+## Version 1.3.0 (2026/05/17)
+
+FitTrackee now allows you to add photos to workouts 🖼️.  
+The character limit for equipment description and bio has been increased, and Markdown syntax is now supported.  
+In addition, all fields that support Markdown syntax can be previewed before submission.  
+An Atom feed is also available in addition to the RSS feed on the User profile.
+
+**Warning**:
+- **Python 3.10** is no longer supported.
+- **libmagic** is now required.
+- Installation from source code on production now requires Node (see instructions in [documentation](https://docs.fittrackee.org/en/installation/installation.html#from-sources)).
+- This release contains database migrations (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html)). 
+  
+**Note**: This release note includes the changes from the beta versions.
+
+### Features and enhancements
+
+* [#60](https://codeberg.org/FitTrackee/FitTrackee/issues/60) - Display photos related to workouts
+* [#1117](https://codeberg.org/FitTrackee/FitTrackee/issues/1117) - allow for longer equipment description
+* [#1120](https://codeberg.org/FitTrackee/FitTrackee/issues/1120) - Add Atom feed to user profile
+* [#1132](https://codeberg.org/FitTrackee/FitTrackee/issues/1132) - Add Markdown syntax to Bio
+* [#1139](https://codeberg.org/FitTrackee/FitTrackee/issues/1139) - add preview when Markdown syntax is enabled
+* [PR#1140](https://codeberg.org/FitTrackee/FitTrackee/pulls/1140) - add Open Graph tags to improve link sharing
+
+### Translations
+
+* [PR#1115](https://codeberg.org/FitTrackee/FitTrackee/pulls/1115) - Translations update from Hosted Weblate (German)
+* [PR#1147](https://codeberg.org/FitTrackee/FitTrackee/pulls/1147) - Translations update from Hosted Weblate (French)
+* [PR#1148](https://codeberg.org/FitTrackee/FitTrackee/pulls/1148) - Translations update from Hosted Weblate (French and Russian) 
+
+Translation status for languages available on the interface:
+- Basque: 97%
+- Bulgarian: 50%
+- Catalan: 33%
+- Chinese (Simplified): 95%
+- Croatian: 99%
+- Czech: 49%
+- Dutch: 98%
+- English: 100%
+- French: 100%
+- Galician: 98%
+- German: 98%
+- Italian: 97%
+- Kabyle: 5%
+- Norwegian Bokmål: 42%
+- Polish: 92%
+- Portuguese: 50%
+- Russian: 93%
+- Spanish: 67%
+- Turkish: 1%
+
+### Misc
+
+* [#1107](https://codeberg.org/FitTrackee/FitTrackee/issues/1107) - Drop support for Python 3.10
+* [PR#1119](https://codeberg.org/FitTrackee/FitTrackee/pulls/1119) - Remove dist directory from repository
+* [PR#1122](https://codeberg.org/FitTrackee/FitTrackee/pulls/1122) - Remove documentation directory
+* [PR#1127](https://codeberg.org/FitTrackee/FitTrackee/pulls/1127) - update repository URLs and documentation
+* [PR#1135](https://codeberg.org/FitTrackee/FitTrackee/pulls/1135) - Update repository logo in About page
+* [PR#1142](https://codeberg.org/FitTrackee/FitTrackee/pulls/1142) - CI - move lightweight workflows to Forgejo Actions
+* [PR#1145](https://codeberg.org/FitTrackee/FitTrackee/pulls/1145) - CI - move publishing of packages and images into a dedicated workflow
+
+Thanks to the contributors:
+- [@PeterAuer](https://github.com/PeterAuer)
+
+And thanks to the beta-testers for feedback.
+
+
+## Version 1.3.0b4 (2026/05/14)
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+### Features and enhancements
+
+* [#1139](https://codeberg.org/FitTrackee/FitTrackee/issues/1139) - add preview when Markdown syntax is enabled
+* [PR#1140](https://codeberg.org/FitTrackee/FitTrackee/pulls/1140) - add Open Graph tags to improve link sharing
+
+### Bugs Fixed
+
+* [PR#1141](https://codeberg.org/FitTrackee/FitTrackee/pulls/1141) - fix photos link in workout card when it is displayed in the User Profile
+
+### Misc
+
+* [PR#1142](https://codeberg.org/FitTrackee/FitTrackee/pulls/1142) - CI - move lightweight workflows to Forgejo Actions
+* [PR#1145](https://codeberg.org/FitTrackee/FitTrackee/pulls/1145) - CI - move publishing of packages and images into a dedicated workflow
+
+
+## Version 1.3.0b3 (2026/05/08)
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+**Warning**:
+- This release contains database migrations (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html)). 
+
+### Features and enhancements
+
+* [#1132](https://codeberg.org/FitTrackee/FitTrackee/issues/1132) - Add Markdown syntax to Bio
+
+### Bugs Fixed
+
+* [#1133](https://codeberg.org/FitTrackee/FitTrackee/issues/1133) - image description is not displayed when updating a workout
+* [PR#1138](https://codeberg.org/FitTrackee/FitTrackee/pulls/1138) - fix keyboard navigation in gallery modal when photo has description
+
+### Misc
+
+* [PR#1135](https://codeberg.org/FitTrackee/FitTrackee/pulls/1135) - Update repository logo in About page
+
+
+## Version 1.3.0b2 (2026/05/05)
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+### Bugs Fixed
+
+* [#1129](https://codeberg.org/FitTrackee/FitTrackee/issues/1129) - js assets are missing in wheel
+
+
+## Version 1.3.0b1 (2026/05/04)
+
+**Warning**:
+- The Python package has been yanked due to an incomplete Wheel package. A new version will be released.
+
+**This is a pre-release. Don't install this version in production, you may not be able to safely downgrade to a stable version.**  
+If you find bugs, please report them.
+
+FitTrackee now allows to add photos to workouts 🖼️ and longer descriptions to equipment.
+An Atom feed is also available in addition to the RSS feed on User profile.
+
+**Warning**:
+- **Python 3.10** is no longer supported.
+- **libmagic** is now required.
+- Installation from source code on production now requires Node (see instructions in [documentation](https://docs.fittrackee.org/en/installation/installation.html#from-sources)).
+- This release contains database migrations (see upgrade instructions in [documentation](https://docs.fittrackee.org/en/installation/upgrade.html)). 
+
+### Features and enhancements
+
+* [#60](https://codeberg.org/FitTrackee/FitTrackee/issues/60) - Display photos related to workouts
+* [#1117](https://codeberg.org/FitTrackee/FitTrackee/issues/1117) - allow for longer equipment description
+* [#1120](https://codeberg.org/FitTrackee/FitTrackee/issues/1120) - Add Atom feed to user profile
+
+### Translations
+
+* [PR#1115](https://codeberg.org/FitTrackee/FitTrackee/pulls/1115) - Translations update from Hosted Weblate (German)
+
+### Misc
+
+* [#1107](https://codeberg.org/FitTrackee/FitTrackee/issues/1107) - Drop support for Python 3.10
+* [PR#1119](https://codeberg.org/FitTrackee/FitTrackee/pulls/1119) - Remove dist directory from repository
+* [PR#1122](https://codeberg.org/FitTrackee/FitTrackee/pulls/1122) - Remove documentation directory
+* [PR#1127](https://codeberg.org/FitTrackee/FitTrackee/pulls/1127) - update repository URLs and documentation
+
+Thanks to the contributors:
+- [@PeterAuer](https://github.com/PeterAuer)
+
+
 ## Version 1.2.2 (2026/04/19)
 
 Adding MIME type checking requires the libmagic C library. If not present, a warning will appear in the application logs and files will be uploaded without mime type verification.  
@@ -3650,7 +3807,7 @@ In this release 1 issue was closed.
 
 ## Version 0.6.0 (2022/03/27)
 
-This version introduces some changes on [user registration](https://next.docs.fittrackee.org/en/features/account_and_preferences.html).  
+This version introduces some changes on [user registration](https://docs.fittrackee.org/en/features/account_and_preferences.html).  
 From now on, a user needs to confirm his account after registration (an email with confirmation instructions is sent after registration).
 
 

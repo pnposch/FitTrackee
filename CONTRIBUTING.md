@@ -29,13 +29,13 @@ Pull requests or feature requests must therefore take these points into account.
 ### Project repository
 
 The **Codeberg** repository contains:
-- source code (note that the repository also includes client build),
+- source code,
 - translations,
 - tests,
-- documentation (source, translations and build).
+- documentation (source and translations).
 
 The repository is mirrored on **GitHub**.  
-Continuous integration workflows run on **Github Actions** platform (on **push**) for the moment (see [issue](https://codeberg.org/FitTrackee/FitTrackee/issues/1121)).
+Continuous integration workflows run on **Forgejo Actions** (Cobeberg) and **Github Actions** platforms (see [issue](https://codeberg.org/FitTrackee/FitTrackee/issues/1121)).
 
 For now, releases do not follow [semantic versioning](https://semver.org). Any version may contain backward-incompatible changes.
 
@@ -116,13 +116,12 @@ Please make your changes from the development branch (`dev`).
 
 * If needed, add or update tests.
 
-* If needed, update documentation (no need to build documentation, it will be done when releasing).
+* If needed, update documentation.
 
 * If updated code contains client-side changes, you can generate javascript assets to check **FitTrackee** without starting client dev server:
   ```shell
   $ make build-client
   ```
-  No need to commit these files, dist files will be generated before merging or when releasing.
 
 * Create your pull request to merge on `dev` branch.
 

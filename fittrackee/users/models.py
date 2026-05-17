@@ -69,6 +69,8 @@ SEGMENTS_CREATION_EVENTS = [
     "none",
     "only_manual",
 ]
+MAX_USER_INPUT = 80
+MAX_BIO_LIMIT = 500
 
 
 class FollowRequest(BaseModel):
@@ -280,18 +282,20 @@ class User(BaseModel):
     password: Mapped[str] = mapped_column(db.String(255), nullable=False)
     created_at: Mapped[datetime] = mapped_column(TZDateTime, nullable=False)
     first_name: Mapped[Optional[str]] = mapped_column(
-        db.String(80), nullable=True
+        db.String(MAX_USER_INPUT), nullable=True
     )
     last_name: Mapped[Optional[str]] = mapped_column(
-        db.String(80), nullable=True
+        db.String(MAX_USER_INPUT), nullable=True
     )
     birth_date: Mapped[Optional[datetime]] = mapped_column(
         TZDateTime, nullable=True
     )
     location: Mapped[Optional[str]] = mapped_column(
-        db.String(80), nullable=True
+        db.String(MAX_USER_INPUT), nullable=True
     )
-    bio: Mapped[Optional[str]] = mapped_column(db.String(200), nullable=True)
+    bio: Mapped[Optional[str]] = mapped_column(
+        db.String(MAX_BIO_LIMIT), nullable=True
+    )
     picture: Mapped[Optional[str]] = mapped_column(
         db.String(255), nullable=True
     )
@@ -383,6 +387,11 @@ class User(BaseModel):
         nullable=False,
     )
     calories_visibility: Mapped[VisibilityLevel] = mapped_column(
+        Enum(VisibilityLevel, name="visibility_levels"),
+        server_default="PRIVATE",
+        nullable=False,
+    )
+    media_visibility: Mapped[VisibilityLevel] = mapped_column(
         Enum(VisibilityLevel, name="visibility_levels"),
         server_default="PRIVATE",
         nullable=False,
@@ -999,6 +1008,7 @@ class User(BaseModel):
                     self.calculated_missing_elevations_processing
                 ),
                 "calories_visibility": self.calories_visibility.value,
+                "media_visibility": self.media_visibility.value,
             }
 
         return serialized_user
