@@ -187,6 +187,7 @@
             :input="appData.privacy_policy"
             rows="20"
             with-markdown
+            :with-markdown-info="'none'"
             use-convert
             @updateValue="updatePrivacyPolicy"
           />
@@ -345,5 +346,9 @@
 
   .no-contact {
     font-style: italic;
+  }
+
+  .form-buttons {
+    margin-top: $default-margin;
   }
 </style>

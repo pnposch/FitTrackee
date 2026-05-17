@@ -16,6 +16,7 @@ from fittrackee.responses import (
 from fittrackee.users.models import User
 from fittrackee.users.roles import UserRole
 from fittrackee.users.utils.controls import is_valid_email
+from fittrackee.utils import clean_input
 
 from .models import AppConfig
 from .utils import update_app_config_from_database, verify_app_config
@@ -219,11 +220,15 @@ def update_application_config(auth_user: User) -> Union[Dict, HttpResponse]:
             config.admin_contact = admin_contact if admin_contact else None
         if "about" in config_data:
             config.about = (
-                config_data.get("about") if config_data.get("about") else None
+                clean_input(config_data["about"])
+                if config_data.get("about")
+                else None
             )
         if "privacy_policy" in config_data:
             privacy_policy = config_data.get("privacy_policy")
-            config.privacy_policy = privacy_policy if privacy_policy else None
+            config.privacy_policy = (
+                clean_input(privacy_policy) if privacy_policy else None
+            )
             config.privacy_policy_date = (
                 datetime.now(timezone.utc) if privacy_policy else None
             )
