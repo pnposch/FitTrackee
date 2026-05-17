@@ -16,6 +16,7 @@ from fittrackee.workouts.models import (
     Sport,
 )
 
+from ...utils import clean_input
 from ..constants import WORKOUT_DATE_FORMAT
 from ..exceptions import WorkoutException
 from ..utils.convert import convert_speed_into_pace_duration
@@ -231,13 +232,15 @@ class WorkoutUpdateService(CheckWorkoutMixin, WorkoutMediaAttachmentsMixin):
             self.workout.equipments = self.equipments_list
 
         if self.workout_data.get("description") is not None:
-            self.workout.description = self.workout_data["description"][
-                :DESCRIPTION_MAX_CHARACTERS
-            ]
+            self.workout.description = clean_input(
+                self.workout_data["description"]
+            )[:DESCRIPTION_MAX_CHARACTERS]
+
         if self.workout_data.get("notes") is not None:
-            self.workout.notes = self.workout_data["notes"][
+            self.workout.notes = clean_input(self.workout_data["notes"])[
                 :NOTES_MAX_CHARACTERS
             ]
+
         if self.workout_data.get("title") is not None:
             self.workout.title = self.workout_data["title"][
                 :TITLE_MAX_CHARACTERS

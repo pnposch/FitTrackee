@@ -10,6 +10,7 @@ from fittrackee.visibility_levels import (
     get_calculated_visibility,
 )
 
+from ...utils import clean_input
 from ..constants import WORKOUT_DATE_FORMAT
 from ..exceptions import WorkoutException
 from ..models import (
@@ -129,14 +130,16 @@ class WorkoutCreationService(CheckWorkoutMixin, BaseWorkoutService):
         self._check_workout(new_workout)
         new_workout.title = self._get_workout_title(workout_date)
         new_workout.description = (
-            self.workout_data.description[:DESCRIPTION_MAX_CHARACTERS]
+            clean_input(self.workout_data.description)[
+                :DESCRIPTION_MAX_CHARACTERS
+            ]
             if self.workout_data.description
             else None
         )
         new_workout.notes = (
             None
             if self.workout_data.notes is None
-            else self.workout_data.notes[:NOTES_MAX_CHARACTERS]
+            else clean_input(self.workout_data.notes)[:NOTES_MAX_CHARACTERS]
         )
 
         equipments = self.get_equipments()

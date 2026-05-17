@@ -414,11 +414,7 @@ def post_equipment(auth_user: User) -> Union[Tuple[Dict, int], HttpResponse]:
             label=clean_input(label),
             equipment_type_id=equipment_type_id,
             is_active=True,
-            description=(
-                clean_input(description, for_markdown_renderer=True)
-                if description
-                else ""
-            ),
+            description=clean_input(description) if description else "",
         )
         db.session.add(new_equipment)
         db.session.flush()
@@ -652,7 +648,7 @@ def update_equipment(
                 return InvalidPayloadErrorResponse(
                     f"description exceeds {DESCRIPTION_MAX_LENGTH} characters"
                 )
-            equipment.description = description
+            equipment.description = clean_input(description)
         if "visibility" in equipment_data:
             visibility = equipment_data["visibility"]
             try:
