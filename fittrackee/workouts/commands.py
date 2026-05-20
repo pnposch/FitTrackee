@@ -1,10 +1,11 @@
 import logging
 import os
+import re
 import shutil
 import sys
 from datetime import datetime
 from logging import Logger
-from typing import Optional
+from typing import Dict, Optional
 
 import click
 
@@ -29,6 +30,63 @@ VALID_ON_ERROR_CHOICES = ["remove-references", "delete-workout"]
 
 logger = logging.getLogger("fittrackee_workouts_cli")
 logger.setLevel(logging.INFO)
+
+
+def get_sport_from_tcx(filepath: str) -> Optional[str]:
+    """
+    Read the first 2 KB of a TCX file and return the value of the
+    <Activity Sport="..."> attribute, or None if not found.
+    """
+    with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+        header = f.read(2048)
+    match = re.search(r'<Activity\s+Sport="([^"]+)"', header)
+    return match.group(1) if match else None
+
+
+def parse_sport_mapping(
+    mapping_str: str,
+) -> Dict[str, int]:
+    """
+    Parse a sport mapping string into a dict of {tcx_sport: sport_id}.
+
+    Accepts two value formats:
+      - Numeric:  "Biking:1,Running:5,Other:3"
+      - Label:    "Biking:Cycling (Sport),Running:Running,Other:Hiking"
+        (labels are resolved to IDs via the DB at call time)
+
+    Raises click.BadParameter on invalid format or unknown label/ID.
+    """
+    mapping: Dict[str, int] = {}
+    for part in mapping_str.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        if ":" not in part:
+            raise click.BadParameter(
+                f"invalid mapping entry '{part}' — expected 'TCX_sport:sport_id_or_label'"
+            )
+        tcx_sport, _, fittrackee_value = part.partition(":")
+        tcx_sport = tcx_sport.strip()
+        fittrackee_value = fittrackee_value.strip()
+        if fittrackee_value.isdigit():
+            sport_id = int(fittrackee_value)
+            with app.app_context():
+                if not Sport.query.filter_by(id=sport_id).first():
+                    raise click.BadParameter(
+                        f"sport id {sport_id} in mapping does not exist"
+                    )
+            mapping[tcx_sport.lower()] = sport_id
+        else:
+            with app.app_context():
+                sport = Sport.query.filter_by(
+                    label=fittrackee_value
+                ).first()
+                if sport is None:
+                    raise click.BadParameter(
+                        f"sport label '{fittrackee_value}' in mapping does not exist"
+                    )
+                mapping[tcx_sport.lower()] = sport.id
+    return mapping
 
 
 def validate_order(
@@ -493,10 +551,27 @@ def refresh_workouts(
 )
 @click.option(
     "--sport-id",
-    help="Sport id for imported workouts.",
+    help=(
+        "Default sport id for imported workouts. "
+        "Used when sport cannot be inferred from the file "
+        "(required for non-TCX formats)."
+    ),
     type=int,
-    required=True,
+    required=False,
+    default=None,
     callback=validate_sport_id,
+)
+@click.option(
+    "--sport-mapping",
+    "sport_mapping",
+    default=None,
+    help=(
+        "Comma-separated TCX sport → FitTrackee sport mappings. "
+        "Values can be sport IDs or labels. "
+        "Example: \"Biking:Cycling (Sport),Running:Running,Other:Hiking\" "
+        "or \"Biking:1,Running:5,Other:3\". "
+        "Takes precedence over --sport-id for TCX files."
+    ),
 )
 @click.option(
     "--on-success",
@@ -522,7 +597,8 @@ def refresh_workouts(
 def import_dir(
     import_dir: str,
     username: Optional[str],
-    sport_id: int,
+    sport_id: Optional[int],
+    sport_mapping: Optional[str],
     on_success: str,
     verbose: bool,
 ) -> None:
@@ -531,6 +607,10 @@ def import_dir(
 
     Supported formats: gpx, fit, tcx, kml, kmz.
     Files are processed in alphabetical order.
+
+    For TCX files the sport type is inferred from the <Activity Sport="...">
+    attribute when --sport-mapping is provided. --sport-id is used as the
+    fallback for files where the sport cannot be determined.
     """
     from flask import current_app
     from werkzeug.datastructures import FileStorage
@@ -546,6 +626,24 @@ def import_dir(
 
     with app.app_context():
         logger.setLevel(logging.DEBUG if verbose else logging.INFO)
+
+        # Parse and validate sport mapping upfront
+        resolved_mapping: Dict[str, int] = {}
+        if sport_mapping:
+            try:
+                resolved_mapping = parse_sport_mapping(sport_mapping)
+            except click.BadParameter as e:
+                logger.error(f"Invalid --sport-mapping: {e}")
+                sys.exit(1)
+            if verbose:
+                logger.debug(f"Sport mapping: {resolved_mapping}")
+
+        if not sport_id and not resolved_mapping:
+            logger.error(
+                "Provide --sport-id, --sport-mapping, or both. "
+                "At least one is required."
+            )
+            sys.exit(1)
 
         if username:
             user: Optional[User] = User.query.filter_by(
@@ -586,6 +684,34 @@ def import_dir(
         errored = 0
         for filename in files:
             filepath = os.path.join(import_dir, filename)
+            ext = filename.rsplit(".", 1)[-1].lower()
+
+            # Resolve sport_id for this file
+            file_sport_id: Optional[int] = sport_id
+            if ext == "tcx" and resolved_mapping:
+                tcx_sport = get_sport_from_tcx(filepath)
+                if tcx_sport is not None:
+                    mapped = resolved_mapping.get(tcx_sport.lower())
+                    if mapped is not None:
+                        file_sport_id = mapped
+                        if verbose:
+                            logger.debug(
+                                f"  > TCX sport '{tcx_sport}' → sport_id {mapped}"
+                            )
+                    else:
+                        logger.warning(
+                            f"  > TCX sport '{tcx_sport}' not in mapping, "
+                            "falling back to --sport-id"
+                        )
+
+            if file_sport_id is None:
+                errored += 1
+                logger.error(
+                    f"Skipping {filename}: could not determine sport id "
+                    "(no --sport-id and no mapping entry for this file)."
+                )
+                continue
+
             logger.info(f"Importing {filename}...")
             try:
                 if (
@@ -599,7 +725,7 @@ def import_dir(
                     file_storage = FileStorage(stream=f, filename=filename)
                     service = WorkoutsFromFileCreationService(
                         auth_user=user,
-                        workouts_data={"sport_id": sport_id},
+                        workouts_data={"sport_id": file_sport_id},
                         file=file_storage,
                     )
                     service.process()
