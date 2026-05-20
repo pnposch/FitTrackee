@@ -75,7 +75,28 @@ The `ftcli workouts import_dir` CLI command scans a local directory for workout
 files and imports them for a given user and sport — useful for drop-folder
 automation with cron or a systemd path unit.
 
-**Supported formats:** GPX, FIT, TCX, KML, KMZ
+**Supported formats:** GPX, FIT, TCX, KML, KMZ — including `.tcx` files from
+Garmin devices.
+
+> **Note:** The sport type is **not** inferred from the file content. You must
+> supply `--sport-id` explicitly. Look up the numeric ID for your sport via the
+> FitTrackee API or admin UI:
+> ```bash
+> # List all sports (no auth required)
+> curl http://localhost:5000/api/sports
+> # In Docker:
+> docker compose exec fittrackee ftcli --help  # then browse /api/sports in browser
+> ```
+> Default sports after a fresh install (IDs may differ on your instance):
+>
+> | ID | Label |
+> |----|-------|
+> | 1  | Cycling (Sport) |
+> | 2  | Cycling (Transport) |
+> | 3  | Hiking |
+> | 4  | Mountain Biking |
+> | 5  | Running |
+> | 6  | Walking |
 
 ```
 Usage: ftcli workouts import_dir [OPTIONS]
@@ -98,25 +119,42 @@ Options:
   -v, --verbose            Enable verbose output log.
 ```
 
+**How imports are triggered**
+
+The command scans once and exits — there is no built-in watch loop. Use one of:
+
+- **One-shot (Docker):**
+  ```bash
+  docker compose exec fittrackee \
+    ftcli workouts import_dir --dir /usr/src/app/import --sport-id 5 --on-success move
+  ```
+
+- **Cron** (runs every 15 minutes; `-T` disables TTY for non-interactive use):
+  ```cron
+  */15 * * * * docker compose -f /path/to/docker-compose.yml exec -T fittrackee \
+    ftcli workouts import_dir --dir /usr/src/app/import --sport-id 5 --on-success move
+  ```
+
+- **Systemd path unit** — triggers immediately when a file is dropped into the
+  folder, without polling. Ideal for desktop setups.
+
+The `--on-success move` flag moves processed files to `import/done/` so repeated
+runs never re-import the same file.
+
 **Examples:**
 
 ```bash
-# Import all GPX files; keep originals in place (single-user: no --username needed)
-ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1
+# Import all TCX/GPX files; keep originals in place (single-user: auto-detects user)
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 5
 
 # Move each successfully imported file to /mnt/gpx-drop/done/
-ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1 --on-success move
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 5 --on-success move
 
 # Delete originals after import, target a specific user
-ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 2 \
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 5 \
   --username alice --on-success delete
 ```
 
-**Cron example** (import every 15 minutes, move on success):
-
-```cron
-*/15 * * * * ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1 --on-success move
-```
 
 #### Docker: mount an import directory
 
