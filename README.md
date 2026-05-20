@@ -37,7 +37,7 @@ Map data from [OpenStreetMap](https://www.openstreetmap.org).
 
 ## Fork additions: single-user mode
 
-This fork adds two quality-of-life features for self-hosted single-user deployments.
+This fork adds quality-of-life features for self-hosted single-user deployments.
 
 ### Disable registration
 
@@ -45,14 +45,29 @@ Set the environment variable `REGISTRATION_DISABLED=true` to permanently close
 new account sign-ups regardless of the `max_users` admin setting:
 
 ```bash
-# .env
+# .env / .env.docker
 export REGISTRATION_DISABLED=true
 ```
 
-The API returns `403 error, registration is disabled` for any registration
-attempt, and the frontend correctly reports registration as unavailable.  
-The existing `max_users` admin config field continues to work normally when the
-variable is not set.
+- The API returns `403 – registration is disabled` for any registration attempt.
+- The `/register` route redirects to `/login` in the frontend.
+- The existing `max_users` admin config field continues to work normally when the variable is not set.
+
+### Docker: bootstrap a single user on first start
+
+Set the following environment variables to automatically create an account when
+the container starts for the first time. Re-runs are safe — if the user already
+exists the command is a no-op:
+
+```bash
+# .env.docker
+export INIT_USERNAME=alice
+export INIT_EMAIL=alice@example.com
+export INIT_PASSWORD=changeme
+export INIT_ROLE=admin          # owner | admin | moderator | user (default: admin)
+```
+
+Pair with `REGISTRATION_DISABLED=true` for a fully locked-down single-user instance.
 
 ### Automated GPX / workout file import from a local directory
 
@@ -60,7 +75,34 @@ The `ftcli workouts import_dir` CLI command scans a local directory for workout
 files and imports them for a given user and sport — useful for drop-folder
 automation with cron or a systemd path unit.
 
-**Supported formats:** GPX, FIT, TCX, KML, KMZ
+**Supported formats:** GPX, FIT, TCX, KML, KMZ — including `.tcx` files from
+Garmin devices, Polar Flow exports, etc.
+
+#### TCX sport inference
+
+For **TCX files** the command reads the `<Activity Sport="...">` attribute from
+the file header and maps it to a FitTrackee sport. The default mapping is stored
+in `fittrackee/workouts/tcx_sport_mapping.json` and covers the most common TCX
+sport values out of the box:
+
+| TCX Sport value | FitTrackee sport |
+|-----------------|-----------------|
+| Biking | Cycling (Sport) |
+| Mountain Biking | Mountain Biking |
+| Running | Running |
+| Trail Running | Trail |
+| Hiking | Hiking |
+| Walking | Walking |
+| Swimming | Open Water Swimming |
+| Cross Country Skiing | Skiing Cross Country |
+| Alpine Skiing | Skiing Alpine |
+| Rowing | Rowing |
+| Kayaking | Kayaking |
+| Other | Hiking |
+
+Edit `tcx_sport_mapping.json` to customise the defaults for your instance.
+The `--sport-mapping` CLI option lets you override individual entries per run
+(merged on top of the file, so you only need to specify what differs).
 
 ```
 Usage: ftcli workouts import_dir [OPTIONS]
@@ -70,10 +112,21 @@ Usage: ftcli workouts import_dir [OPTIONS]
   Supported formats: gpx, fit, tcx, kml, kmz.
   Files are processed in alphabetical order.
 
+  For TCX files the sport type is inferred from the <Activity Sport="...">
+  attribute when --sport-mapping is provided. --sport-id is used as the
+  fallback for files where the sport cannot be determined.
+
 Options:
   --dir DIRECTORY          Directory containing workout files to import.
                            [required]
-  --sport-id INTEGER       Sport id for imported workouts.  [required]
+  --sport-id INTEGER       Default sport id for imported workouts. Used when
+                           sport cannot be inferred from the file (required
+                           for non-TCX formats).
+  --sport-mapping TEXT     Comma-separated TCX sport → FitTrackee sport
+                           overrides (merged on top of tcx_sport_mapping.json).
+                           Values can be sport IDs or labels. Example:
+                             "Biking:Mountain Biking,Other:Walking"
+                           If omitted the bundled default file is used.
   --username TEXT          Username to import workouts for. Defaults to the
                            only active user when just one exists.
   --on-success [keep|move|delete]
@@ -83,25 +136,117 @@ Options:
   -v, --verbose            Enable verbose output log.
 ```
 
+At least one of `--sport-id` or `--sport-mapping` must be provided. Files
+whose sport cannot be resolved are skipped with an error (counted in the final
+summary).
+
+**Look up sport IDs / labels** for your instance via the FitTrackee API:
+
+```bash
+# No auth required
+curl http://localhost:5000/api/sports
+
+# In Docker
+docker compose exec fittrackee curl http://localhost:5000/api/sports
+```
+
+Default sports after a fresh install (IDs may differ on your instance):
+
+| ID | Label |
+|----|-------|
+| 1  | Cycling (Sport) |
+| 2  | Cycling (Transport) |
+| 3  | Hiking |
+| 4  | Mountain Biking |
+| 5  | Running |
+| 6  | Walking |
+
+**How imports are triggered**
+
+The command scans once and exits — there is no built-in watch loop. Use one of:
+
+- **One-shot (Docker):**
+  ```bash
+  # Uses default tcx_sport_mapping.json — no flags needed for TCX files
+  docker compose exec fittrackee \
+    ftcli workouts import_dir --dir /usr/src/app/import --on-success move
+  ```
+
+- **Cron** (runs every 15 minutes; `-T` disables TTY for non-interactive use):
+  ```cron
+  */15 * * * * docker compose -f /path/to/docker-compose.yml exec -T fittrackee \
+    ftcli workouts import_dir --dir /usr/src/app/import --on-success move
+  ```
+
+- **Systemd path unit** — triggers immediately when a file is dropped into the
+  folder, without polling. Ideal for desktop setups.
+
+The `--on-success move` flag moves processed files to `import/done/` so repeated
+runs never re-import the same file.
+
 **Examples:**
 
 ```bash
-# Import all GPX files; keep originals in place (single-user: no --username needed)
-ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1
+# TCX directory — sport inferred automatically from default mapping file
+ftcli workouts import_dir --dir /mnt/tcx-drop --on-success move
 
-# Move each successfully imported file to /mnt/gpx-drop/done/
-ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1 --on-success move
+# Override one entry (e.g. map "Other" to Walking instead of Hiking)
+ftcli workouts import_dir --dir /mnt/tcx-drop --sport-mapping "Other:Walking" --on-success move
 
-# Delete originals after import, target a specific user
-ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 2 \
+# Non-TCX files (GPX/FIT/KML/KMZ) — sport-id required as fallback
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 5 --on-success move
+
+# Mixed directory: TCX uses default mapping, GPX/FIT fall back to --sport-id
+ftcli workouts import_dir --dir /mnt/mixed-drop --sport-id 5 --on-success move
+
+# Target a specific user and delete originals after import
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 5 \
   --username alice --on-success delete
 ```
 
-**Cron example** (import every 15 minutes, move on success):
 
-```cron
-*/15 * * * * ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1 --on-success move
+#### Docker: mount an import directory
+
+Uncomment the import volume in `docker-compose.yml`:
+
+```yaml
+- ${HOST_IMPORT_DIR:-./data/import}:/usr/src/app/import:z
 ```
+
+Set the host path in `.env.docker` (optional, defaults to `./data/import`):
+
+```bash
+export HOST_IMPORT_DIR=/path/to/your/gpx/drop-folder
+```
+
+Then run imports inside the container:
+
+```bash
+# TCX files: sport inferred from tcx_sport_mapping.json automatically
+docker compose exec fittrackee \
+  ftcli workouts import_dir --dir /usr/src/app/import --on-success move
+```
+
+### Security: APP_SECRET_KEY minimum length
+
+The application validates `APP_SECRET_KEY` on startup against the 32-byte
+minimum required by HS256 (RFC 7518 §3.2):
+
+- In **production** the app refuses to start if the key is shorter than 32 bytes.
+- In **development** a warning is logged.
+
+Generate a suitable key with:
+
+```bash
+python3 -c "import secrets; print(secrets.token_hex(32))"
+```
+
+### Docker CI
+
+A GitHub Actions workflow (`.github/workflows/docker.yml`) builds the image
+and pushes it to the private registry at `repo.dev.posch.org` on every push to
+`main`/`dev` and on `v*` tags. Requires a `REPO_PWD` secret in the repository
+settings.
 
 ---
 

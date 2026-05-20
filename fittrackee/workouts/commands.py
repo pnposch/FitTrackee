@@ -1,10 +1,12 @@
+import json
 import logging
 import os
+import re
 import shutil
 import sys
 from datetime import datetime
 from logging import Logger
-from typing import Optional
+from typing import Dict, Optional
 
 import click
 
@@ -27,8 +29,97 @@ from fittrackee.workouts.utils.workouts import get_workout_datetime
 WORKOUT_VALID_EXTENSIONS = ", ".join(WORKOUT_ALLOWED_EXTENSIONS)
 VALID_ON_ERROR_CHOICES = ["remove-references", "delete-workout"]
 
+DEFAULT_TCX_SPORT_MAPPING_FILE = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "tcx_sport_mapping.json"
+)
+
 logger = logging.getLogger("fittrackee_workouts_cli")
 logger.setLevel(logging.INFO)
+
+
+def get_sport_from_tcx(filepath: str) -> Optional[str]:
+    """
+    Read the first 2 KB of a TCX file and return the value of the
+    <Activity Sport="..."> attribute, or None if not found.
+    """
+    try:
+        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+            header = f.read(2048)
+    except OSError:
+        return None
+    match = re.search(r'<Activity\s+Sport="([^"]+)"', header)
+    return match.group(1) if match else None
+
+
+def load_default_tcx_sport_mapping() -> Dict[str, str]:
+    """
+    Load the default TCX sport mapping from the bundled JSON file.
+
+    Returns a raw {tcx_sport: fittrackee_label_or_id} dict.
+    Keys prefixed with '_' (comments) are ignored.
+    """
+    if not os.path.isfile(DEFAULT_TCX_SPORT_MAPPING_FILE):
+        return {}
+    with open(DEFAULT_TCX_SPORT_MAPPING_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, dict):
+        raise ValueError(
+            f"{DEFAULT_TCX_SPORT_MAPPING_FILE} must be a JSON object"
+        )
+    return {
+        str(k): str(v)
+        for k, v in data.items()
+        if not str(k).startswith("_")
+    }
+
+
+def parse_sport_mapping_str(mapping_str: str) -> Dict[str, str]:
+    """
+    Parse a 'Biking:Cycling (Sport),Running:Running' string into a raw
+    {tcx_sport: fittrackee_label_or_id} dict (values not yet DB-resolved).
+    """
+    raw: Dict[str, str] = {}
+    for part in mapping_str.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        if ":" not in part:
+            raise click.BadParameter(
+                f"invalid mapping entry '{part}' "
+                "— expected 'TCX_sport:sport_id_or_label'"
+            )
+        tcx_sport, _, fittrackee_value = part.partition(":")
+        raw[tcx_sport.strip()] = fittrackee_value.strip()
+    return raw
+
+
+def resolve_sport_mapping(raw: Dict[str, str]) -> Dict[str, int]:
+    """
+    Resolve a raw {tcx_sport: fittrackee_label_or_id} dict to
+    {tcx_sport_lower: sport_id}.  Unknown labels are skipped with a warning.
+    Must be called within an app context.
+    """
+    mapping: Dict[str, int] = {}
+    for tcx_sport, fittrackee_value in raw.items():
+        if fittrackee_value.isdigit():
+            sport_id = int(fittrackee_value)
+            if not Sport.query.filter_by(id=sport_id).first():
+                logger.warning(
+                    f"sport id {sport_id} (mapped from '{tcx_sport}') "
+                    "does not exist — skipping"
+                )
+                continue
+            mapping[tcx_sport.lower()] = sport_id
+        else:
+            sport = Sport.query.filter_by(label=fittrackee_value).first()
+            if sport is None:
+                logger.warning(
+                    f"sport label '{fittrackee_value}' (mapped from "
+                    f"'{tcx_sport}') not found in DB — skipping"
+                )
+                continue
+            mapping[tcx_sport.lower()] = sport.id
+    return mapping
 
 
 def validate_order(
@@ -493,10 +584,28 @@ def refresh_workouts(
 )
 @click.option(
     "--sport-id",
-    help="Sport id for imported workouts.",
+    help=(
+        "Default sport id for imported workouts. "
+        "Used when sport cannot be inferred from the file "
+        "(required for non-TCX formats)."
+    ),
     type=int,
-    required=True,
+    required=False,
+    default=None,
     callback=validate_sport_id,
+)
+@click.option(
+    "--sport-mapping",
+    "sport_mapping",
+    default=None,
+    help=(
+        "Comma-separated TCX sport → FitTrackee sport overrides. "
+        "Values can be sport IDs or labels. "
+        "Example: \"Biking:Cycling (Sport),Running:Running,Other:Hiking\" "
+        "or \"Biking:1,Running:5,Other:3\". "
+        "Merged on top of the defaults in tcx_sport_mapping.json; "
+        "takes precedence over --sport-id for TCX files."
+    ),
 )
 @click.option(
     "--on-success",
@@ -522,7 +631,8 @@ def refresh_workouts(
 def import_dir(
     import_dir: str,
     username: Optional[str],
-    sport_id: int,
+    sport_id: Optional[int],
+    sport_mapping: Optional[str],
     on_success: str,
     verbose: bool,
 ) -> None:
@@ -531,6 +641,10 @@ def import_dir(
 
     Supported formats: gpx, fit, tcx, kml, kmz.
     Files are processed in alphabetical order.
+
+    For TCX files the sport type is inferred from the <Activity Sport="...">
+    attribute when --sport-mapping is provided. --sport-id is used as the
+    fallback for files where the sport cannot be determined.
     """
     from flask import current_app
     from werkzeug.datastructures import FileStorage
@@ -546,6 +660,34 @@ def import_dir(
 
     with app.app_context():
         logger.setLevel(logging.DEBUG if verbose else logging.INFO)
+
+        # Build raw mapping: defaults from file, overridden by --sport-mapping
+        try:
+            raw_mapping = load_default_tcx_sport_mapping()
+        except Exception as e:
+            logger.warning(f"Could not load default TCX sport mapping: {e}")
+            raw_mapping = {}
+
+        if sport_mapping:
+            try:
+                cli_overrides = parse_sport_mapping_str(sport_mapping)
+            except click.BadParameter as e:
+                logger.error(f"Invalid --sport-mapping: {e}")
+                sys.exit(1)
+            raw_mapping.update(cli_overrides)
+
+        # Resolve labels/ids to sport_id ints (warnings on unknown entries)
+        resolved_mapping: Dict[str, int] = resolve_sport_mapping(raw_mapping)
+
+        if verbose:
+            logger.debug(f"Resolved TCX sport mapping: {resolved_mapping}")
+
+        if not sport_id and not resolved_mapping:
+            logger.error(
+                "Provide --sport-id, --sport-mapping, or both. "
+                "At least one is required."
+            )
+            sys.exit(1)
 
         if username:
             user: Optional[User] = User.query.filter_by(
@@ -586,6 +728,34 @@ def import_dir(
         errored = 0
         for filename in files:
             filepath = os.path.join(import_dir, filename)
+            ext = filename.rsplit(".", 1)[-1].lower()
+
+            # Resolve sport_id for this file
+            file_sport_id: Optional[int] = sport_id
+            if ext == "tcx" and resolved_mapping:
+                tcx_sport = get_sport_from_tcx(filepath)
+                if tcx_sport is not None:
+                    mapped = resolved_mapping.get(tcx_sport.lower())
+                    if mapped is not None:
+                        file_sport_id = mapped
+                        if verbose:
+                            logger.debug(
+                                f"  > TCX sport '{tcx_sport}' → sport_id {mapped}"
+                            )
+                    else:
+                        logger.warning(
+                            f"  > TCX sport '{tcx_sport}' not in mapping, "
+                            "falling back to --sport-id"
+                        )
+
+            if file_sport_id is None:
+                errored += 1
+                logger.error(
+                    f"Skipping {filename}: could not determine sport id "
+                    "(no --sport-id and no mapping entry for this file)."
+                )
+                continue
+
             logger.info(f"Importing {filename}...")
             try:
                 if (
@@ -599,7 +769,7 @@ def import_dir(
                     file_storage = FileStorage(stream=f, filename=filename)
                     service = WorkoutsFromFileCreationService(
                         auth_user=user,
-                        workouts_data={"sport_id": sport_id},
+                        workouts_data={"sport_id": file_sport_id},
                         file=file_storage,
                     )
                     service.process()

@@ -23,7 +23,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ${HOST_DATABASE_DIR:-./data/db}:/var/lib/postgresql/data
+      - ${HOST_DATABASE_DIR:-./data/db}:/var/lib/postgresql/data:z
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
@@ -40,12 +40,14 @@ services:
 # Image from Docker Hub
     image: fittrackee/fittrackee:v1.3.0
 # Uncomment following line to build image instead of using pre-built image
-#    build: .
+    build: .
     volumes:
-      - ${HOST_UPLOAD_DIR:-./data/uploads}:/usr/src/app/uploads
-      - ${HOST_STATICMAP_CACHE_DIR:-./data/staticmap_cache}:/usr/src/app/.staticmap_cache
+      - ${HOST_UPLOAD_DIR:-./data/uploads}:/usr/src/app/uploads:z
+      - ${HOST_STATICMAP_CACHE_DIR:-./data/staticmap_cache}:/usr/src/app/.staticmap_cache:z
 # Comment the following line when logging to stdout
-      - ${HOST_LOG_DIR:-./data/logs}:/usr/src/app/logs
+      - ${HOST_LOG_DIR:-./data/logs}:/usr/src/app/logs:z
+# Uncomment to enable automated GPX/FIT/TCX imports (see 'ftcli workouts import_dir')
+#     - ${HOST_IMPORT_DIR:-./data/import}:/usr/src/app/import:z
     post_start:
 # Remove '/usr/src/app/logs' directory when logging to stdout
       - command: chown -R fittrackee:fittrackee /usr/src/app/uploads /usr/src/app/.staticmap_cache /usr/src/app/logs

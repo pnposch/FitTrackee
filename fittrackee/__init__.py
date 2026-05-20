@@ -133,6 +133,21 @@ def create_app(init_email: bool = True) -> Flask:
             reload(config)
         app.config.from_object(app_settings)
 
+    # Validate secret key length — PyJWT requires ≥32 bytes for HS256.
+    # Raise in production to prevent silent insecure deployments.
+    _secret = app.config.get("SECRET_KEY") or ""
+    _secret_bytes = len(_secret.encode()) if isinstance(_secret, str) else len(_secret)
+    if _secret_bytes < 32:
+        _is_prod = not app.config.get("TESTING") and not app.config.get("DEBUG")
+        _msg = (
+            f"APP_SECRET_KEY is only {_secret_bytes} bytes — "
+            "a minimum of 32 bytes is required for HS256 (see RFC 7518 §3.2). "
+            "Set a longer random value in your environment."
+        )
+        if _is_prod:
+            raise ValueError(_msg)
+        appLog.warning(_msg)
+
     # set up extensions
     babel.init_app(app)
     db.init_app(app)
