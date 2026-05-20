@@ -47,7 +47,7 @@ services:
 # Comment the following line when logging to stdout
       - ${HOST_LOG_DIR:-./data/logs}:/usr/src/app/logs:z
 # Uncomment to enable automated GPX/FIT/TCX imports (see 'ftcli workouts import_dir')
-#     - ${HOST_IMPORT_DIR:-./data/import}:/usr/src/app/import:z
+      - ${HOST_IMPORT_DIR:-./data/import}:/usr/src/app/import:z
     post_start:
 # Remove '/usr/src/app/logs' directory when logging to stdout
       - command: chown -R fittrackee:fittrackee /usr/src/app/uploads /usr/src/app/.staticmap_cache /usr/src/app/logs
