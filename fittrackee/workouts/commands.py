@@ -42,8 +42,11 @@ def get_sport_from_tcx(filepath: str) -> Optional[str]:
     Read the first 2 KB of a TCX file and return the value of the
     <Activity Sport="..."> attribute, or None if not found.
     """
-    with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-        header = f.read(2048)
+    try:
+        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+            header = f.read(2048)
+    except OSError:
+        return None
     match = re.search(r'<Activity\s+Sport="([^"]+)"', header)
     return match.group(1) if match else None
 
