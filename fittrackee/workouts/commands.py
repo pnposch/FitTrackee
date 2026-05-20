@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import re
@@ -28,6 +29,10 @@ from fittrackee.workouts.utils.workouts import get_workout_datetime
 WORKOUT_VALID_EXTENSIONS = ", ".join(WORKOUT_ALLOWED_EXTENSIONS)
 VALID_ON_ERROR_CHOICES = ["remove-references", "delete-workout"]
 
+DEFAULT_TCX_SPORT_MAPPING_FILE = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "tcx_sport_mapping.json"
+)
+
 logger = logging.getLogger("fittrackee_workouts_cli")
 logger.setLevel(logging.INFO)
 
@@ -43,49 +48,74 @@ def get_sport_from_tcx(filepath: str) -> Optional[str]:
     return match.group(1) if match else None
 
 
-def parse_sport_mapping(
-    mapping_str: str,
-) -> Dict[str, int]:
+def load_default_tcx_sport_mapping() -> Dict[str, str]:
     """
-    Parse a sport mapping string into a dict of {tcx_sport: sport_id}.
+    Load the default TCX sport mapping from the bundled JSON file.
 
-    Accepts two value formats:
-      - Numeric:  "Biking:1,Running:5,Other:3"
-      - Label:    "Biking:Cycling (Sport),Running:Running,Other:Hiking"
-        (labels are resolved to IDs via the DB at call time)
-
-    Raises click.BadParameter on invalid format or unknown label/ID.
+    Returns a raw {tcx_sport: fittrackee_label_or_id} dict.
+    Keys prefixed with '_' (comments) are ignored.
     """
-    mapping: Dict[str, int] = {}
+    if not os.path.isfile(DEFAULT_TCX_SPORT_MAPPING_FILE):
+        return {}
+    with open(DEFAULT_TCX_SPORT_MAPPING_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, dict):
+        raise ValueError(
+            f"{DEFAULT_TCX_SPORT_MAPPING_FILE} must be a JSON object"
+        )
+    return {
+        str(k): str(v)
+        for k, v in data.items()
+        if not str(k).startswith("_")
+    }
+
+
+def parse_sport_mapping_str(mapping_str: str) -> Dict[str, str]:
+    """
+    Parse a 'Biking:Cycling (Sport),Running:Running' string into a raw
+    {tcx_sport: fittrackee_label_or_id} dict (values not yet DB-resolved).
+    """
+    raw: Dict[str, str] = {}
     for part in mapping_str.split(","):
         part = part.strip()
         if not part:
             continue
         if ":" not in part:
             raise click.BadParameter(
-                f"invalid mapping entry '{part}' — expected 'TCX_sport:sport_id_or_label'"
+                f"invalid mapping entry '{part}' "
+                "— expected 'TCX_sport:sport_id_or_label'"
             )
         tcx_sport, _, fittrackee_value = part.partition(":")
-        tcx_sport = tcx_sport.strip()
-        fittrackee_value = fittrackee_value.strip()
+        raw[tcx_sport.strip()] = fittrackee_value.strip()
+    return raw
+
+
+def resolve_sport_mapping(raw: Dict[str, str]) -> Dict[str, int]:
+    """
+    Resolve a raw {tcx_sport: fittrackee_label_or_id} dict to
+    {tcx_sport_lower: sport_id}.  Unknown labels are skipped with a warning.
+    Must be called within an app context.
+    """
+    mapping: Dict[str, int] = {}
+    for tcx_sport, fittrackee_value in raw.items():
         if fittrackee_value.isdigit():
             sport_id = int(fittrackee_value)
-            with app.app_context():
-                if not Sport.query.filter_by(id=sport_id).first():
-                    raise click.BadParameter(
-                        f"sport id {sport_id} in mapping does not exist"
-                    )
+            if not Sport.query.filter_by(id=sport_id).first():
+                logger.warning(
+                    f"sport id {sport_id} (mapped from '{tcx_sport}') "
+                    "does not exist — skipping"
+                )
+                continue
             mapping[tcx_sport.lower()] = sport_id
         else:
-            with app.app_context():
-                sport = Sport.query.filter_by(
-                    label=fittrackee_value
-                ).first()
-                if sport is None:
-                    raise click.BadParameter(
-                        f"sport label '{fittrackee_value}' in mapping does not exist"
-                    )
-                mapping[tcx_sport.lower()] = sport.id
+            sport = Sport.query.filter_by(label=fittrackee_value).first()
+            if sport is None:
+                logger.warning(
+                    f"sport label '{fittrackee_value}' (mapped from "
+                    f"'{tcx_sport}') not found in DB — skipping"
+                )
+                continue
+            mapping[tcx_sport.lower()] = sport.id
     return mapping
 
 
@@ -566,11 +596,12 @@ def refresh_workouts(
     "sport_mapping",
     default=None,
     help=(
-        "Comma-separated TCX sport → FitTrackee sport mappings. "
+        "Comma-separated TCX sport → FitTrackee sport overrides. "
         "Values can be sport IDs or labels. "
         "Example: \"Biking:Cycling (Sport),Running:Running,Other:Hiking\" "
         "or \"Biking:1,Running:5,Other:3\". "
-        "Takes precedence over --sport-id for TCX files."
+        "Merged on top of the defaults in tcx_sport_mapping.json; "
+        "takes precedence over --sport-id for TCX files."
     ),
 )
 @click.option(
@@ -627,16 +658,26 @@ def import_dir(
     with app.app_context():
         logger.setLevel(logging.DEBUG if verbose else logging.INFO)
 
-        # Parse and validate sport mapping upfront
-        resolved_mapping: Dict[str, int] = {}
+        # Build raw mapping: defaults from file, overridden by --sport-mapping
+        try:
+            raw_mapping = load_default_tcx_sport_mapping()
+        except Exception as e:
+            logger.warning(f"Could not load default TCX sport mapping: {e}")
+            raw_mapping = {}
+
         if sport_mapping:
             try:
-                resolved_mapping = parse_sport_mapping(sport_mapping)
+                cli_overrides = parse_sport_mapping_str(sport_mapping)
             except click.BadParameter as e:
                 logger.error(f"Invalid --sport-mapping: {e}")
                 sys.exit(1)
-            if verbose:
-                logger.debug(f"Sport mapping: {resolved_mapping}")
+            raw_mapping.update(cli_overrides)
+
+        # Resolve labels/ids to sport_id ints (warnings on unknown entries)
+        resolved_mapping: Dict[str, int] = resolve_sport_mapping(raw_mapping)
+
+        if verbose:
+            logger.debug(f"Resolved TCX sport mapping: {resolved_mapping}")
 
         if not sport_id and not resolved_mapping:
             logger.error(

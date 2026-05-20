@@ -81,9 +81,28 @@ Garmin devices, Polar Flow exports, etc.
 #### TCX sport inference
 
 For **TCX files** the command reads the `<Activity Sport="...">` attribute from
-the file header and maps it to a FitTrackee sport via `--sport-mapping`. This
-lets a single import command handle mixed-sport directories (e.g. cycling +
-running + other) without pre-sorting files.
+the file header and maps it to a FitTrackee sport. The default mapping is stored
+in `fittrackee/workouts/tcx_sport_mapping.json` and covers the most common TCX
+sport values out of the box:
+
+| TCX Sport value | FitTrackee sport |
+|-----------------|-----------------|
+| Biking | Cycling (Sport) |
+| Mountain Biking | Mountain Biking |
+| Running | Running |
+| Trail Running | Trail |
+| Hiking | Hiking |
+| Walking | Walking |
+| Swimming | Open Water Swimming |
+| Cross Country Skiing | Skiing Cross Country |
+| Alpine Skiing | Skiing Alpine |
+| Rowing | Rowing |
+| Kayaking | Kayaking |
+| Other | Hiking |
+
+Edit `tcx_sport_mapping.json` to customise the defaults for your instance.
+The `--sport-mapping` CLI option lets you override individual entries per run
+(merged on top of the file, so you only need to specify what differs).
 
 ```
 Usage: ftcli workouts import_dir [OPTIONS]
@@ -104,11 +123,10 @@ Options:
                            sport cannot be inferred from the file (required
                            for non-TCX formats).
   --sport-mapping TEXT     Comma-separated TCX sport → FitTrackee sport
-                           mappings. Values can be sport IDs or labels.
-                           Example:
-                             "Biking:Cycling (Sport),Running:Running,Other:Hiking"
-                             "Biking:1,Running:5,Other:3"
-                           Takes precedence over --sport-id for TCX files.
+                           overrides (merged on top of tcx_sport_mapping.json).
+                           Values can be sport IDs or labels. Example:
+                             "Biking:Mountain Biking,Other:Walking"
+                           If omitted the bundled default file is used.
   --username TEXT          Username to import workouts for. Defaults to the
                            only active user when just one exists.
   --on-success [keep|move|delete]
@@ -149,18 +167,15 @@ The command scans once and exits — there is no built-in watch loop. Use one of
 
 - **One-shot (Docker):**
   ```bash
+  # Uses default tcx_sport_mapping.json — no flags needed for TCX files
   docker compose exec fittrackee \
-    ftcli workouts import_dir --dir /usr/src/app/import \
-      --sport-mapping "Biking:Cycling (Sport),Running:Running,Other:Hiking" \
-      --on-success move
+    ftcli workouts import_dir --dir /usr/src/app/import --on-success move
   ```
 
 - **Cron** (runs every 15 minutes; `-T` disables TTY for non-interactive use):
   ```cron
   */15 * * * * docker compose -f /path/to/docker-compose.yml exec -T fittrackee \
-    ftcli workouts import_dir --dir /usr/src/app/import \
-      --sport-mapping "Biking:Cycling (Sport),Running:Running,Other:Hiking" \
-      --on-success move
+    ftcli workouts import_dir --dir /usr/src/app/import --on-success move
   ```
 
 - **Systemd path unit** — triggers immediately when a file is dropped into the
@@ -172,22 +187,20 @@ runs never re-import the same file.
 **Examples:**
 
 ```bash
-# TCX directory with mixed sports — infer sport from file, fall back to Hiking
-ftcli workouts import_dir --dir /mnt/tcx-drop \
-  --sport-mapping "Biking:Cycling (Sport),Running:Running,Other:Hiking" \
-  --on-success move
+# TCX directory — sport inferred automatically from default mapping file
+ftcli workouts import_dir --dir /mnt/tcx-drop --on-success move
 
-# All files are the same sport (GPX/FIT/etc.) — use --sport-id
+# Override one entry (e.g. map "Other" to Walking instead of Hiking)
+ftcli workouts import_dir --dir /mnt/tcx-drop --sport-mapping "Other:Walking" --on-success move
+
+# Non-TCX files (GPX/FIT/KML/KMZ) — sport-id required as fallback
 ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 5 --on-success move
 
-# Mixed directory: TCX uses mapping, GPX/FIT fall back to --sport-id
-ftcli workouts import_dir --dir /mnt/mixed-drop \
-  --sport-mapping "Biking:1,Running:5,Other:3" --sport-id 5 \
-  --on-success move
+# Mixed directory: TCX uses default mapping, GPX/FIT fall back to --sport-id
+ftcli workouts import_dir --dir /mnt/mixed-drop --sport-id 5 --on-success move
 
 # Target a specific user and delete originals after import
-ftcli workouts import_dir --dir /mnt/gpx-drop \
-  --sport-mapping "Biking:Cycling (Sport),Running:Running" \
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 5 \
   --username alice --on-success delete
 ```
 
@@ -209,10 +222,9 @@ export HOST_IMPORT_DIR=/path/to/your/gpx/drop-folder
 Then run imports inside the container:
 
 ```bash
+# TCX files: sport inferred from tcx_sport_mapping.json automatically
 docker compose exec fittrackee \
-  ftcli workouts import_dir --dir /usr/src/app/import \
-    --sport-mapping "Biking:Cycling (Sport),Running:Running,Other:Hiking" \
-    --on-success move
+  ftcli workouts import_dir --dir /usr/src/app/import --on-success move
 ```
 
 ### Security: APP_SECRET_KEY minimum length
