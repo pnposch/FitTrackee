@@ -35,6 +35,76 @@ It is also possible to add a workout without a file.
 
 Map data from [OpenStreetMap](https://www.openstreetmap.org).  
 
+## Fork additions: single-user mode
+
+This fork adds two quality-of-life features for self-hosted single-user deployments.
+
+### Disable registration
+
+Set the environment variable `REGISTRATION_DISABLED=true` to permanently close
+new account sign-ups regardless of the `max_users` admin setting:
+
+```bash
+# .env
+export REGISTRATION_DISABLED=true
+```
+
+The API returns `403 error, registration is disabled` for any registration
+attempt, and the frontend correctly reports registration as unavailable.  
+The existing `max_users` admin config field continues to work normally when the
+variable is not set.
+
+### Automated GPX / workout file import from a local directory
+
+The `ftcli workouts import_dir` CLI command scans a local directory for workout
+files and imports them for a given user and sport — useful for drop-folder
+automation with cron or a systemd path unit.
+
+**Supported formats:** GPX, FIT, TCX, KML, KMZ
+
+```
+Usage: ftcli workouts import_dir [OPTIONS]
+
+  Import all workout files from a local directory.
+
+  Supported formats: gpx, fit, tcx, kml, kmz.
+  Files are processed in alphabetical order.
+
+Options:
+  --dir DIRECTORY          Directory containing workout files to import.
+                           [required]
+  --sport-id INTEGER       Sport id for imported workouts.  [required]
+  --username TEXT          Username to import workouts for. Defaults to the
+                           only active user when just one exists.
+  --on-success [keep|move|delete]
+                           Action after a successful import: 'keep' leaves the
+                           file in place, 'move' moves it to a done/
+                           subdirectory, 'delete' removes it.  [default: keep]
+  -v, --verbose            Enable verbose output log.
+```
+
+**Examples:**
+
+```bash
+# Import all GPX files; keep originals in place (single-user: no --username needed)
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1
+
+# Move each successfully imported file to /mnt/gpx-drop/done/
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1 --on-success move
+
+# Delete originals after import, target a specific user
+ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 2 \
+  --username alice --on-success delete
+```
+
+**Cron example** (import every 15 minutes, move on success):
+
+```cron
+*/15 * * * * ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1 --on-success move
+```
+
+---
+
 ## Repositories
 
 The main repository is hosted on [Codeberg.org](https://codeberg.org/FitTrackee/FitTrackee).  
