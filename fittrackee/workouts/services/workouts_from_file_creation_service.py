@@ -218,6 +218,13 @@ class AbstractWorkoutsCreationService(BaseWorkoutService, WorkoutFileMixin):
                 raise WorkoutFileException(
                     "error", "some segments have same start date"
                 ) from e
+            if (
+                "duplicate key value violates unique constraint "
+                '"user_id_workout_date_unique"' in str(e)
+            ):
+                raise WorkoutFileException(
+                    "error", "workout already exists (duplicate)"
+                ) from e
             raise WorkoutException(
                 "error", "error when processing workout"
             ) from e

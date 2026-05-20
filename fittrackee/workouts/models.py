@@ -277,6 +277,13 @@ class Sport(BaseModel):
 
 class Workout(BaseModel):
     __tablename__ = "workouts"
+    __table_args__ = (
+        db.UniqueConstraint(
+            "user_id",
+            "workout_date",
+            name="user_id_workout_date_unique",
+        ),
+    )
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     uuid: Mapped[UUID] = mapped_column(
         postgresql.UUID(as_uuid=True),

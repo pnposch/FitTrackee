@@ -725,6 +725,7 @@ def import_dir(
             os.makedirs(done_dir, exist_ok=True)
 
         imported = 0
+        skipped_duplicates = 0
         errored = 0
         for filename in files:
             filepath = os.path.join(import_dir, filename)
@@ -793,15 +794,24 @@ def import_dir(
                 if verbose:
                     logger.debug("  > imported.")
             except (WorkoutException, WorkoutFileException) as e:
-                errored += 1
-                db.session.rollback()
                 error_msg = (
                     e.args[1] if len(e.args) > 1 else str(e)  # type: ignore
                 )
-                logger.error(f"  > error: {error_msg}")
+                db.session.rollback()
+                if "already exists (duplicate)" in error_msg:
+                    skipped_duplicates += 1
+                    if verbose:
+                        logger.debug(f"  > skipped (duplicate).")
+                else:
+                    errored += 1
+                    logger.error(f"  > error: {error_msg}")
             except Exception as e:
                 errored += 1
                 db.session.rollback()
                 logger.error(f"  > unexpected error: {e}")
 
-        logger.info(f"\nDone. Imported: {imported}, errored: {errored}.")
+        logger.info(
+            f"\nDone. Imported: {imported}, "
+            f"skipped (duplicates): {skipped_duplicates}, "
+            f"errored: {errored}."
+        )
