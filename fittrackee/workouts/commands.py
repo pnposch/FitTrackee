@@ -1,5 +1,6 @@
 import logging
 import os
+import shutil
 import sys
 from datetime import datetime
 from logging import Logger
@@ -606,7 +607,12 @@ def import_dir(
                     if on_success == "delete":
                         os.remove(filepath)
                     elif on_success == "move":
-                        os.rename(filepath, os.path.join(done_dir, filename))
+                        destination = os.path.join(done_dir, filename)
+                        if os.path.exists(destination):
+                            raise FileExistsError(
+                                f"destination file already exists: {destination}"
+                            )
+                        shutil.move(filepath, destination)
                 except OSError as e:
                     errored += 1
                     logger.error(
