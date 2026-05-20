@@ -183,7 +183,7 @@
 <script setup lang="ts">
   import { computed, reactive, ref, toRefs, watch } from 'vue'
   import type { Reactive, ComputedRef, Ref } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
   import PasswordInput from '@/components/Common/PasswordInput.vue'
   import useApp from '@/composables/useApp'
@@ -202,6 +202,7 @@
   const { action, token } = toRefs(props)
 
   const route = useRoute()
+  const router = useRouter()
   const store = useStore()
 
   const { appConfig, appLanguage, displayOptions, errorMessages } = useApp()
@@ -289,6 +290,12 @@
     formData.password = ''
     formData.accepted_policy = false
   }
+
+  watch(registration_disabled, (disabled) => {
+    if (disabled) {
+      router.push('/login')
+    }
+  })
 
   watch(
     () => route.path,

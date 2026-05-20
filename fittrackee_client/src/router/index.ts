@@ -911,6 +911,14 @@ router.beforeEach((to, from, next) => {
       }
 
       if (
+        to.name === 'Register' &&
+        store.getters[ROOT_STORE.GETTERS.APP_CONFIG]?.is_registration_enabled ===
+          false
+      ) {
+        return next('/login')
+      }
+
+      if (
         store.getters[AUTH_USER_STORE.GETTERS.IS_AUTHENTICATED] &&
         to.meta.withoutAuth
       ) {
