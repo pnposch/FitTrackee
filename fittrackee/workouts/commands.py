@@ -1,4 +1,6 @@
 import logging
+import os
+import shutil
 import sys
 from datetime import datetime
 from logging import Logger
@@ -468,3 +470,168 @@ def refresh_workouts(
             )
 
         logger.info("\nDone.")
+
+
+@workouts_cli.command("import_dir")
+@click.option(
+    "--dir",
+    "import_dir",
+    type=click.Path(
+        exists=True, file_okay=False, dir_okay=True, readable=True
+    ),
+    required=True,
+    help="Directory containing workout files to import.",
+)
+@click.option(
+    "--username",
+    help=(
+        "Username to import workouts for. "
+        "Defaults to the only active user when just one exists."
+    ),
+    type=str,
+    callback=validate_user,
+)
+@click.option(
+    "--sport-id",
+    help="Sport id for imported workouts.",
+    type=int,
+    required=True,
+    callback=validate_sport_id,
+)
+@click.option(
+    "--on-success",
+    "on_success",
+    type=click.Choice(["keep", "move", "delete"]),
+    default="keep",
+    show_default=True,
+    help=(
+        "Action after a file is successfully imported: "
+        "'keep' leaves it in place, "
+        "'move' moves it to a 'done/' subdirectory, "
+        "'delete' removes it."
+    ),
+)
+@click.option(
+    "--verbose",
+    "-v",
+    "verbose",
+    is_flag=True,
+    default=False,
+    help="Enable verbose output log (default: disabled).",
+)
+def import_dir(
+    import_dir: str,
+    username: Optional[str],
+    sport_id: int,
+    on_success: str,
+    verbose: bool,
+) -> None:
+    """
+    Import all workout files from a local directory.
+
+    Supported formats: gpx, fit, tcx, kml, kmz.
+    Files are processed in alphabetical order.
+    """
+    from flask import current_app
+    from werkzeug.datastructures import FileStorage
+
+    from fittrackee import db
+    from fittrackee.workouts.exceptions import (
+        WorkoutException,
+        WorkoutFileException,
+    )
+    from fittrackee.workouts.services.workouts_from_file_creation_service import (  # noqa
+        WorkoutsFromFileCreationService,
+    )
+
+    with app.app_context():
+        logger.setLevel(logging.DEBUG if verbose else logging.INFO)
+
+        if username:
+            user: Optional[User] = User.query.filter_by(
+                username=username
+            ).first()
+        else:
+            active_users = User.query.filter_by(is_active=True).all()
+            if len(active_users) == 0:
+                logger.error("No active users found.")
+                sys.exit(1)
+            if len(active_users) > 1:
+                logger.error(
+                    "Multiple users exist; use --username to select one."
+                )
+                sys.exit(1)
+            user = active_users[0]
+
+        if user is None:
+            logger.error("User not found.")
+            sys.exit(1)
+
+        files = sorted(
+            entry
+            for entry in os.listdir(import_dir)
+            if os.path.isfile(os.path.join(import_dir, entry))
+            and entry.rsplit(".", 1)[-1].lower() in WORKOUT_ALLOWED_EXTENSIONS
+        )
+
+        if not files:
+            logger.info("No workout files found in directory.")
+            return
+
+        done_dir = os.path.join(import_dir, "done")
+        if on_success == "move":
+            os.makedirs(done_dir, exist_ok=True)
+
+        imported = 0
+        errored = 0
+        for filename in files:
+            filepath = os.path.join(import_dir, filename)
+            logger.info(f"Importing {filename}...")
+            try:
+                if (
+                    os.path.getsize(filepath)
+                    > current_app.config["max_single_file_size"]
+                ):
+                    errored += 1
+                    logger.error("  > error: file exceeds size limit")
+                    continue
+                with open(filepath, "rb") as f:
+                    file_storage = FileStorage(stream=f, filename=filename)
+                    service = WorkoutsFromFileCreationService(
+                        auth_user=user,
+                        workouts_data={"sport_id": sport_id},
+                        file=file_storage,
+                    )
+                    service.process()
+                try:
+                    if on_success == "delete":
+                        os.remove(filepath)
+                    elif on_success == "move":
+                        destination = os.path.join(done_dir, filename)
+                        if os.path.exists(destination):
+                            raise FileExistsError(
+                                f"destination file already exists: {destination}"
+                            )
+                        shutil.move(filepath, destination)
+                except OSError as e:
+                    errored += 1
+                    logger.error(
+                        f"  > imported, but post-import file action failed: {e}"
+                    )
+                    continue
+                imported += 1
+                if verbose:
+                    logger.debug("  > imported.")
+            except (WorkoutException, WorkoutFileException) as e:
+                errored += 1
+                db.session.rollback()
+                error_msg = (
+                    e.args[1] if len(e.args) > 1 else str(e)  # type: ignore
+                )
+                logger.error(f"  > error: {error_msg}")
+            except Exception as e:
+                errored += 1
+                db.session.rollback()
+                logger.error(f"  > unexpected error: {e}")
+
+        logger.info(f"\nDone. Imported: {imported}, errored: {errored}.")

@@ -51,6 +51,8 @@ class AppConfig(BaseModel):
 
     @property
     def is_registration_enabled(self) -> bool:
+        if os.getenv("REGISTRATION_DISABLED", "false").lower() == "true":
+            return False
         result = db.session.execute(text("SELECT COUNT(*) FROM users;"))
         nb_users = result.one()[0]
         return self.max_users == 0 or nb_users < self.max_users
