@@ -594,13 +594,20 @@ def import_dir(
                         file=file_storage,
                     )
                     service.process()
+                try:
+                    if on_success == "delete":
+                        os.remove(filepath)
+                    elif on_success == "move":
+                        os.rename(filepath, os.path.join(done_dir, filename))
+                except OSError as e:
+                    errored += 1
+                    logger.error(
+                        f"  > imported, but post-import file action failed: {e}"
+                    )
+                    continue
                 imported += 1
                 if verbose:
                     logger.debug("  > imported.")
-                if on_success == "delete":
-                    os.remove(filepath)
-                elif on_success == "move":
-                    os.rename(filepath, os.path.join(done_dir, filename))
             except (WorkoutException, WorkoutFileException) as e:
                 errored += 1
                 db.session.rollback()
