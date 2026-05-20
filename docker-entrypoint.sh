@@ -35,6 +35,29 @@ PYEOF
     fi
 fi
 
+# Apply MAX_SINGLE_FILE_SIZE if set (default: 1 MB).
+# This is stored in the DB and reapplied on every start so it survives
+# container recreations.
+if [ -n "${MAX_SINGLE_FILE_SIZE}" ]; then
+    python3 - <<PYEOF 2>/dev/null
+import os
+os.environ.setdefault("APP_SETTINGS", "fittrackee.config.ProductionConfig")
+from fittrackee import create_app, db
+from fittrackee.application.models import AppConfig
+app = create_app(init_email=False)
+with app.app_context():
+    cfg = AppConfig.query.first()
+    if cfg:
+        size = int(os.environ["MAX_SINGLE_FILE_SIZE"])
+        if cfg.max_single_file_size != size:
+            cfg.max_single_file_size = size
+            if cfg.max_zip_file_size < size:
+                cfg.max_zip_file_size = size
+            db.session.commit()
+            print(f"max_single_file_size set to {size} bytes")
+PYEOF
+fi
+
 # Run app w/ gunicorn
 echo "Running app..."
 exec gunicorn -b 0.0.0.0:5000 "fittrackee:create_app()" --log-level "${LOG_LEVEL:-info}" --error-logfile "${GUNICORN_LOG:-/usr/src/app/logs/gunicorn.log}" --workers="${APP_WORKERS:-1}" --timeout "${APP_TIMEOUT:-30}" --no-control-socket
