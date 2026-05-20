@@ -37,7 +37,7 @@ Map data from [OpenStreetMap](https://www.openstreetmap.org).
 
 ## Fork additions: single-user mode
 
-This fork adds two quality-of-life features for self-hosted single-user deployments.
+This fork adds quality-of-life features for self-hosted single-user deployments.
 
 ### Disable registration
 
@@ -45,14 +45,29 @@ Set the environment variable `REGISTRATION_DISABLED=true` to permanently close
 new account sign-ups regardless of the `max_users` admin setting:
 
 ```bash
-# .env
+# .env / .env.docker
 export REGISTRATION_DISABLED=true
 ```
 
-The API returns `403 error, registration is disabled` for any registration
-attempt, and the frontend correctly reports registration as unavailable.  
-The existing `max_users` admin config field continues to work normally when the
-variable is not set.
+- The API returns `403 – registration is disabled` for any registration attempt.
+- The `/register` route redirects to `/login` in the frontend.
+- The existing `max_users` admin config field continues to work normally when the variable is not set.
+
+### Docker: bootstrap a single user on first start
+
+Set the following environment variables to automatically create an account when
+the container starts for the first time. Re-runs are safe — if the user already
+exists the command is a no-op:
+
+```bash
+# .env.docker
+export INIT_USERNAME=alice
+export INIT_EMAIL=alice@example.com
+export INIT_PASSWORD=changeme
+export INIT_ROLE=admin          # owner | admin | moderator | user (default: admin)
+```
+
+Pair with `REGISTRATION_DISABLED=true` for a fully locked-down single-user instance.
 
 ### Automated GPX / workout file import from a local directory
 
@@ -102,6 +117,48 @@ ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 2 \
 ```cron
 */15 * * * * ftcli workouts import_dir --dir /mnt/gpx-drop --sport-id 1 --on-success move
 ```
+
+#### Docker: mount an import directory
+
+Uncomment the import volume in `docker-compose.yml`:
+
+```yaml
+- ${HOST_IMPORT_DIR:-./data/import}:/usr/src/app/import:z
+```
+
+Set the host path in `.env.docker` (optional, defaults to `./data/import`):
+
+```bash
+export HOST_IMPORT_DIR=/path/to/your/gpx/drop-folder
+```
+
+Then run imports inside the container:
+
+```bash
+docker compose exec fittrackee \
+  ftcli workouts import_dir --dir /usr/src/app/import --sport-id 1 --on-success move
+```
+
+### Security: APP_SECRET_KEY minimum length
+
+The application validates `APP_SECRET_KEY` on startup against the 32-byte
+minimum required by HS256 (RFC 7518 §3.2):
+
+- In **production** the app refuses to start if the key is shorter than 32 bytes.
+- In **development** a warning is logged.
+
+Generate a suitable key with:
+
+```bash
+python3 -c "import secrets; print(secrets.token_hex(32))"
+```
+
+### Docker CI
+
+A GitHub Actions workflow (`.github/workflows/docker.yml`) builds the image
+and pushes it to the private registry at `repo.dev.posch.org` on every push to
+`main`/`dev` and on `v*` tags. Requires a `REPO_PWD` secret in the repository
+settings.
 
 ---
 
