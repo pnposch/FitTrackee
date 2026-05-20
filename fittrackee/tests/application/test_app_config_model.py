@@ -69,8 +69,8 @@ class TestConfigModel:
         self, app: Flask, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         monkeypatch.delenv("REGISTRATION_DISABLED", raising=False)
-        config = AppConfig.query.one()
         monkeypatch.setenv("REGISTRATION_DISABLED", "true")
+        config = AppConfig.query.one()
         serialized_app_config = config.serialize()
 
         assert config.is_registration_enabled is False
