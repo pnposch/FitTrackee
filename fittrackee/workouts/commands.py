@@ -531,6 +531,7 @@ def import_dir(
     Supported formats: gpx, fit, tcx, kml, kmz.
     Files are processed in alphabetical order.
     """
+    from flask import current_app
     from werkzeug.datastructures import FileStorage
 
     from fittrackee import db
@@ -586,6 +587,13 @@ def import_dir(
             filepath = os.path.join(import_dir, filename)
             logger.info(f"Importing {filename}...")
             try:
+                if (
+                    os.path.getsize(filepath)
+                    > current_app.config["max_single_file_size"]
+                ):
+                    errored += 1
+                    logger.error("  > error: file exceeds size limit")
+                    continue
                 with open(filepath, "rb") as f:
                     file_storage = FileStorage(stream=f, filename=filename)
                     service = WorkoutsFromFileCreationService(
