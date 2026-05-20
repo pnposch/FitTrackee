@@ -29,12 +29,15 @@ jobs:
       - name: Determine image tags
         id: tags
         run: |
-          IMAGE="repo.dev.posch.org/${{ github.repository }}:latest"
-          IMAGE="${IMAGE},repo.dev.posch.org/${{ github.repository }}:${{ github.sha }}"
-          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
-            IMAGE="${IMAGE},repo.dev.posch.org/${{ github.repository }}:${{ github.ref_name }}"
-          fi
-          echo "tags=${IMAGE}" >> $GITHUB_OUTPUT
+          {
+            echo "tags<<EOF"
+            echo "repo.dev.posch.org/${{ github.repository }}:latest"
+            echo "repo.dev.posch.org/${{ github.repository }}:${{ github.sha }}"
+            if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+              echo "repo.dev.posch.org/${{ github.repository }}:${{ github.ref_name }}"
+            fi
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         uses: docker/build-push-action@v7
